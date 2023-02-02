@@ -1,25 +1,20 @@
-// import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Main from './pages/Main';
+import User from './components/User';
 
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <MainPage />,
-//     children: [
-//       {
-//         index: true,
-//         element: <Products />,
-//         loader: loaderProductsList,
-//       },
-//       {
-//         path: 'products/:id',
-//         element: <ProductsItem />,
-//         loader: loaderProductsItem,
-//       },
-//     ],
-//   },
-// ]);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Main />,
+    children: [
+      {
+        index: true,
+        element: <User />,
+      },
+    ],
+  },
+]);
 
-// export const App = () => <RouterProvider router={router} />;
+const App = () => <RouterProvider router={router} />;
 
-const App = () => <h1>Hello Vite Team!</h1>;
 export default App;
