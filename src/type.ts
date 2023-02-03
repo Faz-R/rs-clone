@@ -9,10 +9,10 @@ export interface UserStateInterface {
   status: 'idle' | 'loading' | 'failed';
 }
 
-export interface MoviesByHumorInterface {
+export interface SearchFormData {
   genres: string[];
   year: number;
-  rating?: '7-10';
+  rating?: string;
   exceptions?: number[];
 }
 

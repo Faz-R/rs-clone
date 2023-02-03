@@ -1,9 +1,9 @@
-import type { MovieDataInterface, MovieInterface, MoviesByHumorInterface } from '../type';
+import type { MovieDataInterface, MovieInterface, SearchFormData } from '../type';
 import { DOMAIN, TOKEN } from '../constants';
 import getRandomNumber from '../tools/getRandomNumber';
 
 const getMovies = async (
-  formData: MoviesByHumorInterface,
+  formData: SearchFormData,
   random: boolean
 ): Promise<MovieInterface[] | MovieInterface> => {
   let queryParams = '';
