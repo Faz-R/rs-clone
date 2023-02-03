@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getUserData, selectUser, changeUserName } from '../../store/userSlice';
+import getMovies from '../../api/getMovies';
 
 const User = () => {
   const store = useAppSelector(selectUser);
@@ -18,6 +19,13 @@ const User = () => {
       </button>
       <button type="button" onClick={() => dispatch(getUserData(1))}>
         get next user
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          getMovies({ year: 2022, rating: '7-10', genres: ['ужасы', 'триллеры'] }, true)
+        }>
+        request test
       </button>
     </section>
   ) : (
