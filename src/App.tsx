@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './pages/Main';
 import User from './components/User';
+import RandomMovie from './pages/Random_movie';
 
 const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <User />,
+        element: <RandomMovie />,
       },
     ],
   },
@@ -18,3 +19,6 @@ const router = createBrowserRouter([
 const App = () => <RouterProvider router={router} />;
 
 export default App;
+{
+  /* User */
+}
