@@ -1,6 +1,20 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useEffect, useState } from 'react';
 import './index.scss';
 
 const Header = () => {
+  const [modalSearch, setModalSearch] = useState(false);
+  const [search, setSearch] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
+  const [theme, setTheme] = useState(true);
+
+  useEffect(() => {
+    theme
+      ? (document.documentElement.setAttribute('theme', 'light-theme'))
+      : (document.documentElement.setAttribute('theme', 'dark-theme'));
+  }, [theme]);
+
   return (
     <header className="header">
       <div className="container">
@@ -33,7 +47,84 @@ const Header = () => {
             </svg>
           </div>
 
-          <ul className="header__nav">
+          <div className="header__buttons">
+            <div className="search-block">
+              <div
+                className="header__icon"
+                onClick={() => {
+                  setModalSearch(!modalSearch);
+                }}>
+                <i
+                  className={`fa-solid fa-magnifying-glass header__show-button ${
+                    !modalSearch && `header__show-button__active`
+                  }`}
+                />
+
+                <i
+                  className={`fa-solid fa-xmark header__show-button ${
+                    modalSearch && `header__show-button__active`
+                  }`}
+                />
+              </div>
+              <div className={`search-wrapper ${modalSearch ? 'show' : ''}`}>
+                <form role="search" method="get" action="" className="search-form">
+                  <input
+                    required
+                    type="text"
+                    id="search-form-63ce639e4857b"
+                    className="search-field"
+                    placeholder="Поиск…"
+                    value={search}
+                    name="s"
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
+                  />
+                  <button
+                    className="search-button fa-solid fa-magnifying-glass"
+                    type="submit"
+                    value="Search"
+                  />
+                </form>
+              </div>
+            </div>
+            <div
+              className="change-theme_button header__icon"
+              onClick={() => {
+                setTheme(!theme);
+              }}>
+              <i
+                className={`fa-regular fa-moon header__show-button ${
+                  theme && `header__show-button__active`
+                }`}
+              />
+
+              <i
+                className={`fa-solid fa-sun header__show-button ${
+                  !theme && `header__show-button__active`
+                }`}
+              />
+            </div>
+            <div
+              className="burger-menu_button header__icon"
+              onClick={() => {
+                setShowMenu(!showMenu);
+              }}>
+              <i
+                className={`fa-solid fa-bars header__show-button ${
+                  !showMenu && `header__show-button__active`
+                }`}
+              />
+
+              <i
+                className={`fa-solid fa-xmark header__show-button ${
+                  showMenu && `header__show-button__active`
+                }`}
+              />
+            </div>
+          </div>
+
+          {/* <ul className="header__nav">
             <li>
               <a href="#" className="header__nav__link">
                 Фильм под настроение
@@ -59,7 +150,7 @@ const Header = () => {
                 Статистика
               </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </header>
