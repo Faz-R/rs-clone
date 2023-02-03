@@ -9,86 +9,70 @@ export interface UserStateInterface {
   status: 'idle' | 'loading' | 'failed';
 }
 
-export interface SearchFormData {
+export interface SearchMovieFormData {
   genres: string[];
   year: number;
   rating?: string;
   exceptions?: number[];
 }
 
-export interface MovieDataInterface {
-  externalId: {
-    kpHD: null | string;
-    imdb: null | string;
-    tmdb: number;
-    _id: null | string;
-  };
-  logo: {
-    _id: null | string;
-    url: null | string;
-  };
-  poster: null | {
-    _id: null | string;
-    url: null | string;
-    previewUrl: null | string;
-  };
-  rating: {
-    kp: number;
-    imdb: number;
-    filmCritics: number;
-    russianFilmCritics: number;
-    await: number;
-    _id: null | string;
-  };
-  votes: {
-    kp: number;
-    imdb: number;
-    filmCritics: number;
-    russianFilmCritics: number;
-    await: number;
-    _id: null | string;
-  };
-  watchability: {
-    _id: null | string;
-    items:
-      | null
-      | {
-          logo: { _id: null | string; url: null | string };
-          _id: null | string;
-          name: null | string;
-          url: null | string;
-        }[];
-  };
+export interface MovieHumorInterface {
   id: number;
-  alternativeName: null | string;
-  description: null | string;
-  enName: null | string;
-  movieLength: number;
-  name: null | string;
-  names:
-    | null
-    | {
-        _id: null | string;
-        name: null | string;
-      }[];
-
-  shortDescription: null | string;
-  type: null | string;
-  year: number;
-  releaseYears: [
-    {
-      start: number;
-      end: number;
-      _id: null | string;
-    }
-  ];
-}
-
-export interface MovieInterface {
-  id: number;
-  name: null | string;
-  description: null | string;
-  year: number;
+  name: string;
+  description: string;
+  genres: string[];
   poster: null | string;
+  country: null | string;
+  year: number;
+  movieLength: number;
   rating: { kp: number; imdb: number };
 }
+
+export interface MovieRandomInterface extends MovieHumorInterface {
+  actors: string[];
+  director: string;
+}
+
+export interface MovieDataInterface {
+  id: number;
+  name: string;
+  description: string;
+  genres: string[];
+  poster: PosterType;
+  year: number;
+  movieLength: number;
+  rating: RatingType;
+  persons: PersonType[];
+  premiere: PremiereType;
+}
+
+export type PersonType = {
+  enName: string;
+  enProfession: string;
+  id: number;
+  name: string;
+  photo: string;
+  profession: string;
+  _id: string;
+};
+
+type PosterType = {
+  previewUrl: string;
+  url: string;
+  _id: string;
+};
+
+type RatingType = {
+  await: number;
+  filmCritics: number;
+  imdb: number;
+  kp: number;
+  russianFilmCritics: number;
+  _id: string;
+};
+
+type PremiereType = {
+  country: string;
+  world: string;
+  _id: string;
+};
