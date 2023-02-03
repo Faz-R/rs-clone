@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Main from './pages/Main';
-import User from './components/User';
+import Main from './pages/main';
+import MainPage from './pages/MainPage/index';
 
 const router = createBrowserRouter([
   {
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <User />,
+        element: <MainPage />,
       },
     ],
   },

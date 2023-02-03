@@ -1,0 +1,25 @@
+
+.rangebar{
+  width: 100%;
+  -webkit-appearance: none;
+  background: var(--color-light);
+  border: medium none;
+  height: 4px;
+  border-radius: 6px;
+
+}
+
+.rangebar::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  position: relative;
+  background: var(--color-primary);
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.rangebar:focus-visible{
+  outline: 0;
+}

@@ -1,0 +1,51 @@
+@mixin flex ($direction, $justify:center){
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: $justify;
+}
+
+.header{
+  background-color: var(--bg-color);
+  color: var(--tertiary-color);
+  padding: 10px 0;
+  flex: 0 0 auto;
+}
+
+.header__wrapper{
+  @include flex(row, space-between);
+}
+
+.header__nav{
+  @include flex(row);
+  list-style: none;
+  gap: 1.5em;
+  text-transform: uppercase;
+
+  &__link{
+    display: block;
+    padding: 30px 0;
+    text-decoration: none;
+    color: var(--tertiary-color);
+    transition: var(--transition);
+    font-weight: 700;
+
+    &:hover{
+      color: var(--primary-color);
+    }
+  }
+
+}
+
+.eye-color{
+  transition: var(--transition);
+}
+
+.header__logo__img{
+  cursor: pointer;  
+  margin-right: auto;
+
+  &:hover .eye-color{
+    fill: var(--primary-color);
+  }
+}
