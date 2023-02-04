@@ -1,0 +1,30 @@
+.select{
+  border-color: var(--color-light);
+  cursor: pointer;
+  color: var(--color-body);
+  transition: .3s;
+  padding: 0 20px;
+  outline: none;
+  appearance: none;
+  border: 1px solid var(--color-border-light);
+  border-radius: 6px;
+  height: 40px;
+  background: url(../../../images/icons/arrow-icon.png) 95% center no-repeat rgba(0,0,0,0);
+  font-size: var(--font-size-b1);
+  line-height: var(--line-height-b1);
+  font-family: var(--font-secondary);
+}
+
+.option{
+  cursor: pointer;
+  color: var(--color-body);
+  font-size: var(--font-size-b1);
+  line-height: var(--line-height-b1);
+  font-family: var(--font-secondary);
+  word-wrap: normal;
+}
+
+.option:disabled{
+  background-color: var(--color-lightest);
+  color: var(--color-white);
+}
