@@ -1,0 +1,14 @@
+.emotions__emoji{
+  font-family: var(--font-emoji);
+  font-weight: 500;
+  font-size: 90px;
+}
+
+.emotions__list{
+  display: flex;
+  flex-direction: row;
+}
+
+.emoji__radio{
+  display: none;
+}

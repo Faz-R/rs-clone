@@ -1,4 +1,6 @@
-import type { MovieDataInterface, SearchMovieFormData } from '../type';
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable @typescript-eslint/no-loop-func */
+import type { MovieDataInterface, SearchMovieFormData } from '../types';
 import { DOMAIN, TOKEN, FIELDS_HUMOR, FIELDS_RANDOM } from '../constants';
 import getRandomNumber from '../tools/getRandomNumber';
 import parseMoviesData from '../tools/parseMovieData';
