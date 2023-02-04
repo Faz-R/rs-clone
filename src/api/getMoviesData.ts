@@ -34,7 +34,6 @@ const getMoviesData = async (formData: SearchMovieFormData, random: boolean) => 
     const { exceptions } = formData;
 
     const result = exceptions ? movies.filter((movie) => !exceptions.includes(movie.id)) : movies;
-    console.log(random ? result[getRandomNumber(result.length)] : result);
 
     return random ? result[getRandomNumber(result.length)] : result;
   } catch (err) {

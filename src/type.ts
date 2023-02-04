@@ -22,7 +22,7 @@ export interface MovieHumorInterface {
   description: string;
   genres: string[];
   poster: null | string;
-  country: null | string;
+  countries: null | string[];
   year: number;
   movieLength: number;
   rating: { kp: number; imdb: number };
@@ -37,13 +37,13 @@ export interface MovieDataInterface {
   id: number;
   name: string;
   description: string;
-  genres: string[];
+  genres: CountryType[];
   poster: PosterType;
   year: number;
   movieLength: number;
   rating: RatingType;
   persons: PersonType[];
-  premiere: PremiereType;
+  countries: CountryType[];
 }
 
 export type PersonType = {
@@ -71,8 +71,7 @@ type RatingType = {
   _id: string;
 };
 
-type PremiereType = {
-  country: string;
-  world: string;
+type CountryType = {
   _id: string;
+  name: string;
 };
