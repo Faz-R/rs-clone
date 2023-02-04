@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Range from '../../components/UI/Range/Range';
 import Select from '../../components/UI/select/Select';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import { options } from './constants';
 import './index.css';
+import getMoviesData from '../../api/getMoviesData';
+import getGenresData from '../../api/getGenresData';
 
 const minYear = 1900;
 const maxYear = 2023;
@@ -34,12 +36,43 @@ const showCheckboxes = function a() {
     }
   }
 };
+const genres = ['мультфильм', 'фэнтези', 'биография', 'комедия', 'драма', 'мюзикл'];
+let raer: string[];
+
+const movies = async () => {
+  await getMoviesData(
+    {
+      genres,
+      year: '1900-2023',
+    },
+    false
+  ).then((r) => {
+    if (r) r.forEach((element) => console.log(element.genres));
+  });
+};
+
+/* movies(); */
 
 const RandomMovie = () => {
   const [minYearRange, setMinYear] = useState(minYear);
   const [maxYearRange, setMaxYear] = useState(maxYear);
-  const [selectSort, setSelectSort] = useState('sdgdgdfg');
   const [filter, setFilter] = useState({ brand: '', checked: true });
+  const [genresState, setGenresState] = useState(genres);
+
+  // movies();
+  // genresArr();
+  const genresArr = async () => {
+    const resp = await getGenresData();
+    return resp ? resp?.arrGenres : genres;
+  };
+  genresArr().then((r) => setGenresState(r));
+
+  useEffect(() => {
+    /* async function r() {
+      raer = await genresArr();
+  
+    } */
+  }, [genresState]);
 
   const rangeMinYear = (value: number) => {
     setMinYear(value);
@@ -91,14 +124,8 @@ const RandomMovie = () => {
             <div className="overSelect" onClick={showCheckboxes} />
           </div>
           <div id="checkboxes">
-            <Checkbox item="hui" onChange={console.log('hui')} value="'huechec'" />
-            {options1.map((item, index: number) => (
-              <Checkbox
-                item={item.name}
-                key={item.id}
-                onChange={checkedBrand}
-                value={'brand' /* sArr[index] */}
-              />
+            {genres.map((item: string, index: number) => (
+              <Checkbox item={item} key={index} onChange={checkedBrand} value="brand" />
             ))}
           </div>
         </div>

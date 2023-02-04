@@ -14,7 +14,7 @@ const Range = ({ value, onChange, min, max, step, className }: IRangeProps) => {
   return (
     <div className={className}>
       <input
-        className=/* "rangebar" */ {classes.rangebar}
+        className={classes.rangebar}
         value={value}
         onChange={(event) => onChange(+event.target.value)}
         type="range"
