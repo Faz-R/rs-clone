@@ -3,7 +3,8 @@ import type {
   MovieHumorInterface,
   MovieRandomInterface,
   PersonType,
-} from '../type';
+  CountryType,
+} from '../types';
 
 const getActorsFromMovieData = (persons: PersonType[]) => {
   return persons
@@ -31,12 +32,12 @@ const parseMoviesData = (
       id,
       name,
       description,
-      genres: genres.map((genre) => genre.name),
+      genres: genres.map((genre: CountryType) => genre.name),
       year,
       movieLength,
       poster: poster?.previewUrl ?? null,
       rating: { kp: rating.kp, imdb: rating.imdb },
-      countries: countries.map((country) => country.name),
+      countries: countries.map((country: CountryType) => country.name),
     };
 
     return random ? { ...movieData, actors, director } : movieData;

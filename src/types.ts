@@ -71,7 +71,7 @@ type RatingType = {
   _id: string;
 };
 
-type CountryType = {
+export type CountryType = {
   _id: string;
   name: string;
 };
