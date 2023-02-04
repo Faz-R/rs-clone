@@ -1,5 +1,5 @@
 export interface ProductOpts {
-  value: string | number;
+  value: string;
   name: string;
   id?: number;
 }

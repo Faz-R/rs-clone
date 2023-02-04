@@ -8,10 +8,9 @@ interface IRangeProps {
   value: number;
   onChange: (item: number) => void;
   className: string;
-  id: string;
 }
 
-const Range = ({ value, onChange, min, max, step, className, id }: IRangeProps) => {
+const Range = ({ value, onChange, min, max, step, className }: IRangeProps) => {
   return (
     <div className={className}>
       <input
@@ -23,7 +22,6 @@ const Range = ({ value, onChange, min, max, step, className, id }: IRangeProps) 
         min={min}
         max={max}
         step={step}
-        id={id}
       />
     </div>
   );

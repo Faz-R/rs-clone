@@ -1,0 +1,13 @@
+.items-on-stock{
+  display: inline-block;
+  margin-left: 20px;
+  width: 150px;
+
+}
+
+
+
+label{
+  display: inline-block;
+  width: 150px;
+}

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './pages/Main';
 import User from './components/User';
-import RandomMovie from './pages/Random_movie';
+import RandomMovie from './pages/Random_Movie/Random_movie';
 
 const router = createBrowserRouter([
   {
