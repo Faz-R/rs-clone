@@ -5,6 +5,7 @@
   --secondary-color: #181818;
   --tertiary-color: #FFFFFF;
   --bg-color: #0E0E0E;
+  --card-color: rgb(40, 40, 40);
   --button-color-idle: #FFFFFF;
   --button-bg-idle: #FF7425;
   --button-color-hover: #FFFFFF;
@@ -96,7 +97,8 @@
   --primary-color: #FF7425;
   --secondary-color: #FFFFFF;
   --tertiary-color: #191c20;
-  --bg-color: #0E0E0E;
+  --bg-color: #FFFFFF;
+  --card-color: #FFFFFF;
   --button-color-idle: #FFFFFF;
   --button-bg-idle: #FF7425;
   --button-color-hover: #FFFFFF;
@@ -192,6 +194,7 @@
 
 body{
   font-family: "Arimo", sans-serif;
+  overflow-x: hidden;
 }
 
 #root{
