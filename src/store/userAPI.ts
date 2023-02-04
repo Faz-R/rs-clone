@@ -1,4 +1,4 @@
-import { UserDataInterface } from '../type';
+import { UserDataInterface } from '../types';
 
 const fetchUserData = async (id: number): Promise<UserDataInterface> => {
   const response = await fetch(`https://dummyjson.com/users/${id}`);
