@@ -1,0 +1,65 @@
+.footer{
+  flex: 0 0 auto;
+  width: 100%;
+  background-color: var(--bg-color);
+  color: var(--tertiary-color);
+  position: relative;
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 -5px 5px -4px rgb(0 0 0 / 10%);
+}
+
+.footer__info{
+  padding-top: 30px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__link, 
+.footer__date{
+  color: var(--tertiary-color);
+}
+
+.footer__link{
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.footer__link:hover{
+  color: var(--primary-color);
+}
+
+.authors-github{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0.3em;
+}
+
+
+.footer__github{
+  width: 20px;
+  height: 20px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+
+  &:hover *{
+    fill: var(--primary-color);
+  }
+}
+
+.footer__rs{
+  width: 70px;
+
+  &:hover *{
+    fill: var(--primary-color);
+  }
+}
+
+.footer__github *, .footer__rs *  {
+  fill: var(--tertiary-color);
+  transition: var(--transition);
+}
