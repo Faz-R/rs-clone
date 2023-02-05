@@ -1,5 +1,4 @@
 import './index.css';
-import { ProductOpts } from '../select/interfaces';
 
 interface checkBoxProps {
   item: string;
@@ -17,8 +16,10 @@ const Checkbox = ({ item, onChange, value }: checkBoxProps) => {
         name={item}
         onChange={(event) => onChange(event.target.checked, item)}
       />
-      <label htmlFor={item}>{item}</label>
-      {/* <span className="items-on-stock">{`${itemOnStock} /   ${itemOnStockFind}`}</span> */}
+      <label className="items-on-stock" htmlFor={item}>
+        {item}
+      </label>
+      {/* <span >{`${itemOnStock} /   ${itemOnStockFind}`}</span> */}
     </div>
   );
 };
