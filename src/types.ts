@@ -32,7 +32,6 @@ export interface MovieRandomInterface extends MovieHumorInterface {
   actors: string[];
   director: string;
 }
-
 export interface MovieDataInterface {
   id: number;
   name: string;
@@ -44,6 +43,7 @@ export interface MovieDataInterface {
   rating: RatingType;
   persons: PersonType[];
   countries: CountryType[];
+  videos?: { trailers: TrailerType[] };
 }
 
 export type PersonType = {
@@ -54,6 +54,11 @@ export type PersonType = {
   photo: string;
   profession: string;
   _id: string;
+};
+
+export type CountryType = {
+  _id: string;
+  name: string;
 };
 
 type PosterType = {
@@ -71,7 +76,17 @@ type RatingType = {
   _id: string;
 };
 
-export type CountryType = {
+type TrailerType = {
   _id: string;
+  url: string;
   name: string;
+  site: string;
 };
+
+export interface ResponseSearchMovieInterface {
+  docs: MovieDataInterface[];
+  total: number;
+  limit: number;
+  page: number;
+  pages: number;
+}

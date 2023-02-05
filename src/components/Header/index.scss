@@ -1,11 +1,11 @@
-@mixin flex ($direction, $justify:center){
+@mixin flex($direction, $justify: center) {
   display: flex;
   flex-direction: $direction;
   align-items: center;
   justify-content: $justify;
 }
 
-.header{
+.header {
   background-color: var(--bg-color);
   color: var(--tertiary-color);
   flex: 0 0 auto;
@@ -13,52 +13,51 @@
   box-shadow: 0 0 transparent, 0 0 transparent, 0 5px 5px -4px rgb(0 0 0 / 10%);
 }
 
-.header__wrapper{
+.header__wrapper {
   @include flex(row, space-between);
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.header__nav{
+.header__nav {
   @include flex(row);
   list-style: none;
   gap: 1.5em;
   text-transform: uppercase;
-
 }
 
-.eye-color{
+.eye-color {
   transition: fill var(--transition);
 }
 
-.header__logo__img{
-  cursor: pointer;  
+.header__logo__img {
+  cursor: pointer;
   margin-right: auto;
   fill: var(--tertiary-color);
 
-  &:hover .eye-color{
+  &:hover .eye-color {
     fill: var(--primary-color);
   }
 }
 
-.header__show-button{
+.header__show-button {
   position: absolute;
   transition: var(--transition);
   opacity: 0;
   transform: scale(0);
 }
 
-.header__show-button__active{
+.header__show-button__active {
   opacity: 1;
   transform: scale(1);
 }
 
-.header__buttons{
+.header__buttons {
   @include flex(row, center);
   gap: 1.2em;
 }
 
-.header__icon{
+.header__icon {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -69,25 +68,24 @@
   transition: all 0.2s;
   min-width: 30px;
 
-  & .fa-xmark{
+  & .fa-xmark {
     font-size: 27px;
   }
 
-  & .fa-magnifying-glass{
+  & .fa-magnifying-glass {
     font-size: 21px;
   }
 
-  &:hover{
+  &:hover {
     color: var(--primary-color);
   }
-
 }
 
-.search-block{
+.search-block {
   position: relative;
 }
 
-.search-wrapper{
+.search-wrapper {
   opacity: 0;
   visibility: hidden;
   position: absolute;
@@ -103,18 +101,18 @@
   box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
 }
 
-.search-form{
+.search-form {
   position: relative;
   font-family: Arimo, sans-serif;
   box-sizing: border-box;
 }
 
-.search-field{
+.search-field {
   width: 270px;
   display: block;
   height: 56px;
   max-width: 100%;
-  color: var(--submenu-color);
+  color: var(--tertiary-color);
   border: 1px solid rgb(220, 220, 220);
   border-width: 0 0 1px 0;
   border-radius: unset;
@@ -128,11 +126,11 @@
   transition: all 0.3s, height 0s;
 }
 
-.search-field:focus{
+.search-field:focus {
   border-color: var(--primary-color);
 }
 
-.search-button{
+.search-button {
   position: absolute;
   height: 56px;
   width: 20px;
@@ -148,13 +146,12 @@
   background: transparent;
   transition: var(--transition);
 
-  &:hover{
+  &:hover {
     color: var(--primary-color);
   }
 }
 
-
-.navigation{
+.navigation {
   padding: 30px;
   position: absolute;
   z-index: 10;
@@ -168,22 +165,22 @@
   transition: var(--transition);
 }
 
-.navigation__active{
+.navigation__active {
   transform: translateX(0);
 }
 
-.nav__logo{
+.nav__logo {
   padding-top: 20px;
   padding-bottom: 30px;
   justify-self: center;
   margin-right: 0;
 }
 
-.nav__list{
+.nav__list {
   list-style: none;
 }
 
-.nav__link{
+.nav__link {
   display: block;
   padding: 10px 0;
   text-decoration: none;
@@ -191,28 +188,28 @@
   transition: var(--transition);
   font-size: 1.2em;
   font-weight: 700;
-  
-  &:hover{
+
+  &:hover {
     color: var(--primary-color);
   }
 }
 
-.dark{
+.dark {
   position: absolute;
   width: 100%;
   height: 100%;
-  top:0;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(0, 0, 0, .3);
+  background-color: rgb(0, 0, 0, 0.3);
   opacity: 0;
   z-index: 5;
   visibility: hidden;
   transition: var(--transition);
 }
 
-.show{
+.show {
   opacity: 1;
   visibility: visible;
 }
