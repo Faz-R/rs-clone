@@ -25,8 +25,8 @@ const DoubleRange = ({
   return (
     <div className={`range-block ${className}-block`}>
       <div className="range-values">
-        <p className="min-range"> {min}</p>
-        <p className="max-range">{max}</p>
+        <p className="min-range">{valuemin}</p>
+        <p className="max-range">{valuemax}</p>
       </div>
       <input
         className={classes.rangebar}
@@ -48,9 +48,9 @@ const DoubleRange = ({
         max={max}
         step={step}
       />
-      <div>
+      <div className="title_range">
         {' '}
-        <strong>Year</strong>
+        <strong>{className}</strong>
       </div>
     </div>
   );

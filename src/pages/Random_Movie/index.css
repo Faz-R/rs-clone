@@ -35,6 +35,9 @@
 .range-block{
   display: flex;
   flex-direction: column;
+  margin-bottom: 100px;
+  margin-left: 10%;
+  width: 80%;
 }
 
 .range__content{
@@ -71,4 +74,8 @@
   display: block;
   padding-top: 30px;
   margin-left: 40%;
+}
+
+.title_range{
+  margin: 40px;
 }

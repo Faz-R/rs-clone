@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Range from '../../components/UI/Range/Range';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import './index.css';
 import getMoviesData from '../../api/getMoviesData';
@@ -10,10 +9,13 @@ import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 const minYear = 1900;
 const maxYear = 2023;
 const setYear = 1;
+const minRate = 0;
+const maxRate = 10;
+const setRate = 0.1;
 let id = 0;
 
 const genres = Array.from(Object.values(getAllGenres)).map((i) => {
-  id = +1;
+  id += 1;
   return { name: i, id };
 });
 
@@ -34,8 +36,16 @@ let expanded = false;
 const RandomMovie = () => {
   const [minYearRange, setMinYear] = useState(minYear);
   const [maxYearRange, setMaxYear] = useState(maxYear);
-  const [filter, setFilter] = useState({ brand: '', checked: true });
+  const [minRateRange, setMinRate] = useState(minRate);
+  const [maxRateRange, setMaxRate] = useState(maxRate);
+  const [filter, setFilter] = useState(['']);
   const [genresState, setGenresState] = useState([{ name: '', id: 0 }]);
+  useEffect(() => {
+    if (genres) {
+      setGenresState(genres);
+      // console.log('genres', genres);
+    }
+  }, []);
 
   const checkboxes = document.getElementById('checkboxes');
 
@@ -52,12 +62,6 @@ const RandomMovie = () => {
     }
   };
 
-  useEffect(() => {
-    if (genres) {
-      setGenresState(genres);
-    }
-  }, []);
-
   const rangeMinYear = (value: number) => {
     setMinYear(value);
   };
@@ -66,14 +70,27 @@ const RandomMovie = () => {
     setMaxYear(value);
   };
 
+  const rangeMinRate = (value: number) => {
+    setMinRate(value);
+    console.log('minRateRange', minRateRange);
+  };
+
+  const rangeMaxRate = (value: number) => {
+    setMaxRate(value);
+    console.log('maxRateRange', maxRateRange);
+  };
+
   const checkedBrand = (check: boolean, item: string) => {
-    setFilter({ brand: item, checked: check });
-    console.log('filter', filter);
+    if (check) filter.push(item);
+    else {
+      setFilter(filter.filter((i) => i !== item));
+      console.log('filter', filter, check);
+    }
   };
 
   return (
     <div className="random_movie">
-      <div className="random_movie">
+      <div className="select_movie_year">
         <DoubleRange
           valuemin={minYearRange}
           valuemax={maxYearRange}
@@ -82,7 +99,19 @@ const RandomMovie = () => {
           step={setYear}
           onChange={rangeMaxYear}
           onChange2={rangeMinYear}
-          className="my-range max-range-slidebar"
+          className="year"
+        />
+      </div>
+      <div className="select_movie_rating">
+        <DoubleRange
+          valuemin={minRateRange}
+          valuemax={maxRateRange}
+          min={minRate}
+          max={maxRate}
+          step={setRate}
+          onChange={rangeMaxRate}
+          onChange2={rangeMinRate}
+          className="rating"
         />
       </div>
       <form>
