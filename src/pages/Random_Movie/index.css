@@ -31,3 +31,44 @@
 #checkboxes label:hover {
   background-color: #1e90ff;
 }
+
+.range-block{
+  display: flex;
+  flex-direction: column;
+}
+
+.range__content{
+  display: flex;
+  flex-direction: column;
+}
+
+.range__title{
+  margin-bottom: 20px;
+}
+
+.range-values{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.range__bar{
+  width: 100%;
+}
+
+.range__line{
+  position: absolute; 
+  width: 100%;
+}
+
+.range-block{
+  position: relative;
+  height: 100px;
+}
+
+.range-block-name{
+  display: block;
+  padding-top: 30px;
+  margin-left: 40%;
+}

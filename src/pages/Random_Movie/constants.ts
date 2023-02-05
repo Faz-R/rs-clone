@@ -1,22 +1,36 @@
-import getGenresData from '../../api/getGenresData';
-
-export const options = [
-  { value: 'titleup', name: 'by title asc' },
-  { value: 'titledown', name: 'by title desc' },
-  { value: 'priceup', name: 'by price asc' },
-  { value: 'pricedown', name: 'by price desc' },
-  { value: 'discountPercentageup', name: 'by discountPercentage asc' },
-  { value: 'discountPercentagedown', name: 'by discountPercentage desc' },
-];
-
-const genresArr = async () => {
-  const resp = await getGenresData();
-  return resp ? resp?.arrGenres : genres;
+export const getAllGenres = {
+  boevik: 'боевик',
+  fentezi: 'фэнтези',
+  fantastika: 'фантастика',
+  triller: 'триллер',
+  voennyj: 'военный',
+  detektiv: 'детектив',
+  komediya: 'комедия',
+  drama: 'драма',
+  uzhasy: 'ужасы',
+  kriminal: 'криминал',
+  melodrama: 'мелодрама',
+  vestern: 'вестерн',
+  biografiya: 'биография',
+  anime: 'аниме',
+  detskij: 'детский',
+  multfilm: 'мультфильм',
+  'film-nuar': 'фильм-нуар',
+  'dlya-vzroslyh': 'для взрослых',
+  dokumentalnyj: 'документальный',
+  igra: 'игра',
+  istoriya: 'история',
+  koncert: 'концерт',
+  korotkometrazhka: 'короткометражка',
+  muzyka: 'музыка',
+  myuzikl: 'мюзикл',
+  novosti: 'новости',
+  priklyucheniya: 'приключения',
+  'realnoe-tv': 'реальное ТВ',
+  semejnyj: 'семейный',
+  sport: 'спорт',
+  'tok-shou': 'ток-шоу',
+  ceremoniya: 'церемония',
 };
-let raer: string[];
-async function r() {
-  raer = await genresArr();
-}
-r();
 
-export default raer;
+export default getAllGenres;
