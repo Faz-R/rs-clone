@@ -35,7 +35,23 @@ const Quiz = () => {
         </div>
         <div className="emotions__title">Выберите год</div>
         <div className="emotions__title">Выберите рейтинг</div>
+        <label htmlFor="hight">
+          Высокий
+          <input type="radio" name="rating" id="hight" value="7-10" />
+        </label>
+        <label htmlFor="all">
+          Неважно
+          <input type="radio" name="rating" id="all" value="" />
+        </label>
         <div className="emotions__title">Убрать просмотренные и отложенные фильмы?</div>
+        <label htmlFor="show">
+          Убрать
+          <input type="radio" name="show" id="show" value="true" />
+        </label>
+        <label htmlFor="hidden">
+          Оставить
+          <input type="radio" name="show" id="hidden" value="false" />
+        </label>
 
         <Button>Отправить</Button>
       </form>

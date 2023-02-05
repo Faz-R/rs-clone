@@ -98,7 +98,7 @@
   padding-top: 21px;
   transition: var(--transition);
   border-radius: 0;
-  color: var(--submenu-color);
+  color: var(--tertiary-color);
   background-color: var(--card-color);
   box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
 }
@@ -114,7 +114,7 @@
   display: block;
   height: 56px;
   max-width: 100%;
-  color: var(--submenu-color);
+  color: var(--tertiary-color);
   border: 1px solid rgb(220, 220, 220);
   border-width: 0 0 1px 0;
   border-radius: unset;
