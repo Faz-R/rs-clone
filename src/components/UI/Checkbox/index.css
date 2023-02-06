@@ -1,0 +1,17 @@
+.items-on-stock{
+  display: inline-block;
+  margin-left: 20px;
+  width: 100px;
+
+}
+
+.my-checkbox{
+  display: grid;
+  grid-template-columns: 1fr  10fr;
+}
+
+
+label{
+  display: inline-block;
+  width: 150px;
+}

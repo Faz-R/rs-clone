@@ -11,7 +11,7 @@ export interface UserStateInterface {
 
 export interface SearchMovieFormData {
   genres: string[];
-  year: number;
+  year: number | string;
   rating?: string;
   exceptions?: number[];
 }
