@@ -2,11 +2,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useState } from 'react';
+import SearchForm from './SearchForm';
 import './index.scss';
 
 const Header = () => {
   const [modalSearch, setModalSearch] = useState(false);
-  const [search, setSearch] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [theme, setTheme] = useState(true);
 
@@ -128,25 +128,7 @@ const Header = () => {
                   />
                 </div>
                 <div className={`search-wrapper ${modalSearch ? 'show' : ''}`}>
-                  <form role="search" method="get" action="" className="search-form">
-                    <input
-                      required
-                      type="text"
-                      id="search-form-63ce639e4857b"
-                      className="search-field"
-                      placeholder="Поиск…"
-                      value={search}
-                      name="s"
-                      onChange={(e) => {
-                        setSearch(e.target.value);
-                      }}
-                    />
-                    <button
-                      className="search-button fa-solid fa-magnifying-glass"
-                      type="submit"
-                      value="Search"
-                    />
-                  </form>
+                  <SearchForm />
                 </div>
               </div>
               <div
