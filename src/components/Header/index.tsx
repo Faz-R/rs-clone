@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { Link } from 'react-router-dom';
+
 import { useEffect, useState } from 'react';
 import SearchForm from './SearchForm';
 import './index.scss';
@@ -11,9 +10,11 @@ const Header = () => {
   const [theme, setTheme] = useState(true);
 
   useEffect(() => {
-    theme
-      ? document.documentElement.setAttribute('theme', 'light-theme')
-      : document.documentElement.setAttribute('theme', 'dark-theme');
+    if (theme) {
+      document.documentElement.setAttribute('theme', 'light-theme');
+    } else {
+      document.documentElement.setAttribute('theme', 'dark-theme');
+    }
 
     if (showMenu) {
       setModalSearch(false);
@@ -27,6 +28,7 @@ const Header = () => {
         onClick={() => {
           setShowMenu(!showMenu);
         }}
+        aria-hidden="true"
       />
       <div className={`navigation ${showMenu ? 'navigation__active' : ''}`}>
         <svg
@@ -56,29 +58,29 @@ const Header = () => {
         </svg>
         <ul className="nav__list">
           <li>
-            <a href="#" className="nav__link">
+            <Link to="humor" className="nav__link">
               Фильм под настроение
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="nav__link">
+            <Link to="random" className="nav__link">
               Случайный фильм
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="nav__link">
+            <Link to="viewed" className="nav__link">
               Просмотренные
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="nav__link">
+            <Link to="expect" className="nav__link">
               Буду смотреть
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="nav__link">
+            <Link to="statistics" className="nav__link">
               Статистика
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -114,7 +116,8 @@ const Header = () => {
                   className="header__icon"
                   onClick={() => {
                     setModalSearch(!modalSearch);
-                  }}>
+                  }}
+                  aria-hidden="true">
                   <i
                     className={`fa-solid fa-magnifying-glass header__show-button ${
                       !modalSearch && `header__show-button__active`
@@ -135,7 +138,8 @@ const Header = () => {
                 className="change-theme_button header__icon"
                 onClick={() => {
                   setTheme(!theme);
-                }}>
+                }}
+                aria-hidden="true">
                 <i
                   className={`fa-regular fa-moon header__show-button ${
                     theme && `header__show-button__active`
@@ -152,7 +156,8 @@ const Header = () => {
                 className="burger-menu_button header__icon"
                 onClick={() => {
                   setShowMenu(!showMenu);
-                }}>
+                }}
+                aria-hidden="true">
                 <i
                   className={`fa-solid fa-bars header__show-button ${
                     !showMenu && `header__show-button__active`

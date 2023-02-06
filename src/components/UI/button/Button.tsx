@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/button-has-type */
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import classes from './Button.module.scss';
 
@@ -8,7 +6,7 @@ const Button = ({
   ...props
 }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>): JSX.Element => {
   return (
-    <button {...props} className={`button ${classes.button}`}>
+    <button type="button" {...props} className={`button ${classes.button}`} aria-hidden="true">
       {children}
     </button>
   );

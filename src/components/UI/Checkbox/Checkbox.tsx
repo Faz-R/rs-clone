@@ -1,12 +1,12 @@
 import './index.css';
 
-interface checkBoxProps {
+interface CheckBoxProps {
   item: string;
-  onChange: any;
+  onChange: (checked: boolean, item: string) => void;
   value: string;
 }
 
-const Checkbox = ({ item, onChange, value }: checkBoxProps) => {
+const Checkbox = ({ item, onChange, value }: CheckBoxProps) => {
   return (
     <div className="my-checkbox">
       <input
