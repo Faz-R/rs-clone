@@ -1,57 +1,30 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/no-children-prop */
 import { useState, useEffect } from 'react';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import './index.css';
 import getMoviesData from '../../api/getMoviesData';
-import getGenresData from '../../api/getGenresData';
-import getAllGenres from './constants';
+import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
 import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 import Button from '../../components/UI/button/Button';
-import { MovieHumorInterface } from '../../types';
 
-const minYear = 1900;
-const maxYear = 2023;
-const setYear = 1;
-const minRate = 0;
-const maxRate = 10;
-const setRate = 0.1;
-let id = 0;
-
-const genres = Array.from(Object.values(getAllGenres)).map((i) => {
-  id += 1;
-  return { name: i, id };
-});
-
-/* movies(); */
 let expanded = false;
+
 const RandomMovie = () => {
   const [minYearRange, setMinYear] = useState(minYear);
   const [maxYearRange, setMaxYear] = useState(maxYear);
   const [minRateRange, setMinRate] = useState(minRate);
   const [maxRateRange, setMaxRate] = useState(maxRate);
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState([] as string[]);
   const [genresState, setGenresState] = useState([{ name: '', id: 0 }]);
   const [cardOfMovie, setCardOfMovie] = useState(false);
   const [randomMovie, setRandomMovie] = useState('выберите другие параметры');
   useEffect(() => {
     if (genres) {
       setGenresState(genres);
-      // console.log('genres', genres);
     }
   }, [cardOfMovie]);
-
-  const getMovie = async () => {
-    await getMoviesData(
-      {
-        genres: filter,
-        year: `${minYearRange}-${maxYearRange}`,
-        rating: `${minRateRange}-${maxRateRange}`,
-      },
-      true
-    ).then((r) =>{
-      setCardOfMovie(true);
-      console.log(r);
-      if(r) setRandomMovie(r.toString());});
-  };
 
   const checkboxes = document.getElementById('checkboxes');
 
@@ -59,13 +32,31 @@ const RandomMovie = () => {
     if (checkboxes) {
       if (!expanded) {
         checkboxes.style.display = 'block';
-
         expanded = true;
       } else {
         checkboxes.style.display = 'none';
         expanded = false;
       }
     }
+  };
+
+  const getMovie = async () => {
+    expanded = true;
+    await getMoviesData(
+      {
+        genres: filter,
+        year: `${minYearRange}-${maxYearRange}`,
+        rating: `${minRateRange}-${maxRateRange}`,
+      },
+      true
+    ).then((r) => {
+      showCheckboxes();
+      setCardOfMovie(true);
+      if (!Array.isArray(r) && r) {
+        if (r.name) setRandomMovie(r.name);
+        else getMovie();
+      }
+    });
   };
 
   const rangeMinYear = (value: number) => {
@@ -78,12 +69,10 @@ const RandomMovie = () => {
 
   const rangeMinRate = (value: number) => {
     setMinRate(value);
-    console.log('minRateRange', minRateRange);
   };
 
   const rangeMaxRate = (value: number) => {
     setMaxRate(value);
-    console.log('maxRateRange', maxRateRange);
   };
 
   const checkedGenres = (check: boolean, item: string) => {
@@ -139,9 +128,7 @@ const RandomMovie = () => {
       <div className="button_random_movie">
         <Button children="Случайный фильм" onClick={getMovie} />
       </div>
-      <div className="card_of_movie">
-        {!cardOfMovie ? '' : `${randomMovie}`}
-      </div>
+      <div className="card_of_movie">{!cardOfMovie ? '' : `${randomMovie}`}</div>
     </div>
   );
 };

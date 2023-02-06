@@ -22,6 +22,7 @@
 #checkboxes {
   display: none;
   border: 1px #dadada solid;
+ 
 }
 
 #checkboxes label {
@@ -86,5 +87,6 @@
 
 .checkboxes_menu{
   position: absolute;
-  
+  z-index: 10;
+  max-height: 200px;
 }
