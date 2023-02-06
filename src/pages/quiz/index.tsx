@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import getMoviesData from '../../api/getMoviesData';
 import Button from '../../components/UI/button/Button';
 import Range from '../../components/UI/range/Range';
@@ -8,12 +8,12 @@ import './index.scss';
 const Quiz = () => {
   const emotions = {
     '😀': ['комедия', 'мюзикл', 'музыкальный'],
-    '😎': ['военные', 'боевики', 'криминал', 'вестерны', 'детективы'],
-    '👽': ['фантастика', 'фэнтези', 'приключения'],
-    '😊': ['детские', 'мультфильмы', 'семейные'],
-    '🧐': ['исторические', 'спортивные', 'документальные', 'биографии'],
-    '🥹': ['драмы', 'мелодрамы'],
-    '😱': ['ужасы', 'триллеры'],
+    '😎': ['военный', 'боевик', 'криминал', 'вестерн', 'детектив', 'фильм-нуар'],
+    '👽': ['фантастика', 'фэнтези', 'приключения', 'игра'],
+    '😊': ['детский', 'мультфильм', 'семейный'],
+    '🧐': ['история', 'спорт', 'документальный', 'биография', 'музыка'],
+    '🥹': ['драма', 'мелодрама'],
+    '😱': ['ужасы', 'триллер'],
     '😻': ['аниме'],
   };
 
@@ -21,7 +21,6 @@ const Quiz = () => {
   const maxYear = today.getFullYear();
   const minYear = 1920;
 
-  const [rate, setRate] = useState('');
   const [minYearRange, setMinYear] = useState(minYear);
   const [maxYearRange, setMaxYear] = useState(maxYear);
 
@@ -33,23 +32,6 @@ const Quiz = () => {
     setMaxYear(value);
   };
 
-  // const getMovie = async (e: any) => {
-  //   e.preventDefault();
-  //   const form = e?.target;
-  //   console.log(form);
-  //   // const formData = new FormData(form);
-  //   // console.log(formData);
-
-  //   // await getMoviesData(
-  //   //   {
-  //   //     genres: ,
-  //   //     year: `${minYearRange}-${maxYearRange}`,
-  //   //     rating:
-  //   //   },
-  //   //   true
-  //   // )
-  // };
-
   const [movie, setMovie] = useState({} as MovieHumorInterface);
 
   const getMovie: React.FormEventHandler<HTMLFormElement> = async (e) => {
@@ -57,20 +39,15 @@ const Quiz = () => {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const rating = formData.get('rating') as string;
-    console.log(rating, 'rating');
     const showViewed = formData.get('show') as string;
-    console.log(showViewed, 'showViewed');
     const genres = (formData.get('emoji') as string).split(',');
-    console.log(genres, 'genres');
     const minYearFrom = Number(formData.get('minYear'));
     const maxYearFrom = Number(formData.get('maxYear'));
     const year = `${Math.min(minYearFrom, maxYearFrom)}-${Math.max(minYearFrom, maxYearFrom)}`;
-    console.log(year, 'year');
 
     const response = await getMoviesData({ genres, year, rating }, true);
     console.log(response);
     setMovie(response as MovieHumorInterface);
-    const movies = await response;
   };
 
   return (
@@ -145,7 +122,7 @@ const Quiz = () => {
 
         <Button>Отправить</Button>
       </form>
-      {movie && <div>{movie.name}</div>}
+      {movie && <div>Название фильма: {movie.name}</div>}
     </section>
   );
 };
