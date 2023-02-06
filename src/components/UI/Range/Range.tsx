@@ -1,4 +1,3 @@
-/* import './Range.module.css'; */
 import classes from './Range.module.scss';
 
 interface IRangeProps {
@@ -8,9 +7,10 @@ interface IRangeProps {
   value: number;
   onChange: (item: number) => void;
   className: string;
+  name: string;
 }
 
-const Range = ({ value, onChange, min, max, step, className }: IRangeProps) => {
+const Range = ({ value, onChange, min, max, step, className, name }: IRangeProps) => {
   return (
     <div className={className}>
       <input
@@ -18,7 +18,7 @@ const Range = ({ value, onChange, min, max, step, className }: IRangeProps) => {
         value={value}
         onChange={(event) => onChange(+event.target.value)}
         type="range"
-        name="year"
+        name={name}
         min={min}
         max={max}
         step={step}

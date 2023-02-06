@@ -4,7 +4,6 @@ import MainPage from './pages/MainPage/index';
 import Quiz from './pages/quiz';
 import SearchPage from './pages/SearhPage';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,7 +14,6 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        questionnaire
         index: true,
         path: 'quiz',
         element: <Quiz />,
@@ -23,7 +21,6 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />,
-        develop
       },
     ],
   },

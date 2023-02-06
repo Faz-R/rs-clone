@@ -1,7 +1,6 @@
-/* import './Range.module.css'; */
 import classes from './DoubleRange.module.scss';
 
-interface IRangeProps {
+interface IDoubleRangeProps {
   min: number;
   max: number;
   step: number;
@@ -21,7 +20,7 @@ const DoubleRange = ({
   max,
   step,
   className,
-}: IRangeProps) => {
+}: IDoubleRangeProps) => {
   return (
     <div className={`range-block ${className}-block`}>
       <div className="range-values">
