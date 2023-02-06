@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './pages/main';
 import MainPage from './pages/MainPage/index';
 import Quiz from './pages/quiz';
+import RandomMovie from './pages/Random_Movie/Random_movie';
 import SearchPage from './pages/SearhPage';
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />,
+      },
+      {
+        path: 'random',
+        element: <RandomMovie />,
       },
     ],
   },

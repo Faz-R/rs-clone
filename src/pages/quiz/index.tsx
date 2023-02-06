@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import getMoviesData from '../../api/getMoviesData';
 import Button from '../../components/UI/button/Button';
-import Range from '../../components/UI/range/Range';
+import Range from '../../components/UI/Range/Range';
 import { MovieHumorInterface } from '../../types';
 import './index.scss';
 

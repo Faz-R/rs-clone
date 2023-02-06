@@ -8,6 +8,7 @@ import getMoviesData from '../../api/getMoviesData';
 import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
 import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 import Button from '../../components/UI/button/Button';
+import { MovieHumorInterface } from '../../types';
 
 let expanded = false;
 
@@ -19,7 +20,7 @@ const RandomMovie = () => {
   const [filter, setFilter] = useState([] as string[]);
   const [genresState, setGenresState] = useState([{ name: '', id: 0 }]);
   const [cardOfMovie, setCardOfMovie] = useState(false);
-  const [randomMovie, setRandomMovie] = useState('выберите другие параметры');
+  const [randomMovie, setRandomMovie] = useState({} as MovieHumorInterface);
   useEffect(() => {
     if (genres) {
       setGenresState(genres);
@@ -42,21 +43,25 @@ const RandomMovie = () => {
 
   const getMovie = async () => {
     expanded = true;
-    await getMoviesData(
+    const responce = await getMoviesData(
       {
         genres: filter,
         year: `${minYearRange}-${maxYearRange}`,
         rating: `${minRateRange}-${maxRateRange}`,
       },
       true
-    ).then((r) => {
-      showCheckboxes();
-      setCardOfMovie(true);
-      if (!Array.isArray(r) && r) {
-        if (r.name) setRandomMovie(r.name);
-        else getMovie();
-      }
-    });
+    );
+    console.log(responce);
+    setRandomMovie(responce as MovieHumorInterface);
+
+    // .then((r) => {
+    //   showCheckboxes();
+    //   setCardOfMovie(true);
+    //   if (!Array.isArray(r) && r) {
+    //     if (r.name) setRandomMovie(r.name);
+    //     else getMovie();
+    //   }
+    // });
   };
 
   const rangeMinYear = (value: number) => {
@@ -128,7 +133,7 @@ const RandomMovie = () => {
       <div className="button_random_movie">
         <Button children="Случайный фильм" onClick={getMovie} />
       </div>
-      <div className="card_of_movie">{!cardOfMovie ? '' : `${randomMovie}`}</div>
+      <div className="card_of_movie">{randomMovie && randomMovie.name}</div>
     </div>
   );
 };
