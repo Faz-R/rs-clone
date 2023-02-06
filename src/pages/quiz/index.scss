@@ -1,0 +1,26 @@
+.quiz__title{
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-line-height);
+  letter-spacing: var(--h3-letter-spacing);
+  text-transform: var(--h3-text-transform);
+  font-weight: var(--h3-font-weight);
+  padding-top: 40px;
+  margin-bottom: 30px;
+}
+
+.emotions__emoji{
+  font-family: var(--font-emoji);
+  font-weight: 500;
+  font-size: 50px;
+  cursor: pointer;
+  color: var(--tertiary-color);
+}
+
+.emotions__list{
+  display: flex;
+  flex-direction: row;
+}
+
+.emoji__radio{
+  display: none;
+}
