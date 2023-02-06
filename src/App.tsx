@@ -4,6 +4,7 @@ import MainPage from './pages/MainPage/index';
 import Quiz from './pages/quiz';
 import RandomMovie from './pages/Random_Movie/Random_movie';
 import SearchPage from './pages/SearhPage';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'random',
         element: <RandomMovie />,
+      },
+      {
+        path: '*',
+        element: <ErrorPage />,
       },
     ],
   },

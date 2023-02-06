@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/no-children-prop */
 import { useState, useEffect } from 'react';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import './index.css';
@@ -95,7 +92,7 @@ const RandomMovie = () => {
             <select>
               <option>Select an option</option>
             </select>
-            <div className="overSelect" onClick={showCheckboxes} />
+            <div className="overSelect" onClick={showCheckboxes} aria-hidden="true" />
           </div>
           <div id="checkboxes">
             <div className="checkboxes_menu">
