@@ -5,6 +5,7 @@ import Quiz from './pages/quiz';
 import RandomMovie from './pages/Random_Movie/Random_movie';
 import SearchPage from './pages/SearhPage';
 import ErrorPage from './pages/ErrorPage';
+import Viewed from './pages/Viewed';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <ErrorPage />,
+      },
+      {
+        path: 'viewed',
+        element: <Viewed />,
       },
     ],
   },
