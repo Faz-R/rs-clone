@@ -1,9 +1,14 @@
 export const DOMAIN = 'https://api.kinopoisk.dev/movie';
 
-// export const TOKEN = 'C8SJTGQ-8374XC7-KMFFQBA-MKXY2FQ';
-export const TOKEN = 'FWSZ570-9QAM014-PM2CSDH-NST8R8P';
-// export const TOKEN = '94CKNN6-8PFMRNZ-G1KGFD8-KJ4KAZX';
+export const TOKEN = 'ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06';
 
 export const FIELDS_HUMOR =
-  '&selectFields=id name genres description year rating poster countries movieLength';
+  '&selectFields=id alternativeName name genres description year rating poster countries movieLength';
 export const FIELDS_RANDOM = `${FIELDS_HUMOR} persons`;
+
+const TOKEN_LIST = [
+  'ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06',
+  'C8SJTGQ-8374XC7-KMFFQBA-MKXY2FQ',
+  'EQTJJ21-N9ZM1PH-P8ASAHG-PSC522M',
+  '94CKNN6-8PFMRNZ-G1KGFD8-KJ4KAZX',
+];
