@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import { useState, useEffect } from 'react';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import './index.css';
@@ -6,6 +7,7 @@ import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './
 import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 import Button from '../../components/UI/button/Button';
 import { MovieHumorInterface } from '../../types';
+import MovieCard from '../../components/MovieCard';
 
 let expanded = false;
 
@@ -130,9 +132,11 @@ const RandomMovie = () => {
       <div className="button_random_movie">
         <Button children="Случайный фильм" onClick={getMovie} />
       </div>
-      <div className="card_of_movie">{randomMovie && randomMovie.name}</div>
+      <div className="card_of_movie">
+        <MovieCard id={randomMovie.id + ''} movie={randomMovie} poster={randomMovie.poster || ''} />
+        {randomMovie && randomMovie.name}
+      </div>
     </div>
   );
 };
-
 export default RandomMovie;
