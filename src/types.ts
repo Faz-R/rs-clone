@@ -32,6 +32,7 @@ export interface MovieRandomInterface extends MovieHumorInterface {
   actors: string[];
   director: string;
 }
+
 export interface MovieDataInterface {
   id: number;
   name: string;

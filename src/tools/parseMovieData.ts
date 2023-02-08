@@ -25,8 +25,8 @@ const parseMoviesData = (
     const { id, name, description, genres, poster, year, movieLength, rating, persons, countries } =
       movie;
 
-    const actors = getActorsFromMovieData(persons);
-    const director = getProducerFromMovieData(persons);
+    const actors = persons ? getActorsFromMovieData(persons) : null;
+    const director = persons ? getProducerFromMovieData(persons) : null;
 
     const movieData = {
       id,

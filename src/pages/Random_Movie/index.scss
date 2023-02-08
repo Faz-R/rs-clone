@@ -1,0 +1,214 @@
+.random-movie{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.switch-block__title{
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-line-height);
+  letter-spacing: var(--h3-letter-spacing);
+  text-transform: var(--h3-text-transform);
+  font-weight: var(--h3-font-weight);
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+
+.switch-block__subtitle{
+  padding: 0;
+  margin: 0;
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  margin-bottom: 20px;
+
+}
+
+.switch-block{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+  padding-right: 20px;
+}
+
+.movie-card{
+  width: 50%;
+  padding-left: 20px;
+}
+
+.random-movie__range{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1em;
+  padding-bottom: 20px;
+}
+
+.random-movie__range__num{
+  min-width: 50px;
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-line-height);
+  letter-spacing: var(--h5-letter-spacing);
+  text-transform: var(--h5-text-transform);
+  font-weight: var(--h5-font-weight);
+}
+
+.range__num__max{
+  text-align: end;
+}
+
+.range-block{
+  margin-bottom: 15px;
+}
+
+.switch-block__multiselect{
+  width: 100%;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.switch-block__select{
+  display: block;
+  position: relative;
+  color: var(--tertiary-color);
+  background-color: var(--card-color);
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(220, 220, 220);
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  outline: none;
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+  transition: var(--transition);
+  background-size: 15px;
+  cursor: pointer;
+
+  &:hover{
+      border-color: var(--primary-color);
+  }
+}
+
+.switch-block__select__angle{
+  position: absolute;
+  opacity: 0;
+  transform: scale(0);
+  top: 40%;
+  right: 15px;
+  font-size: 0.9em;
+  transition: var(--transition);
+}
+
+.select__angle__active{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.border__select__active{
+  border-color: var(--primary-color);
+}
+
+.switch-block__checkboxes-menu{
+  position: absolute;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  top: 100%;
+  opacity: 0;
+  z-index: 10;
+  visibility: hidden;
+
+  display: block;
+  color: var(--tertiary-color);
+  background-color: var(--card-color);
+  border: 1px solid rgb(220, 220, 220);
+  border-width: 0 0 1px 1px;
+  font-size: 18px;
+  line-height: 1.5em;
+  outline: none;
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+  transition: var(--transition);
+
+  &::-webkit-scrollbar {
+    width: 5px;   
+    scroll-behavior: smooth;           
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgb(220, 220, 220);  
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);    
+  }
+}
+
+.checkboxes__show{
+  visibility: visible;
+  opacity: 1;
+}
+
+.button_random_movie{
+  padding-top: 30px;
+  align-self: center;
+}
+
+.design__row{
+  color: var(--primary-color);
+  font-size: 0.9em;
+}
+
+.movie-card{
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card__top{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.movie-card__poster{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 200px;
+  background-color: var(--card-color);
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+  margin-bottom: 30px;
+}
+
+.movie-card__placeholder{
+  width: 80px;
+  fill: var(--tertiary-color);
+  opacity: .6;
+}
+
+.movie-card__info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+
+
+
+
+

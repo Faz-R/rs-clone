@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './pages/main';
 import MainPage from './pages/MainPage/index';
-import Quiz from './pages/quiz';
-import RandomMovie from './pages/Random_Movie/Random_movie';
+import Humor from './pages/HumorPage';
+import RandomMovie from './pages/Random_Movie';
 import SearchPage from './pages/SearhPage';
 import ErrorPage from './pages/ErrorPage';
 
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
       },
       {
         index: true,
-        path: 'quiz',
-        element: <Quiz />,
+        path: 'humor',
+        element: <Humor />,
       },
       {
         path: 'search',

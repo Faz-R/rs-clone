@@ -6,7 +6,7 @@ const Button = ({
   ...props
 }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>): JSX.Element => {
   return (
-    <button type="button" {...props} className={`button ${classes.button}`} aria-hidden="true">
+    <button {...props} className={`button ${classes.button}`} aria-hidden="true">
       {children}
     </button>
   );

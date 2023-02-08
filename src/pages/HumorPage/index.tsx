@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import getMoviesData from '../../api/getMoviesData';
 import Button from '../../components/UI/button/Button';
-import Range from '../../components/UI/Range/Range';
+import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 import { MovieHumorInterface } from '../../types';
 import './index.scss';
 
-const Quiz = () => {
+const Humor = () => {
   const emotions = {
     '😀': ['комедия', 'мюзикл', 'музыкальный'],
     '😎': ['военный', 'боевик', 'криминал', 'вестерн', 'детектив', 'фильм-нуар'],
@@ -20,6 +20,7 @@ const Quiz = () => {
   const today = new Date();
   const maxYear = today.getFullYear();
   const minYear = 1920;
+  const stepYear = 1;
 
   const [minYearRange, setMinYear] = useState(minYear);
   const [maxYearRange, setMaxYear] = useState(maxYear);
@@ -45,8 +46,7 @@ const Quiz = () => {
     const maxYearFrom = Number(formData.get('maxYear'));
     const year = `${Math.min(minYearFrom, maxYearFrom)}-${Math.max(minYearFrom, maxYearFrom)}`;
 
-    const response = await getMoviesData({ genres, year, rating }, true);
-    console.log(response);
+    const response = await getMoviesData({ genres, year, rating }, false);
     setMovie(response as MovieHumorInterface);
   };
 
@@ -64,7 +64,7 @@ const Quiz = () => {
                   type="radio"
                   name="emoji"
                   id={`${key}`}
-                  className="emoji__radio"
+                  className="emoji__radio bubbly-button"
                   value={value}
                   required
                 />
@@ -73,34 +73,19 @@ const Quiz = () => {
           })}
         </div>
         <span className="emotions__title">Выберите год</span>
-        <div className="range-block price-block">
-          <div className="range-values">
-            <p className="min-range"> {minYear}</p>
-            <p className="max-range">{maxYear}</p>
-          </div>
-          <Range
-            value={minYearRange}
-            min={minYear}
-            max={maxYear}
-            step={1}
-            onChange={rangeMinYear}
-            className="my-range min-range-slidebar"
-            name="minYear"
-          />
-          <Range
-            value={maxYearRange}
-            min={minYear}
-            max={maxYear}
-            step={1}
-            onChange={rangeMaxYear}
-            className="my-range max-range-slidebar"
-            name="maxYear"
-          />
-          <div>
-            {' '}
-            <strong>Year</strong>
-          </div>
-        </div>
+
+        <DoubleRange
+          valuemin={minYearRange}
+          valuemax={maxYearRange}
+          min={minYear}
+          max={maxYear}
+          nameMin="minYear"
+          nameMax="maxYear"
+          onChange={rangeMaxYear}
+          onChange2={rangeMinYear}
+          step={stepYear}
+          className="year"
+        />
         <div className="emotions__title">Выберите рейтинг</div>
         <label htmlFor="hight">
           Высокий
@@ -127,4 +112,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Humor;
