@@ -21,31 +21,31 @@
         "jsx": "react-jsx",
         "paths": {
             "@api/*": [
-                "E:/ITASK/RSS/rs-clone/src/api/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/api/*"
             ],
             "@assets/*": [
-                "E:/ITASK/RSS/rs-clone/src/assets/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/assets/*"
             ],
             "@components/*": [
-                "E:/ITASK/RSS/rs-clone/src/components/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/components/*"
             ],
             "@hooks/*": [
-                "E:/ITASK/RSS/rs-clone/src/hooks/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/hooks/*"
             ],
             "@pages/*": [
-                "E:/ITASK/RSS/rs-clone/src/pages/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/pages/*"
             ],
             "@store/*": [
-                "E:/ITASK/RSS/rs-clone/src/store/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/store/*"
             ],
             "@styles/*": [
-                "E:/ITASK/RSS/rs-clone/src/styles/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/styles/*"
             ],
             "@utils/*": [
-                "E:/ITASK/RSS/rs-clone/src/utils/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/utils/*"
             ],
             "@/*": [
-                "E:/ITASK/RSS/rs-clone/src/*"
+                "C:/Users/Rifat/Desktop/Study/rs-clone/src/*"
             ]
         }
     },
