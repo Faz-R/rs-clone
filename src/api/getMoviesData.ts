@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-loop-func */
-/* eslint-disable no-restricted-syntax */
-
 import type { MovieDataInterface, SearchMovieFormData } from '../types';
-import { DOMAIN, TOKEN, FIELDS_HUMOR, FIELDS_RANDOM } from '../constants';
-import getRandomNumber from '../tools/getRandomNumber';
-import parseMoviesData from '../tools/parseMovieData';
+import { DOMAIN, FIELDS_HUMOR, FIELDS_RANDOM } from '../constants';
+import getRandomNumber from '../utils/getRandomNumber';
+import parseMoviesData from '../utils/parseMovieData';
+
+const TOKEN = import.meta.env.VITE_TOKEN;
 
 const getMoviesData = async (formData: SearchMovieFormData, random: boolean) => {
   let queryParams = random ? FIELDS_RANDOM : FIELDS_HUMOR;
 
   const matrixData = Object.entries(formData);
 
-  for (const [key, value] of matrixData) {
+  matrixData.forEach(([key, value]) => {
     if (key === 'rating') {
       queryParams += `&field=${key}.kp&search=${value}`;
       queryParams += `&field=${key}.imdb&search=${value}`;
@@ -26,10 +25,11 @@ const getMoviesData = async (formData: SearchMovieFormData, random: boolean) => 
     if (key === 'year') {
       queryParams += `&field=${key}&search=${value}`;
     }
-  }
+  });
 
   try {
     const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}`);
+
     const { docs } = (await response.json()) as { docs: MovieDataInterface[] };
 
     const movies = parseMoviesData(docs, random);
