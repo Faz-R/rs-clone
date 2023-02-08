@@ -5,7 +5,6 @@ declare module '*.svg' {
   const src: string;
   export default src;
 }
-
 interface ImportMetaEnv {
   readonly VITE_TOKEN_LIST: string;
 }

@@ -7,7 +7,7 @@ const MovieSearchList = (props: { movies: MovieRandomInterface[] }) => {
   ) : (
     <ul>
       {movies.map((movie) => (
-        <li key={movie.id}>{movie.name}</li>
+        <li key={movie.id}>{movie.alternativeName}</li>
       ))}
     </ul>
   );
