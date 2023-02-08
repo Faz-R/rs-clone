@@ -18,8 +18,8 @@ export interface SearchMovieFormData {
 
 export interface MovieHumorInterface {
   id: number;
-  name: string;
-  alternativeName: string;
+  name: null | string;
+  alternativeName: null | string;
   description: string;
   genres: string[];
   poster: null | string;
@@ -36,7 +36,8 @@ export interface MovieRandomInterface extends MovieHumorInterface {
 
 export interface MovieDataInterface {
   id: number;
-  name: string;
+  name: null | string;
+  alternativeName: null | string;
   description: string;
   genres: CountryType[];
   poster: PosterType;
