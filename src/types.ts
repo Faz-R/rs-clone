@@ -19,6 +19,7 @@ export interface SearchMovieFormData {
 export interface MovieHumorInterface {
   id: number;
   name: string;
+  alternativeName: string;
   description: string;
   genres: string[];
   poster: null | string;

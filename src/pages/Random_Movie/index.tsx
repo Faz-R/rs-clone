@@ -5,7 +5,7 @@ import getMoviesData from '../../api/getMoviesData';
 import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
 import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
 import Button from '../../components/UI/button/Button';
-import { MovieHumorInterface } from '../../types';
+import { MovieHumorInterface, MovieRandomInterface } from '../../types';
 import poster from '../../assets/img/poster.svg';
 
 const RandomMovie = () => {
@@ -16,7 +16,7 @@ const RandomMovie = () => {
   const [filter, setFilter] = useState([] as string[]);
   const [genresState, setGenresState] = useState([{ name: '', id: 0 }]);
   const [cardOfMovie, setCardOfMovie] = useState(false);
-  const [randomMovie, setRandomMovie] = useState({} as MovieHumorInterface);
+  const [randomMovie, setRandomMovie] = useState({} as MovieRandomInterface);
   const [showCheckboxes, setshowCheckboxes] = useState(false);
   useEffect(() => {
     if (genres) {
@@ -35,7 +35,10 @@ const RandomMovie = () => {
     }
   }, [cardOfMovie, showCheckboxes]);
 
+  const [loading, setLoading] = useState(false);
+
   const getMovie = async () => {
+    setLoading(true);
     const responce = await getMoviesData(
       {
         genres: filter,
@@ -44,8 +47,8 @@ const RandomMovie = () => {
       },
       true
     );
-    console.log(responce);
-    setRandomMovie(responce as MovieHumorInterface);
+    setLoading(false);
+    setRandomMovie(responce as MovieRandomInterface);
   };
 
   const rangeMinYear = (value: number) => {
@@ -69,6 +72,20 @@ const RandomMovie = () => {
     else {
       setFilter(filter.filter((i) => i !== item));
     }
+  };
+
+  const FilmName = () => {
+    if (!randomMovie.name) {
+      return `Название фильма`;
+    }
+    return randomMovie.name ? randomMovie.name : `Название фильма отсутствует`;
+  };
+
+  const FilmDescription = () => {
+    if (!randomMovie.description) {
+      return `Описание фильма`;
+    }
+    return randomMovie.description ? randomMovie.description : `Описание фильма отсутствует`;
   };
 
   return (
@@ -137,40 +154,61 @@ const RandomMovie = () => {
           <Button onClick={getMovie}>Случайный фильм</Button>
         </div>
       </div>
-      {/* randomMovie && randomMovie.name */}
       <div className="movie-card">
         <div className="movie-card__top">
-          <div className="movie-card__poster">
-            <div className="movie-card__placeholder">
-              <svg xmlSpace="preserve" id="OBJECTS" x="0" y="0" version="1.1" viewBox="0 0 166 166">
-                <path
-                  d="M81 166A83 83 0 1 1 84 0a83 83 0 0 1-3 166zm0-152a69 69 0 1 0 0 138 69 69 0 0 0 0-138z"
-                  className="st0"
-                />
-                <path
-                  d="M24 55c-9 19-8 42 2 60l45-52-47-8zm54-36c-22 1-42 14-52 33l68 12-16-45zm61 93c10-19 9-42-2-61l-45 53 47 8zm-4-63a63 63 0 0 0-54-30l23 66 31-36zM28 118c13 19 33 30 55 29L58 82l-30 36zm58 29c21-1 41-14 51-33l-68-12 17 45z"
-                  className="st0"
-                />
-              </svg>
+          <div className="movie-card__wrapper">
+            <div className="movie-card__picture">
+              <div className="card__front">
+                <div className="movie-card__placeholder">
+                  <svg
+                    xmlSpace="preserve"
+                    id="OBJECTS"
+                    x="0"
+                    y="0"
+                    version="1.1"
+                    viewBox="0 0 284 284"
+                    className="movie-card__icon">
+                    <path
+                      d="m244 78-69 69V27c29 8 53 26 69 51zm3 6-85 85h97a123 123 0 0 0-12-85zm-42 160c25-15 44-40 53-69H137l68 69zM25 116a123 123 0 0 0 12 85l85-85H25zm53-76c-24 16-43 40-51 69h120L78 40zm38 219a123 123 0 0 0 83-11l-84-86v97zm-7-1V138l-68 68c15 25 40 44 68 52zm60-233a123 123 0 0 0-85 12l85 85V25z"
+                      className={loading ? 'animation__active' : ''}
+                    />
+                    <path d="M273 87a144 144 0 0 0-76-76A141 141 0 0 0 11 87a141 141 0 0 0 76 186 141 141 0 0 0 186-76 141 141 0 0 0 0-110zM142 271a129 129 0 1 1 0-258 129 129 0 0 1 0 258z" />
+                  </svg>
+                </div>
+              </div>
+              {/* <div className="card__back">
+                  {randomMovie.poster ? <img src={randomMovie.poster} alt="" /> : ''}
+                </div> */}
             </div>
           </div>
           <div className="movie-card__info">
-            <h2 className="movie-card__title">Название фильма</h2>
-            <h3 className="movie-card__title__eng">Film Name</h3>
-            <span className="movie-card__year">Год: 2023</span>
-            <span className="movie-card__duration">Продолжительность: 158 мин</span>
+            <h2 className="movie-card__title">{FilmName()}</h2>
+            <span className="movie-card__title__eng movie-card__text">
+              {randomMovie.alternativeName ? randomMovie.alternativeName : ''}
+            </span>
+            <span className="movie-card__year">
+              Год: {randomMovie.year ? randomMovie.year : '-'}
+            </span>
+            <span className="movie-card__year movie-card__text">
+              Страна: {randomMovie.countries ? randomMovie.countries.join(', ') : '-'}
+            </span>
+            <span className="movie-card__director movie-card__text">
+              Режиссёр: {randomMovie.director ? randomMovie.director : '-'}
+            </span>
+            <span className="movie-card__actors movie-card__text">
+              Актёры: {randomMovie.actors ? randomMovie.actors.join(', ') : '-'}
+            </span>
+            <span className="movie-card__genres movie-card__text">
+              Жанр: {randomMovie.genres ? randomMovie.genres.join(', ') : '-'}
+            </span>
+            <span className="movie-card__duration movie-card__text">
+              Время: {randomMovie.movieLength ? `${randomMovie.movieLength} мин.` : '-'}
+            </span>
             <span className="movie-card__rating">Рейтинг: </span>
-            <span className="movie-card__genres">Жанры: </span>
-            <span className="movie-card__director">Режиссёр: </span>
-            <span className="movie-card__actors">Актёры: </span>
           </div>
         </div>
 
-        <p className="movie-card__description">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi illum eius accusantium.
-          Voluptatum nobis assumenda recusandae, eum repellat quam debitis consequuntur!
-          Repudiandae, delectus dicta! Quisquam eius fugiat nobis laudantium laborum?
-        </p>
+        <p className="movie-card__description movie-card__text">{FilmDescription()}</p>
       </div>
     </div>
   );
