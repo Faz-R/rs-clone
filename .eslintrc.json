@@ -23,6 +23,5 @@
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
     "jsx-a11y/control-has-associated-label": "off"
-    // "no-param-reassign": "off"
   }
 }

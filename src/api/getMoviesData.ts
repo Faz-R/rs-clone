@@ -1,7 +1,9 @@
 import type { MovieDataInterface, SearchMovieFormData } from '../types';
-import { DOMAIN, TOKEN, FIELDS_HUMOR, FIELDS_RANDOM } from '../constants';
-import getRandomNumber from '../tools/getRandomNumber';
-import parseMoviesData from '../tools/parseMovieData';
+import { DOMAIN, FIELDS_HUMOR, FIELDS_RANDOM } from '../constants';
+import getRandomNumber from '../utils/getRandomNumber';
+import parseMoviesData from '../utils/parseMovieData';
+
+const TOKEN = import.meta.env.VITE_TOKEN;
 
 const getMoviesData = async (formData: SearchMovieFormData, random: boolean) => {
   let queryParams = random ? FIELDS_RANDOM : FIELDS_HUMOR;
