@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
+import { viewedStore } from './store/viewed';
 import App from './App';
 
 import 'normalize.css';
@@ -10,7 +11,7 @@ import './index.scss';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={viewedStore}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>

@@ -1,6 +1,6 @@
 import type { MovieRandomInterface, ResponseSearchMovieInterface } from '../types';
 import { DOMAIN, TOKEN, FIELDS_RANDOM } from '../constants';
-import parseMoviesData from '../tools/parseMovieData';
+import parseMoviesData from '../utils/parseMovieData';
 
 const getMoviesBySearchName = async (name: string, currentPage = 1) => {
   const queryParams = `${FIELDS_RANDOM}&field=name&search=${name}&page=${currentPage}`;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './index.css';
 import MovieCard from '../../components/MovieCard';
-//let expanded = false;
+// let expanded = false;
 
 const Viewed = () => {
   /* const [minYearRange, setMinYear] = useState(minYear);
@@ -33,13 +33,10 @@ const Viewed = () => {
     setMaxRate(value);
   };
 */
- 
 
   return (
     <div className="viewed_movie">
-      <MovieCard className='viewed_movie'/>
-      
-      
+      <MovieCard className="viewed_movie" />
     </div>
   );
 };
