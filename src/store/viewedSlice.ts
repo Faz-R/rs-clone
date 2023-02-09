@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 interface IIdViewed {
   id: number;
@@ -32,5 +33,6 @@ export const viewedSlice = createSlice({
   },
 });
 
+export const selectViewed = (state: RootState) => state.viewed;
 export const { addIdToViewed, removeIdFromViewed } = viewedSlice.actions;
 export default viewedSlice.reducer;

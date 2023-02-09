@@ -1,9 +1,9 @@
 /* eslint-disable react/no-children-prop */
 import './index.css';
 import Button from '../UI/button/Button';
-import { useViewedDispatch, useViewedSelector } from '../../store/viewed/hooks';
-import { addIdToViewed, removeIdFromViewed } from '../../store/viewed/viewedSlice';
+import { addIdToViewed, removeIdFromViewed } from '../../store/viewedSlice';
 import { MovieHumorInterface } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 interface IMovieCardProps {
   id: string;
@@ -13,8 +13,8 @@ interface IMovieCardProps {
 }
 
 const MovieCard = ({ id, poster, className = '', movie }: IMovieCardProps) => {
-  const dispatch = useViewedDispatch();
-  const idArr = useViewedSelector((state) => state.viewed);
+  const dispatch = useAppDispatch();
+  const idArr = useAppSelector((state) => state.viewed.viewed);
   const children = !idArr.find((item) => movie.id === item.id)
     ? 'в просмотренные'
     : 'из просмотренных';
