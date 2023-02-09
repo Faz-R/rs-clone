@@ -15,15 +15,19 @@ const initialState: IIdViewed[] = [];
 
 export const viewedSlice = createSlice({
   name: 'viewed',
-  initialState,
+  initialState: {
+    viewed: initialState,
+  },
   reducers: {
     addIdToViewed: (state, action: PayloadAction<IIdViewed>) => {
-      if (!state.find((item) => action.payload.id === item.id)) {
-        state.push(action.payload);
+      if (!state.viewed.find((item) => action.payload.id === item.id)) {
+        state.viewed.push(action.payload);
       }
     },
     removeIdFromViewed: (state, action: PayloadAction<number>) => {
-      state = state.filter((item) => item.id !== action.payload);
+      state.viewed = state.viewed.filter((item) => {
+        return item.id !== action.payload;
+      });
     },
   },
 });

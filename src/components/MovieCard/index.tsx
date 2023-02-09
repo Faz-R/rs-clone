@@ -3,7 +3,6 @@ import './index.css';
 import Button from '../UI/button/Button';
 import { useViewedDispatch, useViewedSelector } from '../../store/viewed/hooks';
 import { addIdToViewed, removeIdFromViewed } from '../../store/viewed/viewedSlice';
-import { viewedStore } from '../../store/viewed';
 import { MovieHumorInterface } from '../../types';
 
 interface IMovieCardProps {
@@ -13,22 +12,17 @@ interface IMovieCardProps {
   movie: MovieHumorInterface;
 }
 
-const MovieCard = ({
-  id = '1046206',
-  poster = 'https://st.kp.yandex.net/images/film_big/1046206.jpg',
-  className = '',
-  movie,
-}: IMovieCardProps) => {
+const MovieCard = ({ id, poster, className = '', movie }: IMovieCardProps) => {
   const dispatch = useViewedDispatch();
-  const idArr = useViewedSelector((state) => state);
-  const children = !idArr.includes(id) ? 'в просмотренные' : 'из просмотренных';
+  const idArr = useViewedSelector((state) => state.viewed);
+  const children = !idArr.find((item) => movie.id === item.id)
+    ? 'в просмотренные'
+    : 'из просмотренных';
 
   const setWillView = () => {
-    /*  dispatch(removeIdFromViewed(id)); */
     console.log('буду смотреть', idArr);
   };
   const setViewed = () => {
-    console.log('посмотрел', idArr);
     if (!idArr.find((item) => movie.id === item.id)) {
       dispatch(
         addIdToViewed({
