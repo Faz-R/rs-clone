@@ -1,11 +1,11 @@
 .random-movie{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start ;
 }
 
-.switch-block__title{
+.random-movie__title{
   font-size: var(--h3-font-size);
   line-height: var(--h3-line-height);
   letter-spacing: var(--h3-letter-spacing);
@@ -13,6 +13,12 @@
   font-weight: var(--h3-font-weight);
   padding-top: 50px;
   margin-bottom: 30px;
+}
+
+.random-movie__blocks{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .switch-block__subtitle{
@@ -31,7 +37,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   width: 50%;
   padding-right: 20px;
 }
@@ -200,7 +206,7 @@
   fill: var(--ring-color);
 }
 
-.card__front, .card__back {
+.movie-card__front, .movie-card__back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -224,8 +230,24 @@
 
 }
 
-.card__back {
+.movie-card__poster{
+  height: 100%;
+}
+
+.movie-card__back {
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.active-wrapper .movie-card__front {
+  transform: rotateY(180deg);
+}
+
+.active-wrapper .movie-card__back {
+  transform: rotateY(360deg);
 }
 
 .movie-card__info{
@@ -244,6 +266,7 @@
   text-transform: var(--h5-text-transform);
   font-weight: var(--h5-font-weight);
   color: var(--primary-color);
+  transition: var(--transition);
 }
 
 .movie-card__title__eng{
@@ -254,6 +277,7 @@
 .movie-card__text{
   line-height: 1.5em;
   font-size: 1em;
+  transition: var(--transition);
 }
 
 .animation__active{
