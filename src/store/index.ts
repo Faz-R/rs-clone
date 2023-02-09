@@ -12,10 +12,12 @@ import {
 import storage from 'redux-persist/lib/storage';
 import userReducer from './userSlice';
 import viewedSliceReducer from './viewedSlice';
+import willViewSliceReducer from './willViewSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   viewed: viewedSliceReducer,
+  willview: willViewSliceReducer,
 });
 
 const persistConfig = {

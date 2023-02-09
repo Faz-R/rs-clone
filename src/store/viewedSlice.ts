@@ -1,28 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '.';
+import { IIdViewed, IIdViewedObject } from './interfaces';
 
-interface IIdViewed {
-  id: number;
-  name: string;
-  countries: string[] | null;
-  genres: string[];
-  description: string;
-  poster: string | null;
-  rating: number;
-  year: number;
-}
-
-const initialState: IIdViewed[] = [];
+const initialState: IIdViewedObject = {
+  viewed: [],
+};
 
 export const viewedSlice = createSlice({
   name: 'viewed',
-  initialState: {
-    viewed: initialState,
-  },
+  initialState,
   reducers: {
     addIdToViewed: (state, action: PayloadAction<IIdViewed>) => {
-      if (!state.viewed.find((item) => action.payload.id === item.id)) {
-        state.viewed.push(action.payload);
+      if (!state.viewed.some((item) => action.payload.id === item.id)) {
+        state.viewed = [...state.viewed, action.payload];
       }
     },
     removeIdFromViewed: (state, action: PayloadAction<number>) => {
@@ -33,6 +22,5 @@ export const viewedSlice = createSlice({
   },
 });
 
-export const selectViewed = (state: RootState) => state.viewed;
 export const { addIdToViewed, removeIdFromViewed } = viewedSlice.actions;
 export default viewedSlice.reducer;
