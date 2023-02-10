@@ -24,7 +24,6 @@ const RandomMovie = () => {
   const [planWatch, setPlanWatch] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  // const [imgLoad, setImgLoad] = useState(false);
   const [showMovie, setShowMovie] = useState(false);
 
   useEffect(() => {
@@ -136,32 +135,48 @@ const RandomMovie = () => {
       </div>
       <div className="random-movie__blocks">
         <div className="switch-block">
-          <div className="switch-block__multiselect">
-            <div
-              className={`switch-block__select ${showCheckboxes ? `border__select__active` : ''}`}
-              onClick={() => {
-                setshowCheckboxes(!showCheckboxes);
-              }}
-              aria-hidden="true">
-              Жанр фильма
-              <i
-                className={`fa-solid fa-angle-down switch-block__select__angle ${
-                  !showCheckboxes ? `select__angle__active` : ''
-                }`}
-              />
-              <i
-                className={`fa-solid fa-angle-up switch-block__select__angle ${
-                  showCheckboxes ? `select__angle__active` : ''
-                }`}
-              />
+          <div className="switch-block__top">
+            <div className="switch-block__multiselect">
+              <div
+                className={`switch-block__select ${showCheckboxes ? `border__select__active` : ''}`}
+                onClick={() => {
+                  setshowCheckboxes(!showCheckboxes);
+                }}
+                aria-hidden="true">
+                Жанр фильма
+                <i
+                  className={`fa-solid fa-angle-down switch-block__select__angle ${
+                    !showCheckboxes ? `select__angle__active` : ''
+                  }`}
+                />
+                <i
+                  className={`fa-solid fa-angle-up switch-block__select__angle ${
+                    showCheckboxes ? `select__angle__active` : ''
+                  }`}
+                />
+              </div>
+              <div
+                className={`switch-block__checkboxes-menu ${
+                  showCheckboxes ? `checkboxes__show` : ''
+                }`}>
+                {genresState.map((item) => (
+                  <Checkbox
+                    item={item.name}
+                    key={item.id}
+                    onChange={checkedGenres}
+                    value="genres"
+                  />
+                ))}
+              </div>
             </div>
-            <div
-              className={`switch-block__checkboxes-menu ${
-                showCheckboxes ? `checkboxes__show` : ''
-              }`}>
-              {genresState.map((item) => (
-                <Checkbox item={item.name} key={item.id} onChange={checkedGenres} value="genres" />
-              ))}
+            <div className="switch-block__viewed">
+              <span className="switch-block__subtitle subtitle__viewed">Скрыть просмотренные</span>
+              <input
+                type="checkbox"
+                className="viewed__switcher"
+                name="viewed__switcher"
+                id="viewed__switcher"
+              />
             </div>
           </div>
           <span className="switch-block__subtitle">Рейтинг фильма</span>
