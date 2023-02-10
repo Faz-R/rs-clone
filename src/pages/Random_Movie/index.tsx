@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import Checkbox from '../../components/UI/Checkbox/Checkbox';
+import Checkbox from '@components/UI/Checkbox/Checkbox';
 import './index.scss';
-import getMoviesData from '../../api/getMoviesData';
+import getMoviesData from '@api/getMoviesData';
+import DoubleRange from '@components/UI/DoubleRange/DoubleRange';
+import Button from '@components/UI/button/Button';
 import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
-import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
-import Button from '../../components/UI/button/Button';
-import { MovieHumorInterface, MovieRandomInterface } from '../../types';
-import poster from '../../assets/img/poster.svg';
+import type { MovieRandomInterface } from '@/types';
 
 const RandomMovie = () => {
   const [minYearRange, setMinYear] = useState(minYear);
@@ -19,13 +18,23 @@ const RandomMovie = () => {
   const [randomMovie, setRandomMovie] = useState({} as MovieRandomInterface);
   const [showCheckboxes, setshowCheckboxes] = useState(false);
 
-  const [imgLoad, setImgLoad] = useState(false);
+  // TODO: поправить работу кнопок карточки фильма с учётом Redux
+
+  const [viewed, setViewed] = useState(false);
+  const [planWatch, setPlanWatch] = useState(false);
+
   const [loading, setLoading] = useState(false);
-  const [newMovie, setNewMovie] = useState(false);
+  // const [imgLoad, setImgLoad] = useState(false);
+  const [showMovie, setShowMovie] = useState(false);
 
   useEffect(() => {
     if (genres) {
       setGenresState(genres);
+    }
+
+    if (randomMovie && randomMovie.poster === null) {
+      setShowMovie(true);
+      setLoading(false);
     }
 
     if (showCheckboxes === true) {
@@ -38,21 +47,39 @@ const RandomMovie = () => {
         }
       });
     }
-  }, [cardOfMovie, showCheckboxes]);
+  }, [cardOfMovie, showCheckboxes, randomMovie, randomMovie.poster]);
+
+  const PosterLoad = () => {
+    if (showMovie) {
+      return 'active-wrapper';
+    }
+    return '';
+  };
 
   const getMovie = async () => {
-    setNewMovie(true);
+    setShowMovie(false);
     setLoading(true);
-    const responce = await getMoviesData(
+    await getMoviesData(
       {
         genres: filter,
         year: `${minYearRange}-${maxYearRange}`,
         rating: `${minRateRange}-${maxRateRange}`,
       },
       true
-    );
-    setRandomMovie(responce as MovieRandomInterface);
+    ).then((response) => {
+      if (response) {
+        setRandomMovie(response as MovieRandomInterface);
+      } else if (!response) {
+        setRandomMovie({} as MovieRandomInterface);
+        setShowMovie(true);
+        setLoading(false);
+      }
+    });
   };
+
+  function ratingStars(rating: number) {
+    return 10 * rating;
+  }
 
   const rangeMinYear = (value: number) => {
     setMinYear(value);
@@ -91,14 +118,15 @@ const RandomMovie = () => {
     return randomMovie.description ? randomMovie.description : `Описание фильма отсутствует`;
   };
 
-  const PosterLoad = () => {
-    if (newMovie) {
-      return '';
+  const Rating = () => {
+    let ratingArray: number[] = [];
+
+    if (randomMovie.rating) {
+      ratingArray = Object.values(randomMovie.rating);
+      return Number((ratingArray.reduce((sum, e) => sum + e, 0) / ratingArray.length).toFixed(1));
     }
-    if (imgLoad) {
-      return 'active-wrapper';
-    }
-    return '';
+
+    return 0;
   };
 
   return (
@@ -183,7 +211,7 @@ const RandomMovie = () => {
                       y="0"
                       version="1.1"
                       viewBox="0 0 284 284"
-                      className="movie-card__icon">
+                      className="movie-card__placeholder-icon">
                       <path
                         d="m244 78-69 69V27c29 8 53 26 69 51zm3 6-85 85h97a123 123 0 0 0-12-85zm-42 160c25-15 44-40 53-69H137l68 69zM25 116a123 123 0 0 0 12 85l85-85H25zm53-76c-24 16-43 40-51 69h120L78 40zm38 219a123 123 0 0 0 83-11l-84-86v97zm-7-1V138l-68 68c15 25 40 44 68 52zm60-233a123 123 0 0 0-85 12l85 85V25z"
                         className={loading ? 'animation__active' : ''}
@@ -193,19 +221,66 @@ const RandomMovie = () => {
                   </div>
                 </div>
                 <div className="movie-card__back">
-                  {randomMovie.poster ? (
-                    <img
-                      src={randomMovie.poster}
-                      alt={randomMovie.name ? randomMovie.name : 'Постер фильма'}
-                      className="movie-card__poster"
-                      onLoad={() => {
-                        setImgLoad(true);
-                        setNewMovie(false);
-                        setLoading(false);
-                      }}
-                    />
+                  {randomMovie && Object.values(randomMovie).length !== 0 ? (
+                    <div className="movie-card__back__wrapper">
+                      <div className="movie-card__icons">
+                        <div
+                          className="movie-card__icon"
+                          onClick={() => {
+                            setPlanWatch(!planWatch);
+                          }}
+                          aria-hidden="true">
+                          <i
+                            className={`fa-regular fa-bookmark movie-card__show-button ${
+                              !planWatch && `movie-card__show-button__active`
+                            }`}
+                          />
+                          <i
+                            className={`fa-solid fa-bookmark movie-card__show-button movie-card__icon__active ${
+                              planWatch && `movie-card__show-button__active`
+                            }`}
+                          />
+                        </div>
+                        <div
+                          className="movie-card__icon"
+                          onClick={() => {
+                            setViewed(!viewed);
+                          }}
+                          aria-hidden="true">
+                          <i
+                            className={`fa-regular fa-eye movie-card__show-button ${
+                              !viewed && `movie-card__show-button__active`
+                            }`}
+                          />
+                          <i
+                            className={`fa-solid fa-eye movie-card__show-button movie-card__icon__active ${
+                              viewed && `movie-card__show-button__active`
+                            }`}
+                          />
+                        </div>
+                      </div>
+                      {randomMovie.poster ? (
+                        <img
+                          src={randomMovie.poster}
+                          alt={randomMovie.name ? randomMovie.name : 'Постер фильма'}
+                          className="movie-card__poster"
+                          onLoad={() => {
+                            setLoading(false);
+                            setShowMovie(true);
+                          }}
+                        />
+                      ) : (
+                        <div className="poster-error">
+                          <i className="fa-solid fa-triangle-exclamation poster-error__icon" />
+                          Постер отсутствует
+                        </div>
+                      )}
+                    </div>
                   ) : (
-                    ''
+                    <div className="movie-card__back__wrapper">
+                      <i className="fa-solid fa-video-slash poster-error__icon" />
+                      <div className="poster-error">Подходящий фильм не найден</div>
+                    </div>
                   )}
                 </div>
               </div>
@@ -215,25 +290,34 @@ const RandomMovie = () => {
               <span className="movie-card__title__eng movie-card__text">
                 {randomMovie.alternativeName ? randomMovie.alternativeName : ''}
               </span>
+              <div className="movie-card__rating">
+                <div className="movie-card__body">
+                  <div
+                    className="movie-card__active"
+                    style={{ width: `${Rating() ? ratingStars(Rating()) : ratingStars(0)}%` }}
+                  />
+                </div>
+                <div className="movie-card__rating-text">{Rating() || ''}</div>
+              </div>
               <span className="movie-card__year movie-card__text">
-                Год: {randomMovie.year ? randomMovie.year : '-'}
-              </span>
-              <span className="movie-card__year movie-card__text">
-                Страна: {randomMovie.countries ? randomMovie.countries.join(', ') : '-'}
+                {randomMovie.countries ? randomMovie.countries.join(', ') : 'Страна'}{' '}
+                <span className="movie-card__point">●</span>{' '}
+                {randomMovie.year ? randomMovie.year : 'Год'}{' '}
+                <span className="movie-card__point">●</span>{' '}
+                {randomMovie.movieLength ? `${randomMovie.movieLength} мин.` : 'Время'}
               </span>
               <span className="movie-card__director movie-card__text">
                 Режиссёр: {randomMovie.director ? randomMovie.director : '-'}
               </span>
               <span className="movie-card__actors movie-card__text">
-                Актёры: {randomMovie.actors ? randomMovie.actors.join(', ') : '-'}
+                Актёры:{' '}
+                {randomMovie.actors && randomMovie.actors[0] !== null
+                  ? randomMovie.actors.join(', ')
+                  : '-'}
               </span>
               <span className="movie-card__genres movie-card__text">
                 Жанр: {randomMovie.genres ? randomMovie.genres.join(', ') : '-'}
               </span>
-              <span className="movie-card__duration movie-card__text">
-                Время: {randomMovie.movieLength ? `${randomMovie.movieLength} мин.` : '-'}
-              </span>
-              <span className="movie-card__rating">Рейтинг: </span>
             </div>
           </div>
 

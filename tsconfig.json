@@ -19,33 +19,34 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
+        "baseUrl": ".",
         "paths": {
             "@api/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/api/*"
+                "src/api/*"
             ],
             "@assets/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/assets/*"
+                "src/assets/*"
             ],
             "@components/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/components/*"
+                "src/components/*"
             ],
             "@hooks/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/hooks/*"
+                "src/hooks/*"
             ],
             "@pages/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/pages/*"
+                "src/pages/*"
             ],
             "@store/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/store/*"
+                "src/store/*"
             ],
             "@styles/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/styles/*"
+                "src/styles/*"
             ],
             "@utils/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/utils/*"
+                "src/utils/*"
             ],
             "@/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/*"
+                "src/*"
             ]
         }
     },
