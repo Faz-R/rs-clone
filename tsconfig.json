@@ -21,31 +21,31 @@
         "jsx": "react-jsx",
         "paths": {
             "@api/*": [
-                "E:/ITASK/RSS/rs-clone/src/api/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/api/*"
             ],
             "@assets/*": [
-                "E:/ITASK/RSS/rs-clone/src/assets/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/assets/*"
             ],
             "@components/*": [
-                "E:/ITASK/RSS/rs-clone/src/components/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/components/*"
             ],
             "@hooks/*": [
-                "E:/ITASK/RSS/rs-clone/src/hooks/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/hooks/*"
             ],
             "@pages/*": [
-                "E:/ITASK/RSS/rs-clone/src/pages/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/pages/*"
             ],
             "@store/*": [
-                "E:/ITASK/RSS/rs-clone/src/store/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/store/*"
             ],
             "@styles/*": [
-                "E:/ITASK/RSS/rs-clone/src/styles/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/styles/*"
             ],
             "@utils/*": [
-                "E:/ITASK/RSS/rs-clone/src/utils/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/utils/*"
             ],
             "@/*": [
-                "E:/ITASK/RSS/rs-clone/src/*"
+                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/*"
             ]
         }
     },
