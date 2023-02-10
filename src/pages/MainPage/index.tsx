@@ -5,7 +5,9 @@ const MainPage = () => {
   return (
     <section className="main-page">
       <div className="main-page__question">
-        <div className="question__title">Что сегодня посмотреть?</div>
+        <h2 className="page__title">
+          <i className="fa-solid fa-angles-right design__row" /> Что сегодня посмотреть?
+        </h2>
         <div className="question__cards">
           <div className="question-card__wrapper">
             <div className="question__cards__card">
@@ -47,12 +49,12 @@ const MainPage = () => {
                 <div className="card__circle">
                   <i className="fa-regular fa-clock" />
                 </div>
-                <h5 className="card__front__text">Запланированные</h5>
+                <h5 className="card__front__text">Отложенные фильмы</h5>
               </div>
               <div className="card__back">
-                <h5 className="card__back__title-text">Запланированные</h5>
+                <h5 className="card__back__title-text">Отложенные фильмы</h5>
                 <span className="card__back__text">
-                  Список фильмов, ранее отложенных для просмотра
+                  Список фильмов, ранее запланированных для просмотра
                 </span>
                 <Button>посмотреть</Button>
               </div>
@@ -61,7 +63,9 @@ const MainPage = () => {
         </div>
       </div>
       <div className="main-page__user">
-        <div className="user__title">Информация о пользователе</div>
+        <h2 className="page__title">
+          <i className="fa-solid fa-angles-right design__row" /> Информация о пользователе
+        </h2>
         <div className="user__info">
           <div className="user__logo fa-solid fa-user" />
           <div className="user__description">

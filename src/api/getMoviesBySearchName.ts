@@ -1,11 +1,19 @@
-import type { MovieRandomInterface, ResponseSearchMovieInterface } from '../types';
-import { DOMAIN, TOKEN, FIELDS_RANDOM } from '../constants';
 import parseMoviesData from '../utils/parseMovieData';
+import type { MovieRandomInterface, ResponseSearchMovieInterface } from '../types';
+import { DOMAIN, FIELDS_RANDOM } from '../constants';
+
+const TOKEN = import.meta.env.VITE_TOKEN;
 
 const getMoviesBySearchName = async (name: string, currentPage = 1) => {
-  const queryParams = `${FIELDS_RANDOM}&field=name&search=${name}&page=${currentPage}`;
+  const isEnglish = /[a-z]/i.test(name);
+
+  const queryParams = `${FIELDS_RANDOM}&field=${
+    isEnglish ? 'alternativeName' : 'name'
+  }&search=${name}&page=${currentPage}`;
+
   try {
     const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}`);
+
     const { docs, page, pages } = (await response.json()) as ResponseSearchMovieInterface;
 
     const movies = parseMoviesData(docs, true) as MovieRandomInterface[];

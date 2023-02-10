@@ -1,4 +1,4 @@
-import './index.css';
+import classes from './Checkbox.module.scss';
 
 interface CheckBoxProps {
   item: string;
@@ -8,18 +8,18 @@ interface CheckBoxProps {
 
 const Checkbox = ({ item, onChange, value }: CheckBoxProps) => {
   return (
-    <div className="my-checkbox">
+    <div className={classes.checkbox__block}>
       <input
         type="checkbox"
         id={item}
         value={value}
         name={item}
+        className={classes.checkbox}
         onChange={(event) => onChange(event.target.checked, item)}
       />
-      <label className="items-on-stock" htmlFor={item}>
+      <label htmlFor={item} className={classes.checkbox__label}>
         {item}
       </label>
-      {/* <span >{`${itemOnStock} /   ${itemOnStockFind}`}</span> */}
     </div>
   );
 };

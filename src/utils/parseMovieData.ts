@@ -6,15 +6,17 @@ import type {
   CountryType,
 } from '../types';
 
-const getActorsFromMovieData = (persons: PersonType[]) => {
+const getActorsFromMovieData = (persons?: PersonType[]) => {
   return persons
-    .filter((person) => person.enProfession === 'actor')
-    .slice(0, 3)
-    .map((person) => person.enName);
+    ? persons
+        .filter((person) => person.enProfession === 'actor')
+        .slice(0, 3)
+        .map((person) => person.enName)
+    : [];
 };
 
-const getProducerFromMovieData = (persons: PersonType[]) => {
-  return persons.find((person) => person.enProfession === 'director')?.enName ?? '';
+const getProducerFromMovieData = (persons?: PersonType[]) => {
+  return persons ? persons.find((person) => person.enProfession === 'director')?.enName ?? '' : '';
 };
 
 const parseMoviesData = (
@@ -22,14 +24,26 @@ const parseMoviesData = (
   random: boolean
 ): MovieHumorInterface[] | MovieRandomInterface[] => {
   return movies.map((movie) => {
-    const { id, name, description, genres, poster, year, movieLength, rating, persons, countries } =
-      movie;
+    const {
+      id,
+      alternativeName,
+      name,
+      description,
+      genres,
+      poster,
+      year,
+      movieLength,
+      rating,
+      persons,
+      countries,
+    } = movie;
 
-    const actors = getActorsFromMovieData(persons);
-    const director = getProducerFromMovieData(persons);
+    const actors = persons ? getActorsFromMovieData(persons) : null;
+    const director = persons ? getProducerFromMovieData(persons) : null;
 
     const movieData = {
       id,
+      alternativeName,
       name,
       description,
       genres: genres.map((genre: CountryType) => genre.name),

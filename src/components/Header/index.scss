@@ -54,7 +54,7 @@
 
 .header__buttons {
   @include flex(row, center);
-  gap: 1.2em;
+  gap: 1.4em;
 }
 
 .header__icon {
@@ -63,17 +63,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 23px;
+  font-size: 2em;
   cursor: pointer;
   transition: all 0.2s;
-  min-width: 30px;
+  min-width: 40px;
 
   & .fa-xmark {
-    font-size: 27px;
+    font-size: 1.2em;
   }
 
   & .fa-magnifying-glass {
-    font-size: 21px;
+    font-size: 0.9em;
   }
 
   &:hover {
@@ -207,6 +207,7 @@
   z-index: 5;
   visibility: hidden;
   transition: var(--transition);
+  cursor: pointer;
 }
 
 .show {

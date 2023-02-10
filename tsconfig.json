@@ -1,21 +1,60 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "compilerOptions": {
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "paths": {
+            "@api/*": [
+                "E:/ITASK/RSS/rs-clone/src/api/*"
+            ],
+            "@assets/*": [
+                "E:/ITASK/RSS/rs-clone/src/assets/*"
+            ],
+            "@components/*": [
+                "E:/ITASK/RSS/rs-clone/src/components/*"
+            ],
+            "@hooks/*": [
+                "E:/ITASK/RSS/rs-clone/src/hooks/*"
+            ],
+            "@pages/*": [
+                "E:/ITASK/RSS/rs-clone/src/pages/*"
+            ],
+            "@store/*": [
+                "E:/ITASK/RSS/rs-clone/src/store/*"
+            ],
+            "@styles/*": [
+                "E:/ITASK/RSS/rs-clone/src/styles/*"
+            ],
+            "@utils/*": [
+                "E:/ITASK/RSS/rs-clone/src/utils/*"
+            ],
+            "@/*": [
+                "E:/ITASK/RSS/rs-clone/src/*"
+            ]
+        }
+    },
+    "include": [
+        "src"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ]
 }
