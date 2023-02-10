@@ -1,5 +1,6 @@
 @import './styles/normalize.css';
 
+
 :root[theme='dark-theme'] {
   --primary-color: #FF7425;
   --secondary-color: #181818;
@@ -9,14 +10,15 @@
   --ring-color: #6b6b6b;
   --card-color: rgb(40, 40, 40);
   --checkbox-menu-color: rgba(255, 255, 255, 0.1);
-  --button-color-idle: #FFFFFF;
+  --bg-hover: rgba(0, 0, 0, 0.5);
+  --white: #FFFFFF;
   --button-bg-idle: #FF7425;
   --button-color-hover: #FFFFFF;
   --button-bg-hover: #303030;
   --back-to-top-color: #ffffff;
   --back-to-top-color-bg: #2e2e2e;
   --transition: 0.4s;
-  --font-awesome: "Font Awesome";
+  --font-awesome: "FontAwesome";
   --font-emoji: "Noto Emoji";
   --h1-font-family: Arimo;
   --h1-font-size: 52px;
@@ -66,14 +68,15 @@
   --background-color: #fafafa;
   --card-color: #FFFFFF;
   --checkbox-menu-color: rgba(0, 0, 0, 0.1);
-  --button-color-idle: #FFFFFF;
+  --bg-hover: rgba(0, 0, 0, 0.5);
+  --white: #FFFFFF;
   --button-bg-idle: #FF7425;
   --button-color-hover: #FFFFFF;
   --button-bg-hover: #303030;
   --back-to-top-color: #ffffff;
   --back-to-top-color-bg: #2e2e2e;
   --transition: 0.4s;
-  --font-awesome: "Font Awesome";
+  --font-awesome: "FontAwesome";
   --font-emoji: "Noto Emoji";
   --h1-font-family: Arimo;
   --h1-font-size: 52px;

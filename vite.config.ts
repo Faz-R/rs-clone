@@ -9,7 +9,6 @@ export default defineConfig({
     react(),
     svgr(),
     ViteAliases({
-      useAbsolute: true,
       useConfig: true,
       useTypescript: true,
     }),

@@ -3,37 +3,31 @@
         "baseUrl": ".",
         "paths": {
             "@api/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/api/*"
-            ],
-            "@assets/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/assets/*"
-            ],
-            "@components/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/components/*"
-            ],
-            "@hooks/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/hooks/*"
-            ],
-            "@pages/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/pages/*"
-            ],
-            "@store/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/store/*"
-            ],
-            "@styles/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/styles/*"
-            ],
-            "@utils/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/utils/*"
-            ],
-            "@/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/*"
+                "src/api/*"
             ],
             "@MovieCard/*": [
                 "C:/Users/Rifat/Desktop/Study/rs-clone/src/components/MovieCard/*"
             ],
-            "@Viewed/*": [
-                "C:/Users/Rifat/Desktop/Study/rs-clone/src/pages/Viewed/*"
+            "@components/*": [
+                "src/components/*"
+            ],
+            "@hooks/*": [
+                "src/hooks/*"
+            ],
+            "@pages/*": [
+                "src/pages/*"
+            ],
+            "@store/*": [
+                "src/store/*"
+            ],
+            "@styles/*": [
+                "src/styles/*"
+            ],
+            "@utils/*": [
+                "src/utils/*"
+            ],
+            "@/*": [
+                "src/*"
             ]
         }
     }
