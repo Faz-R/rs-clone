@@ -19,33 +19,34 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
+        "baseUrl": ".",
         "paths": {
             "@api/*": [
-                "E:/ITASK/RSS/rs-clone/src/api/*"
+                "src/api/*"
             ],
             "@assets/*": [
-                "E:/ITASK/RSS/rs-clone/src/assets/*"
+                "src/assets/*"
             ],
             "@components/*": [
-                "E:/ITASK/RSS/rs-clone/src/components/*"
+                "src/components/*"
             ],
             "@hooks/*": [
-                "E:/ITASK/RSS/rs-clone/src/hooks/*"
+                "src/hooks/*"
             ],
             "@pages/*": [
-                "E:/ITASK/RSS/rs-clone/src/pages/*"
+                "src/pages/*"
             ],
             "@store/*": [
-                "E:/ITASK/RSS/rs-clone/src/store/*"
+                "src/store/*"
             ],
             "@styles/*": [
-                "E:/ITASK/RSS/rs-clone/src/styles/*"
+                "src/styles/*"
             ],
             "@utils/*": [
-                "E:/ITASK/RSS/rs-clone/src/utils/*"
+                "src/utils/*"
             ],
             "@/*": [
-                "E:/ITASK/RSS/rs-clone/src/*"
+                "src/*"
             ]
         }
     },
