@@ -19,33 +19,34 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
+        "baseUrl": ".",
         "paths": {
             "@api/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/api/*"
+                "src/api/*"
             ],
             "@assets/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/assets/*"
+                "src/assets/*"
             ],
             "@components/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/components/*"
+                "src/components/*"
             ],
             "@hooks/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/hooks/*"
+                "src/hooks/*"
             ],
             "@pages/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/pages/*"
+                "src/pages/*"
             ],
             "@store/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/store/*"
+                "src/store/*"
             ],
             "@styles/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/styles/*"
+                "src/styles/*"
             ],
             "@utils/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/utils/*"
+                "src/utils/*"
             ],
             "@/*": [
-                "D:/rs_school/stage1/RS clone_06_02_23/rs-clone/src/*"
+                "src/*"
             ]
         }
     },

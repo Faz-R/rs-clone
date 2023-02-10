@@ -52,15 +52,6 @@ const RandomMovie = () => {
     );
     console.log(responce);
     setRandomMovie(responce as MovieHumorInterface);
-
-    // .then((r) => {
-    //   showCheckboxes();
-    //   setCardOfMovie(true);
-    //   if (!Array.isArray(r) && r) {
-    //     if (r.name) setRandomMovie(r.name);
-    //     else getMovie();
-    //   }
-    // });
   };
 
   const rangeMinYear = (value: number) => {
