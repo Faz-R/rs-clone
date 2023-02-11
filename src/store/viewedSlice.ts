@@ -10,18 +10,18 @@ export const viewedSlice = createSlice({
   name: 'viewed',
   initialState,
   reducers: {
-    addIdToViewed: (state, action: PayloadAction<IIdViewed>) => {
+    addMovieToViewed: (state, action: PayloadAction<IIdViewed>) => {
       if (!state.viewed.some((item) => action.payload.id === item.id)) {
         state.viewed = [...state.viewed, action.payload];
       }
     },
-    removeIdFromViewed: (state, action: PayloadAction<number>) => {
+    removeMovieFromViewed: (state, action: PayloadAction<IIdViewed>) => {
       state.viewed = state.viewed.filter((item) => {
-        return item.id !== action.payload;
+        return item.id !== action.payload.id;
       });
     },
   },
 });
 
-export const { addIdToViewed, removeIdFromViewed } = viewedSlice.actions;
+export const { addMovieToViewed, removeMovieFromViewed } = viewedSlice.actions;
 export default viewedSlice.reducer;

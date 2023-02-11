@@ -4,6 +4,10 @@ import './index.scss';
 import getMoviesData from '@api/getMoviesData';
 import DoubleRange from '@components/UI/DoubleRange/DoubleRange';
 import Button from '@components/UI/button/Button';
+import CheckboxSwitch from '@components/UI/checkboxSwitch/CheckboxSwitch';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
+import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
 import type { MovieRandomInterface } from '@/types';
 
@@ -17,8 +21,15 @@ const RandomMovie = () => {
   const [cardOfMovie, setCardOfMovie] = useState(false);
   const [randomMovie, setRandomMovie] = useState({} as MovieRandomInterface);
   const [showCheckboxes, setshowCheckboxes] = useState(false);
+  const [addExceptions, setAddExceptions] = useState(false);
 
   // TODO: поправить работу кнопок карточки фильма с учётом Redux
+
+  const dispatch = useAppDispatch();
+  const viewedArr = useAppSelector((state) => state.viewed.viewed);
+  const exceptions = viewedArr.map((elem) => elem.id);
+
+  const willViewArr = useAppSelector((state) => state.willview.value);
 
   const [viewed, setViewed] = useState(false);
   const [planWatch, setPlanWatch] = useState(false);
@@ -26,7 +37,35 @@ const RandomMovie = () => {
   const [loading, setLoading] = useState(false);
   const [showMovie, setShowMovie] = useState(false);
 
+  const addViewed = () => {
+    dispatch(addMovieToViewed(randomMovie));
+  };
+
+  const removeViewed = () => {
+    dispatch(removeMovieFromViewed(randomMovie));
+  };
+
+  const addWillView = () => {
+    dispatch(addMovieToWillView(randomMovie));
+  };
+
+  const removeWillView = () => {
+    dispatch(removeMovieFromWillView(randomMovie));
+  };
+
   useEffect(() => {
+    if (viewedArr.some((elem) => elem.id === randomMovie.id)) {
+      setViewed(true);
+    } else {
+      setViewed(false);
+    }
+
+    if (willViewArr.some((elem) => elem.id === randomMovie.id)) {
+      setPlanWatch(true);
+    } else {
+      setPlanWatch(false);
+    }
+
     if (genres) {
       setGenresState(genres);
     }
@@ -46,7 +85,7 @@ const RandomMovie = () => {
         }
       });
     }
-  }, [cardOfMovie, showCheckboxes, randomMovie, randomMovie.poster]);
+  }, [cardOfMovie, showCheckboxes, randomMovie, randomMovie.poster, viewedArr, willViewArr]);
 
   const PosterLoad = () => {
     if (showMovie) {
@@ -63,6 +102,7 @@ const RandomMovie = () => {
         genres: filter,
         year: `${minYearRange}-${maxYearRange}`,
         rating: `${minRateRange}-${maxRateRange}`,
+        exceptions: addExceptions ? exceptions : undefined,
       },
       true
     ).then((response) => {
@@ -171,11 +211,12 @@ const RandomMovie = () => {
             </div>
             <div className="switch-block__viewed">
               <span className="switch-block__subtitle subtitle__viewed">Скрыть просмотренные</span>
-              <input
-                type="checkbox"
-                className="viewed__switcher"
-                name="viewed__switcher"
-                id="viewed__switcher"
+              <CheckboxSwitch
+                item="viewed__switcher"
+                onChange={(checked: boolean) => {
+                  setAddExceptions(!addExceptions);
+                }}
+                value=""
               />
             </div>
           </div>
@@ -242,7 +283,13 @@ const RandomMovie = () => {
                         <div
                           className="movie-card__icon"
                           onClick={() => {
-                            setPlanWatch(!planWatch);
+                            if (planWatch) {
+                              removeWillView();
+                              setPlanWatch(false);
+                            } else {
+                              addWillView();
+                              setPlanWatch(true);
+                            }
                           }}
                           aria-hidden="true">
                           <i
@@ -259,7 +306,13 @@ const RandomMovie = () => {
                         <div
                           className="movie-card__icon"
                           onClick={() => {
-                            setViewed(!viewed);
+                            if (viewed) {
+                              removeViewed();
+                              setViewed(false);
+                            } else {
+                              addViewed();
+                              setViewed(true);
+                            }
                           }}
                           aria-hidden="true">
                           <i

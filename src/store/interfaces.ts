@@ -1,11 +1,11 @@
 export interface IIdViewed {
   id: number;
-  name: string;
+  name: string | null;
   countries: string[] | null;
   genres: string[];
   description: string;
   poster: string | null;
-  rating: number;
+  rating: { kp: number; imdb: number };
   year: number;
 }
 

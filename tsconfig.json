@@ -47,6 +47,9 @@
             ],
             "@/*": [
                 "src/*"
+            ],
+            "@BigMovieCard/*": [
+                "src/components/BigMovieCard/*"
             ]
         }
     },
