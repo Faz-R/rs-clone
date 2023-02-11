@@ -1,26 +1,121 @@
-.quiz__title{
+.humor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.humor__blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 40px;
+}
+
+.humor__form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.humor__title {
   font-size: var(--h3-font-size);
   line-height: var(--h3-line-height);
   letter-spacing: var(--h3-letter-spacing);
   text-transform: var(--h3-text-transform);
   font-weight: var(--h3-font-weight);
-  padding-top: 40px;
+  padding-top: 50px;
   margin-bottom: 30px;
 }
 
-.emotions__emoji{
-  font-family: var(--font-emoji);
-  font-weight: 500;
-  font-size: 50px;
-  cursor: pointer;
-  color: var(--tertiary-color);
+.humor__subtitle {
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  margin-bottom: 20px;
 }
 
-.emotions__list{
+.emoji__subtitle {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.emoji__radio{
+.emoji__subtitle__title {
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  padding-right: 20px;
+}
+
+.subtitle__row {
+  margin: 0;
+  padding-right: 20px;
+}
+
+.humor__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.emoji__radio {
   display: none;
+}
+
+.emoji__subtitle__error {
+  color: tomato;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.emotions__emoji {
+  font-family: var(--font-emoji);
+  font-weight: 500;
+  font-size: 70px;
+  cursor: pointer;
+  color: var(--tertiary-color);
+  transition: var(--transition);
+  position: relative;
+  display: block;
+  min-width: 90px;
+  height: 100px;
+  user-select: none;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.emotions__list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  gap: 1em;
+  padding-bottom: 20px;
+}
+
+.emotions__emoji:active {
+  transform: scale(0.8);
+}
+
+.emoji__active {
+  color: var(--primary-color);
+}
+
+.emoji__button {
+  position: absolute;
+  transition: var(--transition);
 }

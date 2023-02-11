@@ -48,8 +48,8 @@
             "@/*": [
                 "src/*"
             ],
-            "@BigMovieCard/*": [
-                "src/components/BigMovieCard/*"
+            "@Emoji/*": [
+                "src/components/Emoji/*"
             ]
         }
     },

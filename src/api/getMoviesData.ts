@@ -28,7 +28,7 @@ const getMoviesData = async (formData: SearchMovieFormData, random: boolean) => 
   });
 
   try {
-    const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}&limit=4`);
+    const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}&limit=200`);
 
     const { docs } = (await response.json()) as { docs: MovieDataInterface[] };
 
