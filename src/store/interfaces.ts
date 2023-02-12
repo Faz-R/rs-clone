@@ -2,11 +2,11 @@ export interface IIdViewed {
   id: number;
   name: string | null;
   countries: string[] | null;
-  genres: string[];
-  description: string;
+  genres: string[] | null;
+  description: string | null;
   poster: string | null;
-  rating: { kp: number; imdb: number };
-  year: number;
+  rating: { kp: number | null; imdb: number | null };
+  year: number | null;
 }
 
 export interface IIdViewedObject {
