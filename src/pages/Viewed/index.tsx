@@ -4,8 +4,12 @@ import { useAppSelector } from '@store/hooks';
 import './index.css';
 import Button from '@components/UI/button/Button';
 import MovieCard from '@components/MovieCard';
+import MovieSearchPagination from '@pages/SearhPage/MovieSearchPagination';
+import { IIdViewed } from '@store/interfaces';
 
 let asc = true;
+let sorted: IIdViewed[];
+const moviesPerPage = 5;
 
 const Viewed = () => {
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
@@ -26,6 +30,12 @@ const Viewed = () => {
     .map((item) => item)
     .sort((a, b) => (b.genres[0] > a.genres[0] ? 1 : -1));
   const [sort, setSort] = useState(arrForRateKpAsc);
+  const [state, setState] = useState({
+    movies: sort,
+    page: sort.length !== 0 ? 1 : 0,
+    pages: Math.ceil(sort.length / 5),
+  });
+  sorted = sort.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   const sortByRatingKp = () => {
     if (asc) setSort(arrForRateKpAsc);
@@ -54,15 +64,33 @@ const Viewed = () => {
     asc = !asc;
   };
 
+  /* const getMoviesForPage = (page: number) => {
+    sorted = sort.slice((page - 1) * moviesPerPage, page * moviesPerPage);
+  };
+
+  getMoviesForPage(state.page);
+*/
+  const handleBtnClick = (step: 1 | -1) => {
+    setState({ ...state, page: state.page + step });
+  }; 
+
   return (
     <div className="viewed_movie">
       <Button children="по рейтингу кинопоиска" onClick={sortByRatingKp} />
       <Button children="по рейтингу IMDB" onClick={sortByRatingImdb} />
       <Button children="по году" onClick={sortByYear} />
       <Button children="по жанру" onClick={sortByGenr} />
-      {sort.map((item) => (
-        <MovieCard key={item.id} movie={item} id={`${item.id}`} />
-      ))}
+      <MovieSearchPagination
+        page={state.page}
+        pages={state.pages}
+        handleBtnClick={handleBtnClick}
+        isMovies={viewedArr.length !== 0}
+      />
+      {sorted.length !== 0 ? (
+        sorted.map((item) => <MovieCard key={item.id} movie={item} id={`${item.id}`} />)
+      ) : (
+        <h2>вы так ничего и не посмотрели...охохонюшки хохо</h2>
+      )}
     </div>
   );
 };
