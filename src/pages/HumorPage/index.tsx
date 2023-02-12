@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import getMoviesData from '../../api/getMoviesData';
-import Button from '../../components/UI/button/Button';
-import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
-import { MovieHumorInterface } from '../../types';
+import getAnyMovie from '@api/getAnyMovie';
+import Button from '@components/UI/button/Button';
+import DoubleRange from '@components/UI/DoubleRange/DoubleRange';
+import type { AnyMovieInterface } from '@/types';
 import './index.scss';
 
 const Humor = () => {
@@ -33,7 +33,7 @@ const Humor = () => {
     setMaxYear(value);
   };
 
-  const [movie, setMovie] = useState({} as MovieHumorInterface);
+  const [movie, setMovie] = useState({} as AnyMovieInterface);
 
   const getMovie: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -46,8 +46,8 @@ const Humor = () => {
     const maxYearFrom = Number(formData.get('maxYear'));
     const year = `${Math.min(minYearFrom, maxYearFrom)}-${Math.max(minYearFrom, maxYearFrom)}`;
 
-    const response = await getMoviesData({ genres, year, rating }, false);
-    setMovie(response as MovieHumorInterface);
+    const response = await getAnyMovie({ genres, year, rating });
+    setMovie(response as AnyMovieInterface);
   };
 
   return (
