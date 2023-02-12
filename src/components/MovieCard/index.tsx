@@ -1,72 +1,27 @@
 /* eslint-disable react/no-children-prop */
 import './index.css';
-import Button from '../UI/button/Button';
-import { addMovieToViewed, removeMovieFromViewed } from '../../store/viewedSlice';
-import { addMovieToWillView, removeMovieFromWillView } from '../../store/willViewSlice';
-import { MovieHumorInterface } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { IIdViewed } from '@store/interfaces';
 
 interface IMovieCardProps {
   id: string;
-  className: string;
-  poster: string;
-  movie: MovieHumorInterface;
+  movie: IIdViewed;
 }
 
-const MovieCard = ({ id, poster, className = '', movie }: IMovieCardProps) => {
-  const dispatch = useAppDispatch();
-  const idArr = useAppSelector((state) => state.viewed.viewed);
-  const idArrWillWiew = useAppSelector((state) => state.willview.value);
-  const children = !idArr.some((item) => movie.id === item.id)
-    ? 'в просмотренные'
-    : 'из просмотренных';
-  const childrenWill = !idArrWillWiew.some((item) => movie.id === item.id)
-    ? 'буду смотреть'
-    : 'не буду смотреть';
-
-  const setWillView = () => {
-    if (!idArrWillWiew.some((item) => movie.id === item.id)) {
-      dispatch(
-        addMovieToWillView({
-          id: movie.id,
-          name: movie.name,
-          countries: movie.countries,
-          genres: movie.genres,
-          description: movie.description,
-          poster: movie.poster,
-          rating: movie.rating.kp,
-          year: movie.year,
-        })
-      );
-    } else {
-      dispatch(removeMovieFromWillView(movie.id));
-    }
-  };
-
-  const setViewed = () => {
-    if (!idArr.some((item) => movie.id === item.id)) {
-      dispatch(
-        addMovieToViewed({
-          id: movie.id,
-          name: movie.name,
-          countries: movie.countries,
-          genres: movie.genres,
-          description: movie.description,
-          poster: movie.poster,
-          rating: movie.rating.kp,
-          year: movie.year,
-        })
-      );
-    } else {
-      dispatch(removeMovieFromViewed(movie.id));
-    }
-  };
-
+const MovieCard = ({ id, movie }: IMovieCardProps) => {
   return (
-    <div id={id} className={className}>
-      <img src={poster} alt="нет картинки" className={`img_movie_card ${className}`} />
-      <Button children={children} onClick={setViewed} />
-      <Button children={childrenWill} onClick={setWillView} />
+    <div id={id} className="movie_viewed_card">
+      <img
+        src={movie.poster || 'https://pchelp24.com/wp-content/uploads/images/05(1).png'}
+        alt="нет картинки"
+        className="img_movie_card"
+      />
+      <h2 className="viewed_movie_name">{`${movie.name}    ${movie.year}`}</h2>
+      <div className="viewed_movie_descr">{movie.description}</div>
+      <h4 className="viewed_movie_genres">{movie.genres?.join(',   ')}</h4>
+      <h3 className="viewed_movie_country">{movie.countries?.join(',   ')}</h3>
+      <h3 className="viewed_movie_rating">
+        {`рейтинг КП  ${movie.rating.kp}   рейтинг IMDB  ${movie.rating.imdb}`}
+      </h3>
     </div>
   );
 };
