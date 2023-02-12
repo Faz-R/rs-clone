@@ -131,7 +131,7 @@ const Humor = () => {
   return (
     <section className="humor">
       <h3 className="humor__title">
-        <i className="fa-solid fa-angles-right design__row" /> Фильм по настроению
+        <i className="fa-solid fa-angles-right design__row" /> Фильм под настроение
       </h3>
       <div className="humor__blocks">
         <form className="humor__form" onSubmit={getMovie}>
