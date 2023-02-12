@@ -3,10 +3,9 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { useState } from 'react';
-import getMoviesData from '../../api/getMoviesData';
+import getAnyMovie from '../../api/getAnyMovie';
 import Button from '../../components/UI/button/Button';
-import DoubleRange from '../../components/UI/DoubleRange/DoubleRange';
-import { MovieHumorInterface, MovieRandomInterface } from '../../types';
+import { AnyMovieInterface } from '../../types';
 import './index.scss';
 
 const Humor = () => {
@@ -34,7 +33,7 @@ const Humor = () => {
   const [formValid, setFormValid] = useState(false);
   const [error, setError] = useState(false);
 
-  const [randomMovie, setRandomMovie] = useState({} as MovieRandomInterface);
+  const [randomMovie, setRandomMovie] = useState({} as AnyMovieInterface);
 
   const dispatch = useAppDispatch();
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
@@ -59,15 +58,17 @@ const Humor = () => {
     const genres = (formData.get('emoji') as string).split(',');
     const year = `${minYear}-${maxYear}`;
 
-    await getMoviesData(
-      { genres, year, rating, exceptions: showViewed ? exceptions : undefined },
-      false
-    ).then((response) => {
+    await getAnyMovie({
+      genres,
+      year,
+      rating,
+      exceptions: showViewed ? exceptions : undefined,
+    }).then((response) => {
       console.log(response);
       if (response) {
-        setRandomMovie(response as MovieRandomInterface);
+        setRandomMovie(response as AnyMovieInterface);
       } else if (!response) {
-        setRandomMovie({} as MovieRandomInterface);
+        setRandomMovie({} as AnyMovieInterface);
         setShowMovie(true);
         setLoading(false);
       }
@@ -118,11 +119,20 @@ const Humor = () => {
   };
 
   const Rating = () => {
-    let ratingArray: number[] = [];
+    let ratingArray: (number | null)[] = [];
 
     if (randomMovie.rating) {
       ratingArray = Object.values(randomMovie.rating);
-      return Number((ratingArray.reduce((sum, e) => sum + e, 0) / ratingArray.length).toFixed(1));
+      if (ratingArray === null) return 0;
+
+      return Number(
+        (
+          (ratingArray as number[]).reduce((sum, e) => {
+            if (e === null) return sum;
+            return sum + e;
+          }, 0) / ratingArray.length
+        ).toFixed(1)
+      );
     }
 
     return 0;

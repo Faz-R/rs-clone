@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Checkbox from '@components/UI/Checkbox/Checkbox';
-import './index.scss';
-import getMoviesData from '@api/getMoviesData';
+import getMoviesData from '@api/getAnyMovie';
 import DoubleRange from '@components/UI/DoubleRange/DoubleRange';
 import Button from '@components/UI/button/Button';
 import CheckboxSwitch from '@components/UI/checkboxSwitch/CheckboxSwitch';
@@ -9,7 +8,8 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { maxRate, setRate, minRate, setYear, maxYear, minYear, genres } from './constants';
-import type { MovieRandomInterface } from '@/types';
+import type { AnyMovieInterface } from '@/types';
+import './index.scss';
 
 const RandomMovie = () => {
   const [minYearRange, setMinYear] = useState(minYear);
@@ -19,7 +19,7 @@ const RandomMovie = () => {
   const [filter, setFilter] = useState([] as string[]);
   const [genresState, setGenresState] = useState([{ name: '', id: 0 }]);
   const [cardOfMovie, setCardOfMovie] = useState(false);
-  const [randomMovie, setRandomMovie] = useState({} as MovieRandomInterface);
+  const [randomMovie, setRandomMovie] = useState({} as AnyMovieInterface);
   const [showCheckboxes, setshowCheckboxes] = useState(false);
   const [addExceptions, setAddExceptions] = useState(false);
 
@@ -97,19 +97,16 @@ const RandomMovie = () => {
   const getMovie = async () => {
     setShowMovie(false);
     setLoading(true);
-    await getMoviesData(
-      {
-        genres: filter,
-        year: `${minYearRange}-${maxYearRange}`,
-        rating: `${minRateRange}-${maxRateRange}`,
-        exceptions: addExceptions ? exceptions : undefined,
-      },
-      true
-    ).then((response) => {
+    await getMoviesData({
+      genres: filter,
+      year: `${minYearRange}-${maxYearRange}`,
+      rating: `${minRateRange}-${maxRateRange}`,
+      exceptions: addExceptions ? exceptions : undefined,
+    }).then((response) => {
       if (response) {
-        setRandomMovie(response as MovieRandomInterface);
+        setRandomMovie(response as AnyMovieInterface);
       } else if (!response) {
-        setRandomMovie({} as MovieRandomInterface);
+        setRandomMovie({} as AnyMovieInterface);
         setShowMovie(true);
         setLoading(false);
       }
@@ -158,7 +155,7 @@ const RandomMovie = () => {
   };
 
   const Rating = () => {
-    let ratingArray: number[] = [];
+    let ratingArray: (null | number)[] = [];
 
     if (randomMovie.rating) {
       ratingArray = Object.values(randomMovie.rating);
