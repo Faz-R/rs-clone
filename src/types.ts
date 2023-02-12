@@ -11,42 +11,38 @@ export interface UserStateInterface {
 
 export interface SearchMovieFormData {
   genres: string[];
-  year: number | string;
+  year?: string;
   rating?: string;
   exceptions?: number[];
 }
 
-export interface MovieHumorInterface {
+export interface AnyMovieInterface {
   id: number;
   name: null | string;
   alternativeName: null | string;
-  description: string;
-  genres: string[];
+  description: null | string;
+  genres: null | string[];
   poster: null | string;
   countries: null | string[];
-  year: number;
-  movieLength: number;
-  rating: { kp: number; imdb: number };
-}
-
-export interface MovieRandomInterface extends MovieHumorInterface {
-  actors: string[];
-  director: string;
+  year: null | number;
+  movieLength: null | number;
+  rating: { kp: null | number; imdb: null | number };
+  actors: null | string[];
+  director: null | string;
 }
 
 export interface MovieDataInterface {
   id: number;
   name: null | string;
   alternativeName: null | string;
-  description: string;
-  genres: CountryType[];
-  poster: PosterType;
-  year: number;
-  movieLength: number;
-  rating: RatingType;
-  persons: PersonType[];
-  countries: CountryType[];
-  videos?: { trailers: TrailerType[] };
+  description: null | string;
+  genres: null | CountryType[];
+  poster: null | PosterType;
+  year: null | number;
+  movieLength: null | number;
+  rating: null | RatingType;
+  persons: null | PersonType[];
+  countries: null | CountryType[];
 }
 
 export type PersonType = {
