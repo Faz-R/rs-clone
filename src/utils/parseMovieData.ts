@@ -1,60 +1,33 @@
-import type {
-  MovieDataInterface,
-  MovieHumorInterface,
-  MovieRandomInterface,
-  PersonType,
-  CountryType,
-} from '../types';
+import type { MovieDataInterface, AnyMovieInterface, PersonType, CountryType } from '@/types';
 
-const getActorsFromMovieData = (persons?: PersonType[]) => {
-  return persons
-    ? persons
-        .filter((person) => person.enProfession === 'actor')
-        .slice(0, 3)
-        .map((person) => person.enName)
-    : [];
+const getMovieStaff = (persons: null | PersonType[]) => {
+  const actors =
+    persons
+      ?.filter((person) => person.enProfession === 'actor')
+      .slice(0, 3)
+      .map((person) => person.enName) ?? null;
+
+  const director = persons?.find((person) => person.enProfession === 'director')?.enName ?? null;
+
+  return { actors, director };
 };
 
-const getProducerFromMovieData = (persons?: PersonType[]) => {
-  return persons ? persons.find((person) => person.enProfession === 'director')?.enName ?? '' : '';
-};
-
-const parseMoviesData = (
-  movies: MovieDataInterface[],
-  random: boolean
-): MovieHumorInterface[] | MovieRandomInterface[] => {
+const parseMoviesData = (movies: MovieDataInterface[]): AnyMovieInterface[] => {
   return movies.map((movie) => {
-    const {
-      id,
-      alternativeName,
-      name,
-      description,
-      genres,
-      poster,
-      year,
-      movieLength,
-      rating,
-      persons,
-      countries,
-    } = movie;
-
-    const actors = persons ? getActorsFromMovieData(persons) : null;
-    const director = persons ? getProducerFromMovieData(persons) : null;
-
     const movieData = {
-      id,
-      alternativeName,
-      name,
-      description,
-      genres: genres.map((genre: CountryType) => genre.name),
-      year,
-      movieLength,
-      poster: poster?.previewUrl ?? null,
-      rating: { kp: rating.kp, imdb: rating.imdb },
-      countries: countries.map((country: CountryType) => country.name),
+      id: movie.id,
+      alternativeName: movie.alternativeName,
+      name: movie.name,
+      description: movie.description,
+      genres: movie.genres?.map((genre: CountryType) => genre.name) ?? null,
+      year: movie.year,
+      movieLength: movie.movieLength,
+      poster: movie.poster?.previewUrl ?? null,
+      rating: { kp: movie.rating?.kp ?? null, imdb: movie.rating?.imdb ?? null },
+      countries: movie.countries?.map((country: CountryType) => country.name) ?? null,
     };
 
-    return random ? { ...movieData, actors, director } : movieData;
+    return { ...movieData, ...getMovieStaff(movie.persons) };
   });
 };
 
