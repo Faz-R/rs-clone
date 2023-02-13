@@ -8,6 +8,7 @@ import ErrorPage from '@pages/ErrorPage';
 import MovieDetails from '@pages/Movie';
 import loaderMovieDetails from '@api/loaderMovieDetails';
 import Error from '@components/Error';
+import Viewed from '@pages/Viewed';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         element: <MovieDetails />,
         loader: loaderMovieDetails,
         errorElement: <Error />,
+      },
+      {
+        path: 'viewed',
+        element: <Viewed />,
       },
     ],
   },
