@@ -1,9 +1,12 @@
+/* eslint-disable no-else-return */
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import Button from '@components/UI/button/Button';
 import MovieCard from '@components/MovieCard';
-import MovieSearchPagination from '@pages/SearhPage/MovieSearchPagination';
+import MovieSearchPagination from '@components/Pafination';
 import { IIdViewed } from '@store/interfaces';
 
 let asc = true;
@@ -12,22 +15,32 @@ const moviesPerPage = 5;
 
 const Viewed = () => {
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
-  const arrForRateKpAsc = viewedArr.map((item) => item).sort((a, b) => a.rating.kp - b.rating.kp);
-  const arrForRateKpDsc = viewedArr.map((item) => item).sort((a, b) => b.rating.kp - a.rating.kp);
+  const arrForRateKpAsc = viewedArr
+    .map((item) => item)
+    .sort((a, b) => {
+      if (a.rating.kp && b.rating.kp) return a.rating.kp - b.rating.kp;
+      else return 0;
+    });
+  const arrForRateKpDsc = arrForRateKpAsc.map((item) => item).reverse();
   const arrForRateImdbAsc = viewedArr
     .map((item) => item)
-    .sort((a, b) => a.rating.imdb - b.rating.imdb);
-  const arrForRateImdbDsc = viewedArr
+    .sort((a, b) => {
+      if (a.rating.imdb && b.rating.imdb) return a.rating.imdb - b.rating.imdb;
+      else return 0;
+    });
+
+  const arrForRateImdbDsc = arrForRateImdbAsc.map((item) => item).reverse();
+  const arrForYearAsc = viewedArr
     .map((item) => item)
-    .sort((a, b) => b.rating.imdb - a.rating.imdb);
-  const arrForYearAsc = viewedArr.map((item) => item).sort((a, b) => a.year - b.year);
-  const arrForYearDsc = viewedArr.map((item) => item).sort((a, b) => b.year - a.year);
+    .sort((a, b) => {
+      if (a.year && b.year) return a.year - b.year;
+      else return 0;
+    });
+  const arrForYearDsc = arrForYearAsc.map((item) => item).reverse();
   const arrForGenresAsc = viewedArr
     .map((item) => item)
-    .sort((a, b) => (a.genres[0] > b.genres[0] ? 1 : -1));
-  const arrForGenresDsc = viewedArr
-    .map((item) => item)
-    .sort((a, b) => (b.genres[0] > a.genres[0] ? 1 : -1));
+    .sort((a, b) => (a.genres && b.genres && a.genres[0] > b.genres[0] ? 1 : -1));
+  const arrForGenresDsc = arrForGenresAsc.map((item) => item).reverse();
 
   const [sort, setSort] = useState(arrForRateKpAsc);
   const [state, setState] = useState({
