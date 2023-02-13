@@ -1,14 +1,13 @@
-.range{
+.range {
   width: 100%;
 }
 
-.range{
+.range {
   position: relative;
   width: 100%;
   margin-bottom: 10px;
-
 }
-.rangebar{
+.rangebar {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -21,7 +20,7 @@
   background-color: transparent;
   pointer-events: none;
 }
-.ranger__track{
+.ranger__track {
   width: 100%;
   height: 5px;
   position: absolute;
@@ -31,19 +30,19 @@
   left: 0;
   border-radius: 5px;
 }
-.rangebar::-webkit-slider-runnable-track{
+.rangebar::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   height: 5px;
 }
-.rangebar::-moz-range-track{
+.rangebar::-moz-range-track {
   -moz-appearance: none;
   height: 5px;
 }
-.rangebar::-ms-track{
+.rangebar::-ms-track {
   appearance: none;
   height: 5px;
 }
-.rangebar::-webkit-slider-thumb{
+.rangebar::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 1.2em;
   width: 1.2em;
@@ -53,7 +52,7 @@
   pointer-events: auto;
   border-radius: 50%;
 }
-.rangebar::-moz-range-thumb{
+.rangebar::-moz-range-thumb {
   -webkit-appearance: none;
   height: 1em;
   width: 1em;
@@ -62,7 +61,7 @@
   background-color: var(--primary-color);
   pointer-events: auto;
 }
-.rangebar::-ms-thumb{
+.rangebar::-ms-thumb {
   appearance: none;
   height: 1em;
   width: 1em;
@@ -71,23 +70,22 @@
   background-color: var(--primary-color);
   pointer-events: auto;
 }
-.rangebar:active::-webkit-slider-thumb{
+.rangebar:active::-webkit-slider-thumb {
   background-color: var(--secondary-color);
   border: 3px solid var(--primary-color);
 }
 
-.range__values{
+.range__values {
   width: 100%;
-  
 }
 
-.range__lines{
+.range__lines {
   width: 100%;
   box-sizing: border-box;
   padding-top: 65px;
 }
 
-.values{
+.values {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,9 +107,8 @@
   user-select: none;
 }
 
-
-.values:before{
-  content: "";
+.values:before {
+  content: '';
   position: absolute;
   opacity: 0;
   visibility: hidden;
@@ -127,22 +124,21 @@
   transition: opacity var(--transition), visibility var(--transition);
 }
 
-.show{
+.show {
   transform: scale(1);
 
-  &::before{
+  &::before {
     opacity: 1;
     visibility: visible;
   }
 }
 
-
-.range__first{
+.range__first {
   position: absolute;
   left: 0;
 }
 
-.range__second{
+.range__second {
   position: absolute;
   left: 100%;
 }

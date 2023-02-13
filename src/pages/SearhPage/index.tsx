@@ -1,16 +1,21 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Loader from '@components/UI/loader/Loader';
+import SearchForm from '@components/SearchForm/';
 import getMoviesBySearchName from '../../api/getMoviesBySearchName';
 import MovieSearchList from './MovieSearchList';
-import MovieSearchPagination from './MovieSearchPagination';
-import type { MovieRandomInterface } from '../../types';
+import MovieSearchPagination from '../../components/Pafination';
+import type { AnyMovieInterface } from '../../types';
+import './index.scss';
+import getNoun from '@utils/getWorldEnding';
 
 const SearchPage = () => {
   const [state, setState] = useState<{
-    movies: MovieRandomInterface[];
+    movies: AnyMovieInterface[];
     page: number;
     pages: number;
-  }>({ movies: [], page: 0, pages: 0 });
+    total: number;
+  }>({ movies: [], page: 0, pages: 0, total: 0 });
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 
@@ -22,7 +27,7 @@ const SearchPage = () => {
     });
   }, [location.state]);
 
-  const { movies, page, pages } = state;
+  const { movies, page, pages, total } = state;
 
   const handleBtnClick = (step: 1 | -1) => {
     const newPage = page + step;
@@ -34,18 +39,29 @@ const SearchPage = () => {
   };
 
   return (
-    <section className="main-page">
+    <section className="search-page">
       {loading ? (
-        <h2>Loading....</h2>
+        <div className="search__loader">
+          <Loader loading={loading} className="search__loader__icon" />
+        </div>
       ) : (
         <>
+          <div className="search__title">
+            <i className="fa-solid fa-angles-right design__row" /> Поиск
+          </div>
+          <div className="search__top">
+            <span className="search__subtitle">
+              Найдено {total} {getNoun(total, 'фильм', 'фильма', 'фильмов')}
+            </span>
+            <MovieSearchPagination
+              page={page}
+              pages={pages}
+              handleBtnClick={handleBtnClick}
+              isMovies={movies.length !== 0}
+            />
+            <SearchForm />
+          </div>
           <MovieSearchList movies={movies} />
-          <MovieSearchPagination
-            page={page}
-            pages={pages}
-            handleBtnClick={handleBtnClick}
-            isMovies={movies.length !== 0}
-          />
         </>
       )}
     </section>

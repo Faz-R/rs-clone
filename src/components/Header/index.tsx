@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
-import SearchForm from './SearchForm';
+import SearchForm from '../SearchForm/index';
 import './index.scss';
 
 const Header = () => {
