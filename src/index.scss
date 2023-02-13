@@ -1,25 +1,26 @@
 @import './styles/normalize.css';
 
-
 :root[theme='dark-theme'] {
-  --primary-color: #FF7425;
+  --primary-color: rgb(255, 116, 37);
   --secondary-color: #181818;
-  --tertiary-color: #FFFFFF;
-  --bg-color: #0E0E0E;
+  --tertiary-color: rgb(255, 255, 255);
+  --tertiary-color-half: rgba(255, 255, 255, 0.5);
+  --bg-color: #0e0e0e;
   --background-color: #181818;
   --ring-color: #6b6b6b;
   --card-color: rgb(40, 40, 40);
   --checkbox-menu-color: rgba(255, 255, 255, 0.1);
-  --bg-hover: rgba(0, 0, 0, 0.5);
-  --white: #FFFFFF;
-  --button-bg-idle: #FF7425;
-  --button-color-hover: #FFFFFF;
+  --bg-hover: rgba(0, 0, 0, 0.7);
+  --white: #ffffff;
+  --button-bg-idle: #ff7425;
+  --button-color-hover: #ffffff;
   --button-bg-hover: #303030;
   --back-to-top-color: #ffffff;
   --back-to-top-color-bg: #2e2e2e;
+  --button-color-lighter: #f6f7fb;
   --transition: 0.4s;
-  --font-awesome: "FontAwesome";
-  --font-emoji: "Noto Emoji";
+  --font-awesome: 'FontAwesome';
+  --font-emoji: 'Noto Emoji';
   --h1-font-family: Arimo;
   --h1-font-size: 52px;
   --h1-line-height: 64px;
@@ -59,25 +60,27 @@
   box-sizing: border-box;
 }
 
-:root[theme='light-theme']{
-  --primary-color: #FF7425;
-  --secondary-color: #FFFFFF;
-  --tertiary-color: #191c20;
-  --bg-color: #FFFFFF;
+:root[theme='light-theme'] {
+  --primary-color: rgb(255, 116, 37);
+  --secondary-color: #ffffff;
+  --tertiary-color: rgb(25, 28, 32);
+  --tertiary-color-half: rgba(25, 28, 32, 0.5);
+  --bg-color: #ffffff;
   --ring-color: #6b6b6b;
   --background-color: #fafafa;
-  --card-color: #FFFFFF;
+  --card-color: #ffffff;
   --checkbox-menu-color: rgba(0, 0, 0, 0.1);
-  --bg-hover: rgba(0, 0, 0, 0.5);
-  --white: #FFFFFF;
-  --button-bg-idle: #FF7425;
-  --button-color-hover: #FFFFFF;
+  --bg-hover: rgba(0, 0, 0, 0.7);
+  --white: #ffffff;
+  --button-bg-idle: #ff7425;
+  --button-color-hover: #ffffff;
   --button-bg-hover: #303030;
   --back-to-top-color: #ffffff;
   --back-to-top-color-bg: #2e2e2e;
+  --button-color-lighter: #f6f7fb;
   --transition: 0.4s;
-  --font-awesome: "FontAwesome";
-  --font-emoji: "Noto Emoji";
+  --font-awesome: 'FontAwesome';
+  --font-emoji: 'Noto Emoji';
   --h1-font-family: Arimo;
   --h1-font-size: 52px;
   --h1-line-height: 64px;
@@ -123,19 +126,18 @@
   margin: 0;
 }
 
-body{
-  font-family: "Arimo", sans-serif;
+body {
+  font-family: 'Arimo', sans-serif;
   overflow-x: hidden;
 }
 
-#root{
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.container{
+.container {
   max-width: 1200px;
   margin: 0 auto;
 }
-

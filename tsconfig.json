@@ -48,11 +48,17 @@
             "@/*": [
                 "src/*"
             ],
-            "@MovieCard/*": [
-                "src/components/MovieCard/*"
+            "@SearchForm/*": [
+                "src/components/SearchForm/*"
             ],
-            "@Viewed/*": [
-                "src/pages/Viewed/*"
+            "@Pafination/*": [
+                "src/components/Pafination/*"
+            ],
+            "@MovieCardRow/*": [
+                "src/components/MovieCardRow/*"
+            ],
+            "@MovieCardColumn/*": [
+                "src/components/MovieCardColumn/*"
             ]
         }
     },
