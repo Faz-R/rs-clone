@@ -29,6 +29,7 @@ export interface AnyMovieInterface {
   rating: { kp: null | number; imdb: null | number };
   actors: null | string[];
   director: null | string;
+  trailer: null | string;
 }
 
 export interface MovieDataInterface {
@@ -36,52 +37,15 @@ export interface MovieDataInterface {
   name: null | string;
   alternativeName: null | string;
   description: null | string;
-  genres: null | CountryType[];
-  poster: null | PosterType;
+  genres: null | { name: string }[];
+  poster: null | { previewUrl: string };
   year: null | number;
   movieLength: null | number;
-  rating: null | RatingType;
-  persons: null | PersonType[];
-  countries: null | CountryType[];
+  rating: null | { kp: number; imdb: number };
+  persons: null | { name: string; enProfession: string }[];
+  countries: null | { name: string }[];
+  videos: null | { trailers: { url: string }[] };
 }
-
-export type PersonType = {
-  enName: string;
-  enProfession: string;
-  id: number;
-  name: string;
-  photo: string;
-  profession: string;
-  _id: string;
-};
-
-export type CountryType = {
-  _id: string;
-  name: string;
-};
-
-type PosterType = {
-  previewUrl: string;
-  url: string;
-  _id: string;
-};
-
-type RatingType = {
-  await: number;
-  filmCritics: number;
-  imdb: number;
-  kp: number;
-  russianFilmCritics: number;
-  _id: string;
-};
-
-type TrailerType = {
-  _id: string;
-  url: string;
-  name: string;
-  site: string;
-};
-
 export interface ResponseSearchMovieInterface {
   docs: MovieDataInterface[];
   total: number;
