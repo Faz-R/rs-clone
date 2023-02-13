@@ -48,8 +48,17 @@
             "@/*": [
                 "src/*"
             ],
-            "@Emoji/*": [
-                "src/components/Emoji/*"
+            "@SearchForm/*": [
+                "src/components/SearchForm/*"
+            ],
+            "@Pafination/*": [
+                "src/components/Pafination/*"
+            ],
+            "@MovieCardRow/*": [
+                "src/components/MovieCardRow/*"
+            ],
+            "@MovieCardColumn/*": [
+                "src/components/MovieCardColumn/*"
             ]
         }
     },

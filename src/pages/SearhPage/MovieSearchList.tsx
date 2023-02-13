@@ -1,15 +1,16 @@
-import type { MovieRandomInterface } from '../../types';
+import MovieCardColumn from '@components/MovieCardColumn';
+import type { AnyMovieInterface } from '../../types';
 
-const MovieSearchList = (props: { movies: MovieRandomInterface[] }) => {
+const MovieSearchList = (props: { movies: AnyMovieInterface[] }) => {
   const { movies } = props;
   return movies.length === 0 ? (
-    <h2> Фильмы не найдены</h2>
+    <span className="search__movies-not-found">Фильмы не найдены</span>
   ) : (
-    <ul>
+    <div className="search__movies-list">
       {movies.map((movie) => (
-        <li key={movie.id}>{movie.alternativeName}</li>
+        <MovieCardColumn movie={movie} key={movie.id} />
       ))}
-    </ul>
+    </div>
   );
 };
 
