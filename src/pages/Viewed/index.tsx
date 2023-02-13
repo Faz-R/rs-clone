@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import Button from '@components/UI/button/Button';
 import MovieCard from '@components/MovieCard';
-import MovieSearchPagination from '@components/Pafination';
+import MovieSearchPagination from '@components/Pagination';
 import { IIdViewed } from '@store/interfaces';
 
 let asc = true;
