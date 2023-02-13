@@ -48,8 +48,11 @@
             "@/*": [
                 "src/*"
             ],
-            "@BigMovieCard/*": [
-                "src/components/BigMovieCard/*"
+            "@MovieCard/*": [
+                "src/components/MovieCard/*"
+            ],
+            "@Viewed/*": [
+                "src/pages/Viewed/*"
             ]
         }
     },

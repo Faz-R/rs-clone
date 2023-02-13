@@ -1,7 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react';
 import { useAppSelector } from '@store/hooks';
-import './index.css';
 import Button from '@components/UI/button/Button';
 import MovieCard from '@components/MovieCard';
 import MovieSearchPagination from '@pages/SearhPage/MovieSearchPagination';
@@ -29,12 +28,13 @@ const Viewed = () => {
   const arrForGenresDsc = viewedArr
     .map((item) => item)
     .sort((a, b) => (b.genres[0] > a.genres[0] ? 1 : -1));
+
   const [sort, setSort] = useState(arrForRateKpAsc);
   const [state, setState] = useState({
-    movies: sort,
     page: sort.length !== 0 ? 1 : 0,
     pages: Math.ceil(sort.length / 5),
   });
+
   sorted = sort.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   const sortByRatingKp = () => {
@@ -64,15 +64,9 @@ const Viewed = () => {
     asc = !asc;
   };
 
-  /* const getMoviesForPage = (page: number) => {
-    sorted = sort.slice((page - 1) * moviesPerPage, page * moviesPerPage);
-  };
-
-  getMoviesForPage(state.page);
-*/
   const handleBtnClick = (step: 1 | -1) => {
     setState({ ...state, page: state.page + step });
-  }; 
+  };
 
   return (
     <div className="viewed_movie">
