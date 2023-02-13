@@ -7,11 +7,13 @@ import SearchPage from '@pages/SearhPage';
 import ErrorPage from '@pages/ErrorPage';
 import MovieDetails from '@pages/Movie';
 import loaderMovieDetails from '@api/loaderMovieDetails';
+import Error from '@components/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -34,11 +36,7 @@ const router = createBrowserRouter([
         path: 'movies/:id',
         element: <MovieDetails />,
         loader: loaderMovieDetails,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: '*',
-        element: <ErrorPage />,
+        errorElement: <Error />,
       },
     ],
   },
