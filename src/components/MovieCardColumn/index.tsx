@@ -7,7 +7,7 @@ import classes from './index.module.scss';
 
 interface IMovieCardColumn {
   movie: AnyMovieInterface;
-  key: number;
+  key: number; //! переименуй переменную, ругается на нее потомучто такок имя только для ключей в коампонентах зарезервировано
 }
 
 const MovieCardColumn = ({ movie, key }: IMovieCardColumn) => {
