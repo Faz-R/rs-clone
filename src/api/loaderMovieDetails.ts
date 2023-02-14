@@ -15,6 +15,7 @@ const getMovieById = async (id: string) => {
       statusText: response.statusText || 'An error has occurred',
     });
   }
+
   return response.json();
 };
 

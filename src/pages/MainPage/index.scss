@@ -1,16 +1,16 @@
-@mixin flex ($direction, $justify:center, $align: center){
+@mixin flex($direction, $justify: center, $align: center) {
   display: flex;
   flex-direction: $direction;
   align-items: $align;
   justify-content: $justify;
 }
 
-.main-page__question{
+.main-page__question {
   margin-bottom: 30px;
   background: var(--bg-caret);
 }
 
-.page__title{
+.page__title {
   font-size: var(--h3-font-size);
   line-height: var(--h3-line-height);
   letter-spacing: var(--h3-letter-spacing);
@@ -23,7 +23,7 @@
   cursor: default;
 }
 
-.question__cards{
+.question__cards {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -32,23 +32,23 @@
   gap: 2em;
 }
 
-.question-card__wrapper{
-  // flex: 1 0;
+.question-card__wrapper {
   height: 280px;
   min-width: 280px;
   position: relative;
   cursor: pointer;
 }
 
-.question__cards__card{
+.question__cards__card {
   perspective: 1000px;
   height: 280px;
 }
 
-.card__front{
-  @include  flex(column, flex-end, flex-start);
+.card__front {
+  @include flex(column, flex-end, flex-start);
 }
-.card__front, .card__back {
+.card__front,
+.card__back {
   position: absolute;
   max-width: 280px;
   height: 100%;
@@ -62,13 +62,12 @@
   box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
 }
 
-
 .card__back {
   @include flex(column);
   transform: rotateY(180deg);
 }
 
-.card__back .button{
+.card__back .button {
   position: absolute;
   bottom: 0;
   border-radius: inherit;
@@ -83,7 +82,7 @@
   transform: rotateY(360deg);
 }
 
-.card__front__text{
+.card__front__text {
   font-size: var(--h5-font-size);
   line-height: var(--h5-line-height);
   letter-spacing: var(--h5-letter-spacing);
@@ -91,7 +90,7 @@
   font-weight: var(--h5-font-weight);
 }
 
-.card__back__title-text{
+.card__back__title-text {
   font-size: var(--h5-font-size);
   line-height: var(--h5-line-height);
   letter-spacing: var(--h5-letter-spacing);
@@ -101,43 +100,45 @@
   margin-bottom: 5px;
 }
 
-.card__back__text{
+.card__back__text {
   padding-top: 10px;
   margin-bottom: auto;
   line-height: 150%;
 }
 
-.card__circle{
+.card__circle {
   font-size: 28px;
   font-weight: 500;
   padding: 23px;
   width: 1em;
   height: 1em;
   color: #ffffff;
-  background-color: #FF7425;
+  background-color: #ff7425;
   box-sizing: content-box;
   border-radius: 50%;
   margin-bottom: 20px;
 }
 
-.user__info{
+.user__info {
   @include flex(row, flex-start);
 }
 
-.user__logo{
+.user__logo {
   font-size: 90px;
   padding: 10px;
-  color: var(--tertiary-color)
+  color: var(--tertiary-color);
 }
 
-.user__description{
+.user__description {
   padding: 10px;
   padding-left: 20px;
   @include flex(column, center, flex-start);
   gap: 1em;
 }
 
-.user__text{
+.user__text {
+  color: inherit;
+  text-decoration: none;
   @include flex(row);
   font-size: var(--h5-font-size);
   line-height: var(--h5-line-height);
@@ -147,18 +148,25 @@
   cursor: pointer;
   transition: var(--transition);
 
-  &:hover{
+  &:hover {
     color: var(--primary-color);
   }
 }
 
-.text__plus{
+.text__plus {
   color: var(--primary-color);
   font-size: 1em;
   padding-right: 10px;
 }
 
-.design__row{
+.design__row {
   color: var(--primary-color);
   font-size: 0.9em;
+}
+
+.card__link {
+  left: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }

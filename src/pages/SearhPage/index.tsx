@@ -2,12 +2,12 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Loader from '@components/UI/loader/Loader';
 import SearchForm from '@components/SearchForm/';
+import getNoun from '@utils/getWorldEnding';
 import getMoviesBySearchName from '../../api/getMoviesBySearchName';
 import MovieSearchList from './MovieSearchList';
 import MovieSearchPagination from '../../components/Pagination';
 import type { AnyMovieInterface } from '../../types';
 import './index.scss';
-import getNoun from '@utils/getWorldEnding';
 
 const SearchPage = () => {
   const [state, setState] = useState<{

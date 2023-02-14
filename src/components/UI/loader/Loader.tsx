@@ -1,8 +1,8 @@
 import classes from './Loader.module.scss';
 
 interface ILoader {
-  loading: boolean;
   className: string;
+  loading: boolean;
 }
 
 const Loader = ({ loading, className }: ILoader) => {
