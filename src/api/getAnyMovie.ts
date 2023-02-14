@@ -37,9 +37,7 @@ const getAnyMovie = async (formData: SearchMovieFormData) => {
 
     const { docs } = (await response.json()) as { docs: MovieDataInterface[] };
 
-    const movies = parseMoviesData(docs);
-
-    console.log(movies);
+    const movies = parseMoviesData(docs, 3);
 
     const { exceptions } = formData;
 

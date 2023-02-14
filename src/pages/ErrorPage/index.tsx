@@ -1,8 +1,19 @@
-import { useLocation } from 'react-router-dom';
+import Error from '@components/Error';
+import Header from '@components/Header';
+import Footer from '@components/Footer';
 
 const ErrorPage = () => {
-  const location = useLocation();
-  return location.state ? null : <h2>Ooooops!</h2>;
+  return (
+    <>
+      <Header />
+      <main className="main">
+        <div className="container">
+          <Error />
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 };
 
 export default ErrorPage;
