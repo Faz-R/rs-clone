@@ -1,14 +1,20 @@
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
 import MovieDetails from '@components/MovieDetails';
+import Loader from '@components/UI/loader/Loader';
 import type { MovieDataInterface } from '@/types';
+import classes from './index.module.scss';
 
 const Movie = () => {
   const { movie } = useLoaderData() as { movie: Promise<MovieDataInterface> };
 
   return (
-    //! в фоллбек вставляй н спиннер
-    <Suspense fallback={<h2>Loader must be here...</h2>}>
+    <Suspense
+      fallback={
+        <div className={classes.loader}>
+          <Loader loading className={classes.icon} />
+        </div>
+      }>
       <Await resolve={movie}>
         <MovieDetails />
       </Await>

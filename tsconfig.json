@@ -47,9 +47,6 @@
             ],
             "@/*": [
                 "src/*"
-            ],
-            "@Pagination/*": [
-                "src/components/Pagination/*"
             ]
         }
     },
