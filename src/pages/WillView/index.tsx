@@ -71,6 +71,7 @@ const WillView = () => {
   useEffect(() => {
     setMovies(willView);
     sortMovies(selectSort);
+    setState({ ...state, pages: Math.ceil(willView.length / moviesPerPage) });
   }, [willView]);
 
   const handleBtnClick = (step: 1 | -1) => {
@@ -107,13 +108,13 @@ const WillView = () => {
             <Select
               defaultValue="Сортировать"
               options={[
-                { value: 'rating-hight', name: 'Высокий рейтинг' },
-                { value: 'rating-low', name: 'Низкий рейтинг' },
-                { value: 'new', name: 'Сначала новые' },
-                { value: 'old', name: 'Сначала старые' },
-                { value: 'name', name: 'По названию' },
-                { value: 'time-hight', name: 'Долгий фильм' },
-                { value: 'time-low', name: 'Короткий фильм' },
+                { value: 'rating-hight', name: 'Высокий рейтинг', id: 1 },
+                { value: 'rating-low', name: 'Низкий рейтинг', id: 2 },
+                { value: 'new', name: 'Сначала новые', id: 3 },
+                { value: 'old', name: 'Сначала старые', id: 4 },
+                { value: 'name', name: 'По названию', id: 5 },
+                { value: 'time-hight', name: 'Долгий фильм', id: 6 },
+                { value: 'time-low', name: 'Короткий фильм', id: 7 },
               ]}
               value={selectSort}
               onChange={sortMovies}

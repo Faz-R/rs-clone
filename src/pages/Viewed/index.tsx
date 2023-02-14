@@ -62,6 +62,7 @@ const Viewed = () => {
   useEffect(() => {
     setMovies(viewed);
     sortMovies(selectSort);
+    setState({ ...state, pages: Math.ceil(viewed.length / moviesPerPage) });
   }, [viewed]);
 
   const handleBtnClick = (step: 1 | -1) => {
@@ -98,11 +99,11 @@ const Viewed = () => {
             <Select
               defaultValue="Сортировать"
               options={[
-                { value: 'rating-hight', name: 'Высокий рейтинг' },
-                { value: 'rating-low', name: 'Низкий рейтинг' },
-                { value: 'new', name: 'Сначала новые' },
-                { value: 'old', name: 'Сначала старые' },
-                { value: 'name', name: 'По названию' },
+                { value: 'rating-hight', name: 'Высокий рейтинг', id: 1 },
+                { value: 'rating-low', name: 'Низкий рейтинг', id: 2 },
+                { value: 'new', name: 'Сначала новые', id: 3 },
+                { value: 'old', name: 'Сначала старые', id: 4 },
+                { value: 'name', name: 'По названию', id: 5 },
               ]}
               value={selectSort}
               onChange={sortMovies}
