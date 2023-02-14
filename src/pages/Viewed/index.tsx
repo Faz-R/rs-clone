@@ -1,83 +1,62 @@
 /* eslint-disable import/extensions */
-/* eslint-disable consistent-return */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector } from '@store/hooks';
-import Button from '@components/UI/button/Button';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
 import getNoun from '@utils/getWorldEnding';
+import Select from '@components/UI/select/Select';
 import { AnyMovieInterface } from '@/types';
 import './index.scss';
 
-let asc = true;
 let sorted: AnyMovieInterface[] = [];
 const moviesPerPage = 10;
 
 const Viewed = () => {
   const [loading, setLoading] = useState(false);
 
-  const viewedArr = useAppSelector((state) => state.viewed.viewed);
+  const [movies, setMovies] = useState(useAppSelector((state) => state.viewed.viewed));
 
-  const arrForRateKpAsc = viewedArr
-    .map((item) => item)
-    .sort((a, b) => {
-      return a.rating.kp && b.rating.kp ? a.rating.kp - b.rating.kp : 0;
-    });
-  const arrForRateKpDsc = arrForRateKpAsc.map((item) => item).reverse();
-  const arrForRateImdbAsc = viewedArr
-    .map((item) => item)
-    .sort((a, b) => {
-      return a.rating.imdb && b.rating.imdb ? a.rating.imdb - b.rating.imdb : 0;
-    });
+  const [selectSort, setSelectSort] = useState<string | number>('');
 
-  const arrForRateImdbDsc = arrForRateImdbAsc.map((item) => item).reverse();
-  const arrForYearAsc = viewedArr
-    .map((item) => item)
-    .sort((a, b) => {
-      return a.year && b.year ? a.year - b.year : 0;
-    });
-  const arrForYearDsc = arrForYearAsc.map((item) => item).reverse();
-  const arrForGenresAsc = viewedArr
-    .map((item) => item)
-    .sort((a, b) => (a.genres && b.genres && a.genres[0] > b.genres[0] ? 1 : -1));
-  const arrForGenresDsc = arrForGenresAsc.map((item) => item).reverse();
+  const rating = ({ imdb: a, kp: b }: { imdb: number | null; kp: number | null }) => {
+    return ((a || 0) + (b || 0)) / 2;
+  };
 
-  const [sort, setSort] = useState(arrForRateKpAsc);
+  const sortMovies = (sort: string | number) => {
+    setSelectSort(sort);
+    switch (sort) {
+      case 'rating-hight':
+        setMovies([...movies].sort((a, b) => rating(b.rating) - rating(a.rating)));
+        break;
+
+      case 'rating-low':
+        setMovies([...movies].sort((a, b) => rating(a.rating) - rating(b.rating)));
+        break;
+
+      case 'new':
+        setMovies([...movies].sort((a, b) => (b.year || 0) - (a.year || 0)));
+        break;
+
+      case 'old':
+        setMovies([...movies].sort((a, b) => (a.year || 0) - (b.year || 0)));
+        break;
+
+      case 'name':
+        setMovies([...movies].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const [state, setState] = useState({
-    page: sort.length !== 0 ? 1 : 0,
-    pages: Math.ceil(sort.length / moviesPerPage),
+    page: movies.length !== 0 ? 1 : 0,
+    pages: Math.ceil(movies.length / moviesPerPage),
   });
 
-  sorted = sort.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
-
-  const sortByRatingKp = () => {
-    if (asc) setSort(arrForRateKpAsc);
-    else setSort(arrForRateKpDsc);
-    asc = !asc;
-  };
-
-  const sortByRatingImdb = () => {
-    if (asc) setSort(arrForRateImdbAsc);
-    else setSort(arrForRateImdbDsc);
-    asc = !asc;
-  };
-
-  const sortByYear = () => {
-    if (asc) setSort(arrForYearAsc);
-    else setSort(arrForYearDsc);
-    asc = !asc;
-  };
-
-  const sortByGenr = () => {
-    if (asc) {
-      setSort(arrForGenresAsc);
-    } else {
-      setSort(arrForGenresDsc);
-    }
-    asc = !asc;
-  };
+  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
@@ -98,23 +77,31 @@ const Viewed = () => {
           </div>
           <div className="viewed__top">
             <span className="viewed__subtitle">
-              {viewedArr.length
-                ? `${getNoun(viewedArr.length, 'Просмотрен', 'Просмотрено', 'Просмотрено')} ${
-                    viewedArr.length
-                  } ${getNoun(viewedArr.length, 'фильм', 'фильма', 'фильмов')}`
+              {movies.length
+                ? `${getNoun(movies.length, 'Просмотрен', 'Просмотрено', 'Просмотрено')} ${
+                    movies.length
+                  } ${getNoun(movies.length, 'фильм', 'фильма', 'фильмов')}`
                 : `Фильмов пока нет`}
             </span>
             <MovieSearchPagination
               page={state.page}
               pages={state.pages}
               handleBtnClick={handleBtnClick}
-              isMovies={viewedArr.length !== 0}
+              isMovies={movies.length !== 0}
+            />
+            <Select
+              defaultValue="Сортировать"
+              options={[
+                { value: 'rating-hight', name: 'Высокий рейтинг' },
+                { value: 'rating-low', name: 'Низкий рейтинг' },
+                { value: 'new', name: 'Сначала новые' },
+                { value: 'old', name: 'Сначала старые' },
+                { value: 'name', name: 'По названию' },
+              ]}
+              value={selectSort}
+              onChange={sortMovies}
             />
           </div>
-          {/* <Button children="по рейтингу кинопоиска" onClick={sortByRatingKp} />
-          <Button children="по рейтингу IMDB" onClick={sortByRatingImdb} />
-          <Button children="по году" onClick={sortByYear} />
-          <Button children="по жанру" onClick={sortByGenr} /> */}
           {sorted.length !== 0 ? (
             <div className="viewed__movies-list">
               {sorted.map((movie) => (
