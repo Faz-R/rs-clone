@@ -1,0 +1,34 @@
+.error__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10vw;
+  width: 100%;
+  user-select: none;
+}
+
+.error {
+  font-size: 9em;
+  font-weight: 700;
+  line-height: 1em;
+  color: var(--primary-color);
+}
+
+.error_page__subtitle {
+  font-size: 5em;
+  color: var(--tertiary-color);
+  user-select: none;
+}
+
+.error_page__title {
+  font-family: var(--h2-font-family);
+  font-size: var(--h2-font-size);
+  line-height: var(--h2-line-height);
+  font-weight: var(--h2-font-weight);
+  text-transform: var(--h2-text-transform);
+  letter-spacing: var(--h2-letter-spacing);
+  font-size: 3em;
+  margin-bottom: 30px;
+  user-select: none;
+}
