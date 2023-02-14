@@ -1,6 +1,10 @@
 import { ProductOptsArr, ProductOpts } from '../../../types';
 import classes from './Select.module.css';
 
+interface ISelect {
+  
+}
+
 export const Select = ({ options, defaultValue, value, onChange }: ProductOptsArr) => {
   return (
     <select
