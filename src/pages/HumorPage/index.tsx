@@ -3,7 +3,7 @@ import Loader from '@components/UI/loader/Loader';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import getAnyMovie from '../../api/getAnyMovie';
 import Button from '../../components/UI/button/Button';
 import { AnyMovieInterface } from '../../types';
@@ -93,6 +93,25 @@ const Humor = () => {
   const removeWillView = () => {
     dispatch(removeMovieFromWillView(randomMovie));
   };
+
+  useEffect(() => {
+    if (viewedArr.some((elem) => elem.id === randomMovie.id)) {
+      setViewed(true);
+    } else {
+      setViewed(false);
+    }
+
+    if (willViewArr.some((elem) => elem.id === randomMovie.id)) {
+      setPlanWatch(true);
+    } else {
+      setPlanWatch(false);
+    }
+
+    if (randomMovie && randomMovie.poster === null) {
+      setShowMovie(true);
+      setLoading(false);
+    }
+  }, [randomMovie, randomMovie.poster, viewedArr, willViewArr]);
 
   const PosterLoad = () => {
     if (showMovie) {

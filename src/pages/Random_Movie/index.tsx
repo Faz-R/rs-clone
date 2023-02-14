@@ -24,12 +24,9 @@ const RandomMovie = () => {
   const [showCheckboxes, setshowCheckboxes] = useState(false);
   const [addExceptions, setAddExceptions] = useState(false);
 
-  // TODO: поправить работу кнопок карточки фильма с учётом Redux
-
   const dispatch = useAppDispatch();
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
   const exceptions = viewedArr.map((elem) => elem.id);
-
   const willViewArr = useAppSelector((state) => state.willview.value);
 
   const [viewed, setViewed] = useState(false);

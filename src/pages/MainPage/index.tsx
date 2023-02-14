@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '../../components/UI/button/Button';
 import './index.scss';
 
@@ -22,7 +23,9 @@ const MainPage = () => {
                 <span className="card__back__text">
                   С помощью анкеты поможем выбрать фильм, который вам обязательно подойдёт
                 </span>
-                <Button>посмотреть</Button>
+                <Link to="humor" className="card__link">
+                  <Button>посмотреть</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -39,7 +42,9 @@ const MainPage = () => {
                 <span className="card__back__text">
                   Положиться на удачу и пусть она подскажет, какой фильм будем смотреть
                 </span>
-                <Button>посмотреть</Button>
+                <Link to="random" className="card__link">
+                  <Button>посмотреть</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -56,7 +61,9 @@ const MainPage = () => {
                 <span className="card__back__text">
                   Список фильмов, ранее запланированных для просмотра
                 </span>
-                <Button>посмотреть</Button>
+                <Link to="expect" className="card__link">
+                  <Button>посмотреть</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -69,12 +76,12 @@ const MainPage = () => {
         <div className="user__info">
           <div className="user__logo fa-solid fa-user" />
           <div className="user__description">
-            <span className="user__text">
+            <Link to="viewed" className="user__text">
               <i className="fa-solid fa-plus text__plus" /> Просмотренные фильмы
-            </span>
-            <span className="user__text">
+            </Link>
+            <Link to="statistics" className="user__text">
               <i className="fa-solid fa-plus text__plus" /> Статистика
-            </span>
+            </Link>
           </div>
         </div>
       </div>

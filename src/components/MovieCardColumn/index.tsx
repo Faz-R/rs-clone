@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { Link } from 'react-router-dom';
 import { AnyMovieInterface } from '../../types';
 import classes from './index.module.scss';
 
 interface IMovieCardColumn {
   movie: AnyMovieInterface;
-  key: number; //! переименуй переменную, ругается на нее потомучто такок имя только для ключей в коампонентах зарезервировано
 }
 
-const MovieCardColumn = ({ movie, key }: IMovieCardColumn) => {
+const MovieCardColumn = ({ movie }: IMovieCardColumn) => {
   const dispatch = useAppDispatch();
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
-  const exceptions = viewedArr.map((elem) => elem.id);
+  const willViewArr = useAppSelector((state) => state.willview.value);
 
   const addViewed = () => {
     dispatch(addMovieToViewed(movie));
@@ -52,14 +52,30 @@ const MovieCardColumn = ({ movie, key }: IMovieCardColumn) => {
     return 0;
   };
 
+  useEffect(() => {
+    if (viewedArr.some((elem) => elem.id === movie.id)) {
+      setViewed(true);
+    } else {
+      setViewed(false);
+    }
+
+    if (willViewArr.some((elem) => elem.id === movie.id)) {
+      setPlanWatch(true);
+    } else {
+      setPlanWatch(false);
+    }
+  }, [movie.id, viewedArr, willViewArr]);
+
   return (
-    <div className={classes.movie} key={key}>
+    <div className={classes.movie}>
       <div className={classes.wrapper}>
-        <div className={classes.poster__info}>
+        <Link to={`/movies/${movie.id}`} className={classes.poster__info}>
           <div className={classes.icons}>
             <div
               className={classes.icon}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 if (viewed) {
                   removeViewed();
                   setViewed(false);
@@ -82,7 +98,9 @@ const MovieCardColumn = ({ movie, key }: IMovieCardColumn) => {
             </div>
             <div
               className={classes.icon}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 if (planWatch) {
                   removeWillView();
                   setPlanWatch(false);
@@ -121,7 +139,7 @@ const MovieCardColumn = ({ movie, key }: IMovieCardColumn) => {
               </span>
             </div>
           </div>
-        </div>
+        </Link>
         {movie.poster ? (
           <img src={movie.poster} alt={movie.name || 'Постер фильма'} className={classes.poster} />
         ) : (
