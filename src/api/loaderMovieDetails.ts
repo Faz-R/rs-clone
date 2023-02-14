@@ -5,9 +5,7 @@ import { DOMAIN, FIELDS } from '../constants';
 const TOKEN = import.meta.env.VITE_TOKEN;
 
 const getMovieById = async (id: string) => {
-  const response = await fetch(
-    `${DOMAIN}/?token=${TOKEN}${FIELDS} videos.trailers.url&field=id&search=${id}`
-  );
+  const response = await fetch(`${DOMAIN}/?token=${TOKEN}${FIELDS}&field=id&search=${id}`);
 
   if (!response.ok) {
     throw new Response('', {
