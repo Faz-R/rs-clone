@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/extensions */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
@@ -14,7 +15,7 @@ const moviesPerPage = 10;
 
 const Viewed = () => {
   const [loading, setLoading] = useState(false);
-
+  const viewed = useAppSelector((state) => state.viewed.viewed);
   const [movies, setMovies] = useState(useAppSelector((state) => state.viewed.viewed));
 
   const [selectSort, setSelectSort] = useState<string | number>('');
@@ -27,23 +28,23 @@ const Viewed = () => {
     setSelectSort(sort);
     switch (sort) {
       case 'rating-hight':
-        setMovies([...movies].sort((a, b) => rating(b.rating) - rating(a.rating)));
+        setMovies([...viewed].sort((a, b) => rating(b.rating) - rating(a.rating)));
         break;
 
       case 'rating-low':
-        setMovies([...movies].sort((a, b) => rating(a.rating) - rating(b.rating)));
+        setMovies([...viewed].sort((a, b) => rating(a.rating) - rating(b.rating)));
         break;
 
       case 'new':
-        setMovies([...movies].sort((a, b) => (b.year || 0) - (a.year || 0)));
+        setMovies([...viewed].sort((a, b) => (b.year || 0) - (a.year || 0)));
         break;
 
       case 'old':
-        setMovies([...movies].sort((a, b) => (a.year || 0) - (b.year || 0)));
+        setMovies([...viewed].sort((a, b) => (a.year || 0) - (b.year || 0)));
         break;
 
       case 'name':
-        setMovies([...movies].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
+        setMovies([...viewed].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
         break;
 
       default:
@@ -57,6 +58,11 @@ const Viewed = () => {
   });
 
   sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+
+  useEffect(() => {
+    setMovies(viewed);
+    sortMovies(selectSort);
+  }, [viewed]);
 
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);

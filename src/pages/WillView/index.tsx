@@ -9,7 +9,7 @@ import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
 import getNoun from '@utils/getWorldEnding';
 import { AnyMovieInterface } from '@/types';
-import '../Viewed/index';
+import '../Viewed/index.scss';
 
 let sorted: AnyMovieInterface[] = [];
 const moviesPerPage = 10;
@@ -48,11 +48,19 @@ const WillView = () => {
         setMovies([...willView].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
         break;
 
+      case 'time-hight':
+        setMovies([...willView].sort((a, b) => (b.movieLength || 0) - (a.movieLength || 0)));
+        break;
+
+      case 'time-low':
+        setMovies([...willView].sort((a, b) => (a.movieLength || 0) - (b.movieLength || 0)));
+        break;
+
       default:
         break;
     }
   };
-  
+
   const [state, setState] = useState({
     page: movies.length !== 0 ? 1 : 0,
     pages: Math.ceil(movies.length / moviesPerPage),
@@ -104,6 +112,8 @@ const WillView = () => {
                 { value: 'new', name: 'Сначала новые' },
                 { value: 'old', name: 'Сначала старые' },
                 { value: 'name', name: 'По названию' },
+                { value: 'time-hight', name: 'Долгий фильм' },
+                { value: 'time-low', name: 'Короткий фильм' },
               ]}
               value={selectSort}
               onChange={sortMovies}
