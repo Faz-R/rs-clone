@@ -6,6 +6,7 @@ import RandomMovie from './pages/Random_Movie';
 import SearchPage from './pages/SearhPage';
 import ErrorPage from './pages/ErrorPage';
 import Viewed from './pages/Viewed';
+import WillView from '@pages/WillView';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'viewed',
         element: <Viewed />,
+      },
+      {
+        path: 'expect',
+        element: <WillView />,
       },
     ],
   },

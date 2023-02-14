@@ -1,40 +1,41 @@
-/* eslint-disable no-else-return */
+/* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable react/no-children-prop */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@store/hooks';
 import Button from '@components/UI/button/Button';
-import MovieCard from '@components/MovieCard';
 import MovieSearchPagination from '@components/Pagination';
-import { IIdViewed } from '@store/interfaces';
+import MovieCardColumn from '@components/MovieCardColumn';
+import Loader from '@components/UI/loader/Loader';
+import getNoun from '@utils/getWorldEnding';
+import { AnyMovieInterface } from '@/types';
+import './index.scss';
 
 let asc = true;
-let sorted: IIdViewed[];
-const moviesPerPage = 5;
+let sorted: AnyMovieInterface[] = [];
+const moviesPerPage = 10;
 
-const Viewed = () => {
-  const viewedArr = useAppSelector((state) => state.viewed.viewed);
+const WillView = () => {
+  const [loading, setLoading] = useState(false);
+
+  const viewedArr = useAppSelector((state) => state.willview.value);
+
   const arrForRateKpAsc = viewedArr
     .map((item) => item)
     .sort((a, b) => {
-      if (a.rating.kp && b.rating.kp) return a.rating.kp - b.rating.kp;
-      else return 0;
+      return a.rating.kp && b.rating.kp ? a.rating.kp - b.rating.kp : 0;
     });
   const arrForRateKpDsc = arrForRateKpAsc.map((item) => item).reverse();
   const arrForRateImdbAsc = viewedArr
     .map((item) => item)
     .sort((a, b) => {
-      if (a.rating.imdb && b.rating.imdb) return a.rating.imdb - b.rating.imdb;
-      else return 0;
+      return a.rating.imdb && b.rating.imdb ? a.rating.imdb - b.rating.imdb : 0;
     });
 
   const arrForRateImdbDsc = arrForRateImdbAsc.map((item) => item).reverse();
   const arrForYearAsc = viewedArr
     .map((item) => item)
     .sort((a, b) => {
-      if (a.year && b.year) return a.year - b.year;
-      else return 0;
+      return a.year && b.year ? a.year - b.year : 0;
     });
   const arrForYearDsc = arrForYearAsc.map((item) => item).reverse();
   const arrForGenresAsc = viewedArr
@@ -43,12 +44,17 @@ const Viewed = () => {
   const arrForGenresDsc = arrForGenresAsc.map((item) => item).reverse();
 
   const [sort, setSort] = useState(arrForRateKpAsc);
+
   const [state, setState] = useState({
     page: sort.length !== 0 ? 1 : 0,
-    pages: Math.ceil(sort.length / 5),
+    pages: Math.ceil(sort.length / moviesPerPage),
   });
 
   sorted = sort.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+
+  useEffect(() => {
+    setSort(arrForRateKpAsc)
+  }, [viewedArr])
 
   const sortByRatingKp = () => {
     if (asc) setSort(arrForRateKpAsc);
@@ -78,28 +84,54 @@ const Viewed = () => {
   };
 
   const handleBtnClick = (step: 1 | -1) => {
+    setLoading(true);
     setState({ ...state, page: state.page + step });
+    setLoading(false);
   };
 
   return (
-    <div className="viewed_movie">
-      <Button children="по рейтингу кинопоиска" onClick={sortByRatingKp} />
-      <Button children="по рейтингу IMDB" onClick={sortByRatingImdb} />
-      <Button children="по году" onClick={sortByYear} />
-      <Button children="по жанру" onClick={sortByGenr} />
-      <MovieSearchPagination
-        page={state.page}
-        pages={state.pages}
-        handleBtnClick={handleBtnClick}
-        isMovies={viewedArr.length !== 0}
-      />
-      {sorted.length !== 0 ? (
-        sorted.map((item) => <MovieCard key={item.id} movie={item} id={`${item.id}`} />)
+    <section className="viewed-page">
+      {loading ? (
+        <div className="viewed__loader">
+          <Loader loading={loading} className="viewed__loader__icon" />
+        </div>
       ) : (
-        <h2>вы так ничего и не посмотрели...охохонюшки хохо</h2>
+        <>
+          <div className="viewed__title">
+            <i className="fa-solid fa-angles-right design__row" /> Буду смотреть
+          </div>
+          <div className="viewed__top">
+            <span className="viewed__subtitle">
+              {viewedArr.length
+                ? `${getNoun(viewedArr.length, 'Запланирован', 'Запланировано', 'Запланировано')} ${
+                    viewedArr.length
+                  } ${getNoun(viewedArr.length, 'фильм', 'фильма', 'фильмов')}`
+                : `Фильмов пока нет`}
+            </span>
+            <MovieSearchPagination
+              page={state.page}
+              pages={state.pages}
+              handleBtnClick={handleBtnClick}
+              isMovies={viewedArr.length !== 0}
+            />
+          </div>
+          {/* <Button children="по рейтингу кинопоиска" onClick={sortByRatingKp} />
+          <Button children="по рейтингу IMDB" onClick={sortByRatingImdb} />
+          <Button children="по году" onClick={sortByYear} />
+          <Button children="по жанру" onClick={sortByGenr} /> */}
+          {sorted.length !== 0 ? (
+            <div className="viewed__movies-list">
+              {sorted.map((movie) => (
+                <MovieCardColumn movie={movie} key={movie.id} />
+              ))}
+            </div>
+          ) : (
+            ''
+          )}
+        </>
       )}
-    </div>
+    </section>
   );
 };
 
-export default Viewed;
+export default WillView;
