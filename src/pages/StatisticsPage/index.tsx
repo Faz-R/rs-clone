@@ -4,14 +4,23 @@ import getStatistics from '@utils/getStatistics';
 
 const StatisticsPage = () => {
   const dispatch = useDispatch();
+
   const viewed = useSelector(selectViewed);
-  const { amountMovies, amountTimes, favoriteGenres, favoriteActors, favoriteDirectors } =
-    getStatistics(viewed);
-  console.log(amountMovies);
-  console.log(amountTimes);
-  console.log(favoriteGenres);
-  console.log(favoriteActors);
-  console.log(favoriteDirectors);
+
+  //! добавить проверку, если в сторе нет фильмов
+
+  const {
+    amountMovies,
+    amountTimes,
+    favoriteGenres,
+    favoriteActors,
+    favoriteDirectors,
+    genresDiagram,
+    viewerMovieLevel,
+  } = getStatistics(viewed);
+
+  console.log(genresDiagram);
+  console.log(viewerMovieLevel);
   return <h2>StatisticPage</h2>;
 };
 
