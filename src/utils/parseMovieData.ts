@@ -1,4 +1,5 @@
 import type { MovieDataInterface, AnyMovieInterface } from '@/types';
+import getTrailer from './getTrailer';
 
 const getMovieStaff = (
   persons: null | { name: string; enProfession: string }[],
@@ -31,7 +32,7 @@ const parseMoviesData = (
       poster: movie.poster?.previewUrl ?? null,
       rating: { kp: movie.rating?.kp ?? null, imdb: movie.rating?.imdb ?? null },
       countries: movie.countries?.map(({ name }: { name: string }) => name) ?? null,
-      trailer: movie.videos?.trailers[0]?.url ?? null,
+      trailer: getTrailer(movie.videos?.trailers),
     };
 
     return { ...movieData, ...getMovieStaff(movie.persons, actorsNumber) };

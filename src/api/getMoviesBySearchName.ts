@@ -15,9 +15,9 @@ const getMoviesBySearchName = async (name: string, currentPage = 1) => {
     const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}`);
 
     const { docs, page, pages, total } = (await response.json()) as ResponseSearchMovieInterface;
-    console.log(docs);
+    console.log('docs:', docs);
     const movies = parseMoviesData(docs, 3) as AnyMovieInterface[];
-    console.log(movies);
+    console.log('movies:', movies);
     return { movies, page, pages, total };
   } catch (e) {
     const err = e as Error;

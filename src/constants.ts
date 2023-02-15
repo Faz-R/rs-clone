@@ -1,7 +1,7 @@
 export const DOMAIN = 'https://api.kinopoisk.dev/movie';
 
 export const FIELDS =
-  '&selectFields=id alternativeName name genres.name description year rating.kp rating.imdb poster.previewUrl countries.name movieLength persons.name persons.enProfession';
+  '&selectFields=id alternativeName name genres.name description year rating.kp rating.imdb poster.previewUrl countries.name movieLength persons.name persons.enProfession videos.trailers.url';
 
 export const GENRES = [
   'боевик',
