@@ -57,6 +57,8 @@ const Viewed = () => {
     pages: Math.ceil(movies.length / moviesPerPage),
   });
 
+  if (state.page > state.pages) setState({ ...state, page: state.pages });
+
   sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   useEffect(() => {

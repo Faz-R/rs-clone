@@ -66,12 +66,14 @@ const WillView = () => {
     pages: Math.ceil(movies.length / moviesPerPage),
   });
 
-  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+  if (state.page > state.pages) setState({ ...state, page: state.pages });
 
+  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+  
   useEffect(() => {
+    setState({ ...state, pages: Math.ceil(willView.length / moviesPerPage) });    
     setMovies(willView);
     sortMovies(selectSort);
-    setState({ ...state, pages: Math.ceil(willView.length / moviesPerPage) });
   }, [willView]);
 
   const handleBtnClick = (step: 1 | -1) => {
