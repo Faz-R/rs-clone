@@ -9,6 +9,7 @@ import MovieDetails from '@pages/Movie';
 import loaderMovieDetails from '@api/loaderMovieDetails';
 import Error from '@components/Error';
 import Viewed from '@pages/Viewed';
+import StatisticsPage from '@pages/StatisticsPage';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
         path: 'viewed',
         element: <Viewed />,
       },
+      { path: 'statistics', element: <StatisticsPage /> },
     ],
   },
 ]);

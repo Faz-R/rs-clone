@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AnyMovieInterface } from '@/types';
+import { RootState } from './index';
 
 export interface IIdViewedObject {
   viewed: AnyMovieInterface[];
@@ -29,4 +30,5 @@ export const viewedSlice = createSlice({
 });
 
 export const { addMovieToViewed, removeMovieFromViewed } = viewedSlice.actions;
+export const selectViewed = (state: RootState) => state.viewed.viewed;
 export default viewedSlice.reducer;
