@@ -10,6 +10,7 @@ import loaderMovieDetails from '@api/loaderMovieDetails';
 import Error from '@components/Error';
 import Viewed from '@pages/Viewed';
 import StatisticsPage from '@pages/StatisticsPage';
+import WillView from '@pages/WillView';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         element: <Viewed />,
       },
       { path: 'statistics', element: <StatisticsPage /> },
+      {
+        path: 'expect',
+        element: <WillView />,
+      },
     ],
   },
 ]);
