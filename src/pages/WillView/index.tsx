@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/extensions */
+/* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@store/hooks';
+import Select from '@components/UI/select/Select';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
 import getNoun from '@utils/getWorldEnding';
-import Select from '@components/UI/select/Select';
 import { AnyMovieInterface } from '@/types';
-import './index.scss';
+import '../Viewed/index.scss';
 
 let sorted: AnyMovieInterface[] = [];
 const moviesPerPage = 10;
 
-const Viewed = () => {
+const WillView = () => {
   const [loading, setLoading] = useState(false);
-  const viewed = useAppSelector((state) => state.viewed.viewed);
-  const [movies, setMovies] = useState(useAppSelector((state) => state.viewed.viewed));
+  const willView = useAppSelector((state) => state.willview.value);
+  const [movies, setMovies] = useState(willView);
 
   const [selectSort, setSelectSort] = useState<string | number>('');
 
@@ -28,23 +29,31 @@ const Viewed = () => {
     setSelectSort(sort);
     switch (sort) {
       case 'rating-hight':
-        setMovies([...viewed].sort((a, b) => rating(b.rating) - rating(a.rating)));
+        setMovies([...willView].sort((a, b) => rating(b.rating) - rating(a.rating)));
         break;
 
       case 'rating-low':
-        setMovies([...viewed].sort((a, b) => rating(a.rating) - rating(b.rating)));
+        setMovies([...willView].sort((a, b) => rating(a.rating) - rating(b.rating)));
         break;
 
       case 'new':
-        setMovies([...viewed].sort((a, b) => (b.year || 0) - (a.year || 0)));
+        setMovies([...willView].sort((a, b) => (b.year || 0) - (a.year || 0)));
         break;
 
       case 'old':
-        setMovies([...viewed].sort((a, b) => (a.year || 0) - (b.year || 0)));
+        setMovies([...willView].sort((a, b) => (a.year || 0) - (b.year || 0)));
         break;
 
       case 'name':
-        setMovies([...viewed].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
+        setMovies([...willView].sort((a, b) => (a[sort] || '').localeCompare(b[sort] || '')));
+        break;
+
+      case 'time-hight':
+        setMovies([...willView].sort((a, b) => (b.movieLength || 0) - (a.movieLength || 0)));
+        break;
+
+      case 'time-low':
+        setMovies([...willView].sort((a, b) => (a.movieLength || 0) - (b.movieLength || 0)));
         break;
 
       default:
@@ -62,10 +71,10 @@ const Viewed = () => {
   sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   useEffect(() => {
-    setMovies(viewed);
+    setState({ ...state, pages: Math.ceil(willView.length / moviesPerPage) });
+    setMovies(willView);
     sortMovies(selectSort);
-    setState({ ...state, pages: Math.ceil(viewed.length / moviesPerPage) });
-  }, [viewed]);
+  }, [willView]);
 
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
@@ -82,12 +91,12 @@ const Viewed = () => {
       ) : (
         <>
           <div className="viewed__title">
-            <i className="fa-solid fa-angles-right design__row" /> Просмотренные
+            <i className="fa-solid fa-angles-right design__row" /> Буду смотреть
           </div>
           <div className="viewed__top">
             <span className="viewed__subtitle">
               {movies.length
-                ? `${getNoun(movies.length, 'Просмотрен', 'Просмотрено', 'Просмотрено')} ${
+                ? `${getNoun(movies.length, 'Запланирован', 'Запланировано', 'Запланировано')} ${
                     movies.length
                   } ${getNoun(movies.length, 'фильм', 'фильма', 'фильмов')}`
                 : `Фильмов пока нет`}
@@ -106,11 +115,14 @@ const Viewed = () => {
                 { value: 'new', name: 'Сначала новые', id: 3 },
                 { value: 'old', name: 'Сначала старые', id: 4 },
                 { value: 'name', name: 'По названию', id: 5 },
+                { value: 'time-hight', name: 'Долгий фильм', id: 6 },
+                { value: 'time-low', name: 'Короткий фильм', id: 7 },
               ]}
               value={selectSort}
               onChange={sortMovies}
             />
           </div>
+
           {sorted.length !== 0 ? (
             <div className="viewed__movies-list">
               {sorted.map((movie) => (
@@ -126,4 +138,4 @@ const Viewed = () => {
   );
 };
 
-export default Viewed;
+export default WillView;
