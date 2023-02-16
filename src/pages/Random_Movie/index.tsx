@@ -258,8 +258,8 @@ const RandomMovie = () => {
             <Button onClick={getMovie}>Случайный фильм</Button>
           </div>
         </div>
-        <div className="movie-card">
-          <div className="movie-card__top">
+        <div className="movie-card__random">
+          <div className="movie-card__random__top">
             <div className={`movie-card__wrapper ${PosterLoad()}`}>
               <div className="movie-card__picture">
                 <div className="movie-card__front">

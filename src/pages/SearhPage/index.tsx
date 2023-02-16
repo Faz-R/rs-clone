@@ -17,22 +17,41 @@ const SearchPage = () => {
     total: number;
   }>({ movies: [], page: 0, pages: 0, total: 0 });
   const [loading, setLoading] = useState(false);
+  const [moviesPerPage, setMoviesPerPage] = useState(10);
   const location = useLocation();
 
   useEffect(() => {
+    if (window.innerWidth > 1000) {
+      setMoviesPerPage(10);
+    }
+    if (window.innerWidth <= 1000) {
+      setMoviesPerPage(8);
+    }
+
+    if (window.innerWidth <= 800) {
+      setMoviesPerPage(6);
+    }
+
+    if (window.innerWidth <= 600) {
+      setMoviesPerPage(4);
+    }
+
+    if (window.innerWidth <= 400) {
+      setMoviesPerPage(1);
+    }
     setLoading(true);
-    getMoviesBySearchName(location.state).then((data) => {
+    getMoviesBySearchName(location.state, moviesPerPage).then((data) => {
       setState(data);
       setLoading(false);
     });
-  }, [location.state]);
+  }, [location.state, moviesPerPage]);
 
   const { movies, page, pages, total } = state;
 
   const handleBtnClick = (step: 1 | -1) => {
     const newPage = page + step;
     setLoading(true);
-    getMoviesBySearchName(location.state, newPage).then((data) => {
+    getMoviesBySearchName(location.state, moviesPerPage, newPage).then((data) => {
       setState(data);
       setLoading(false);
     });
@@ -53,13 +72,15 @@ const SearchPage = () => {
             <span className="search__subtitle">
               Найдено {total} {getNoun(total, 'фильм', 'фильма', 'фильмов')}
             </span>
-            <MovieSearchPagination
-              page={page}
-              pages={pages}
-              handleBtnClick={handleBtnClick}
-              isMovies={movies.length !== 0}
-            />
-            <SearchForm />
+            <div className="search-pagination">
+              <MovieSearchPagination
+                page={page}
+                pages={pages}
+                handleBtnClick={handleBtnClick}
+                isMovies={movies.length !== 0}
+              />
+              <SearchForm />
+            </div>
           </div>
           <MovieSearchList movies={movies} />
         </>

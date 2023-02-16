@@ -2,6 +2,9 @@
   position: relative;
   font-family: Arimo, sans-serif;
   box-sizing: border-box;
+  @media (max-width: 800px) {
+    margin-right: auto;
+  }
 }
 
 .search-field {

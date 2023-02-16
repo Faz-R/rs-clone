@@ -34,6 +34,7 @@
   box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
   border: 1px solid var(--card-color);
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     border-color: var(--primary-color);

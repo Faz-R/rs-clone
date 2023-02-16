@@ -4,20 +4,18 @@ import { DOMAIN, FIELDS } from '../constants';
 
 const TOKEN = import.meta.env.VITE_TOKEN;
 
-const getMoviesBySearchName = async (name: string, currentPage = 1) => {
+const getMoviesBySearchName = async (name: string, limit: number, currentPage = 1) => {
   const isEnglish = /[a-z]/i.test(name);
 
-  const queryParams = `${FIELDS}&field=${
-    isEnglish ? 'alternativeName' : 'name'
-  }&search=${name}&page=${currentPage}`;
+  const queryParams = `${FIELDS}&field=${isEnglish ? 'alternativeName' : 'name'
+    }&search=${name}&page=${currentPage}`;
 
   try {
-    const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}`);
+    const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}&limit=${limit}`);
+
 
     const { docs, page, pages, total } = (await response.json()) as ResponseSearchMovieInterface;
-    console.log('docs:', docs);
     const movies = parseMoviesData(docs, 3) as AnyMovieInterface[];
-    console.log('movies:', movies);
     return { movies, page, pages, total };
   } catch (e) {
     const err = e as Error;

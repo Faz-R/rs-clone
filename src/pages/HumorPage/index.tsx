@@ -235,7 +235,7 @@ const Humor = () => {
             </Button>
           </div>
         </form>
-        <div className="movie-card">
+        <div className="movie-card__humor">
           <div className="movie-card__top">
             <div className={`movie-card__wrapper ${PosterLoad()}`}>
               <div className="movie-card__picture">
@@ -321,7 +321,7 @@ const Humor = () => {
                 </div>
               </div>
             </div>
-            <div className="movie-card__info">
+            <div className="movie-card__humor__info">
               <h2 className="movie-card__title">{FilmName()}</h2>
               <span className="movie-card__title__eng movie-card__text">
                 {randomMovie.alternativeName ? randomMovie.alternativeName : ''}

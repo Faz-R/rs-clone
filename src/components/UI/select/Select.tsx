@@ -19,7 +19,7 @@ export const Select = ({ options, defaultValue, value, onChange }: ISelect) => {
     <select
       value={value}
       onChange={(event) => onChange(event.target.value)}
-      className={classes.select}>
+      className={`select ${classes.select}`}>
       <option disabled value="" className={classes.option}>
         {defaultValue}
       </option>

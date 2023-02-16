@@ -11,7 +11,7 @@ import { AnyMovieInterface } from '@/types';
 import './index.scss';
 
 let sorted: AnyMovieInterface[] = [];
-const moviesPerPage = 10;
+// let moviesPerPage = 10;
 
 const Viewed = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +24,7 @@ const Viewed = () => {
     return ((a || 0) + (b || 0)) / 2;
   };
 
+  const [moviesPerPage, setMoviesPerPage] = useState(10);
   const sortMovies = (sort: string | number) => {
     setSelectSort(sort);
     switch (sort) {
@@ -64,8 +65,28 @@ const Viewed = () => {
   useEffect(() => {
     setMovies(viewed);
     sortMovies(selectSort);
+
+    if (window.innerWidth > 1000) {
+      setMoviesPerPage(10);
+    }
+    if (window.innerWidth <= 1000) {
+      setMoviesPerPage(8);
+    }
+
+    if (window.innerWidth <= 800) {
+      setMoviesPerPage(6);
+    }
+
+    if (window.innerWidth <= 600) {
+      setMoviesPerPage(4);
+    }
+
+    if (window.innerWidth <= 400) {
+      setMoviesPerPage(1);
+    }
+
     setState({ ...state, pages: Math.ceil(viewed.length / moviesPerPage) });
-  }, [viewed]);
+  }, [viewed, moviesPerPage, window]);
 
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
@@ -92,24 +113,26 @@ const Viewed = () => {
                   } ${getNoun(movies.length, 'фильм', 'фильма', 'фильмов')}`
                 : `Фильмов пока нет`}
             </span>
-            <MovieSearchPagination
-              page={state.page}
-              pages={state.pages}
-              handleBtnClick={handleBtnClick}
-              isMovies={movies.length !== 0}
-            />
-            <Select
-              defaultValue="Сортировать"
-              options={[
-                { value: 'rating-hight', name: 'Высокий рейтинг', id: 1 },
-                { value: 'rating-low', name: 'Низкий рейтинг', id: 2 },
-                { value: 'new', name: 'Сначала новые', id: 3 },
-                { value: 'old', name: 'Сначала старые', id: 4 },
-                { value: 'name', name: 'По названию', id: 5 },
-              ]}
-              value={selectSort}
-              onChange={sortMovies}
-            />
+            <div className="pagination-select">
+              <MovieSearchPagination
+                page={state.page}
+                pages={state.pages}
+                handleBtnClick={handleBtnClick}
+                isMovies={movies.length !== 0}
+              />
+              <Select
+                defaultValue="Сортировать"
+                options={[
+                  { value: 'rating-hight', name: 'Высокий рейтинг', id: 1 },
+                  { value: 'rating-low', name: 'Низкий рейтинг', id: 2 },
+                  { value: 'new', name: 'Сначала новые', id: 3 },
+                  { value: 'old', name: 'Сначала старые', id: 4 },
+                  { value: 'name', name: 'По названию', id: 5 },
+                ]}
+                value={selectSort}
+                onChange={sortMovies}
+              />
+            </div>
           </div>
           {sorted.length !== 0 ? (
             <div className="viewed__movies-list">
