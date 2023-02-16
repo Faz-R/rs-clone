@@ -143,3 +143,9 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+
+@media (max-width: 1300px) {
+  .container {
+    width: 94%;
+  }
+}

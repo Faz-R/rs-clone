@@ -141,15 +141,21 @@ const MovieCardColumn = ({ movie }: IMovieCardColumn) => {
           </div>
         </Link>
         {movie.poster ? (
-          <img src={movie.poster} alt={movie.name || 'Постер фильма'} className={classes.poster} />
+          <div className={classes.poster__wrapper}>
+            <img
+              src={movie.poster}
+              alt={movie.name || 'Постер фильма'}
+              className={classes.poster}
+            />
+          </div>
         ) : (
-          <div className="poster-error">
+          <div className={classes.poster__error}>
             <i className="fa-solid fa-triangle-exclamation poster-error__icon" />
             Постер отсутствует
           </div>
         )}
       </div>
-      <span className={classes.title}>{movie.name}</span>
+      <span className={classes.title}>{movie.name || movie.alternativeName}</span>
     </div>
   );
 };

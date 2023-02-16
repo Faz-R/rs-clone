@@ -16,14 +16,32 @@ const Header = () => {
       document.documentElement.setAttribute('theme', 'dark-theme');
     }
 
+    // document.addEventListener('click', (e) => {
+    //   console.log(modalSearch);
+    //   if (
+    //     !(e.target as HTMLElement).closest('.search-wrapper') ||
+    //     !(e.target as HTMLElement).closest('.header__icon__search')
+    //   ) {
+    //     console.log(modalSearch);
+    //     setModalSearch(false);
+    //   }
+    // });
+
     if (showMenu) {
       setModalSearch(false);
     }
-  }, [theme, showMenu]);
+  }, [theme, showMenu, modalSearch]);
 
   const closeNav = () => {
     setShowMenu(!showMenu);
   };
+
+  document.addEventListener('click', (e) => {
+    console.log(modalSearch);
+    if (!(e.target as HTMLElement).closest('.search-block')) {
+      setModalSearch(false);
+    }
+  });
 
   return (
     <div>
@@ -113,7 +131,7 @@ const Header = () => {
             <div className="header__buttons">
               <div className="search-block">
                 <div
-                  className="header__icon"
+                  className="header__icon header__icon__search"
                   onClick={() => {
                     setModalSearch(!modalSearch);
                   }}

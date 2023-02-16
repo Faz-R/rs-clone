@@ -11,6 +11,12 @@
   flex: 0 0 auto;
   position: relative;
   box-shadow: 0 0 transparent, 0 0 transparent, 0 5px 5px -4px rgb(0 0 0 / 10%);
+
+  @media (max-width: 600px) {
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+  }
 }
 
 .header__wrapper {
@@ -38,6 +44,11 @@
   &:hover .eye-color {
     fill: var(--primary-color);
   }
+
+  @media (max-width: 400px) {
+    display: block;
+    width: 80px;
+  }
 }
 
 .header__show-button {
@@ -55,6 +66,10 @@
 .header__buttons {
   @include flex(row, center);
   gap: 1.4em;
+
+  @media (max-width: 400px) {
+    gap: 0.5em;
+  }
 }
 
 .header__icon {
@@ -83,6 +98,10 @@
 
 .search-block {
   position: relative;
+
+  @media (max-width: 600px) {
+    position: static;
+  }
 }
 
 .search-wrapper {
@@ -99,11 +118,18 @@
   color: var(--tertiary-color);
   background-color: var(--card-color);
   box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+
+  @media (max-width: 600px) {
+    top: 75px;
+    right: 0;
+    width: 100%;
+    max-width: 301px;
+  }
 }
 
 .navigation {
   padding: 30px;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   right: 0;
@@ -145,7 +171,7 @@
 }
 
 .dark {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
