@@ -5,14 +5,12 @@ import './index.scss';
 import Diagram from '@components/UI/Diagram/Diagram';
 import { useEffect, useState } from 'react';
 import Bars from '@components/UI/Bars/Bars';
-import { Bar } from 'react-chartjs-2';
 
 const StatisticsPage = () => {
   const dispatch = useDispatch();
 
   const viewed = useSelector(selectViewed);
   const [sizeChartFont, setSizeChartFont] = useState(16);
-  //! добавить проверку, если в сторе нет фильмов
 
   const {
     amountMovies,
@@ -46,13 +44,13 @@ const StatisticsPage = () => {
 
   return (
     <section className="statistic-page">
-      {!viewed ? (
-        <div>Данных нет</div>
+      <div className="statistic__title">
+        <i className="fa-solid fa-angles-right statistic__design__row" /> Статистика
+      </div>
+      {viewed.length === 0 ? (
+        <div className="statistic__empty">Фильмов пока нет</div>
       ) : (
         <>
-          <div className="statistic__title">
-            <i className="fa-solid fa-angles-right statistic__design__row" /> Статистика
-          </div>
           <div className="statistic__top">
             <div className="statistic__numbers-block statistics__block">
               <div className="statistic__number">{amountMovies}</div>

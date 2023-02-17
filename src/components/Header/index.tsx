@@ -1,25 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/index';
 import './index.scss';
 
+type Theme = 'dark' | 'light';
+
 const Header = () => {
   const [modalSearch, setModalSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [theme, setTheme] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const themeExist = searchParams.get('theme');
+
+  const [theme, setTheme] = useState<Theme>((themeExist as Theme) || 'light');
 
   useEffect(() => {
-    if (theme) {
+    if (themeExist) {
+      setTheme(themeExist as Theme);
+    }
+    if (theme === 'light') {
       document.documentElement.setAttribute('theme', 'light-theme');
-    } else {
+    }
+
+    if (theme === 'dark') {
       document.documentElement.setAttribute('theme', 'dark-theme');
     }
 
     if (showMenu) {
       setModalSearch(false);
     }
-  }, [theme, showMenu, modalSearch]);
+  }, [theme, showMenu, modalSearch, themeExist]);
 
   const closeNav = () => {
     setShowMenu(!showMenu);
@@ -143,7 +153,11 @@ const Header = () => {
               <div
                 className="change-theme_button header__icon"
                 onClick={() => {
-                  setTheme(!theme);
+                  setTheme(theme === 'light' ? 'dark' : 'light');
+                  const key = 'theme';
+                  const saveTheme = theme === 'light' ? 'dark' : 'light';
+                  searchParams.set(key, saveTheme);
+                  setSearchParams(searchParams);
                 }}
                 aria-hidden="true">
                 <i
