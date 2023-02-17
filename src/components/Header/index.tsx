@@ -16,17 +16,6 @@ const Header = () => {
       document.documentElement.setAttribute('theme', 'dark-theme');
     }
 
-    // document.addEventListener('click', (e) => {
-    //   console.log(modalSearch);
-    //   if (
-    //     !(e.target as HTMLElement).closest('.search-wrapper') ||
-    //     !(e.target as HTMLElement).closest('.header__icon__search')
-    //   ) {
-    //     console.log(modalSearch);
-    //     setModalSearch(false);
-    //   }
-    // });
-
     if (showMenu) {
       setModalSearch(false);
     }
@@ -37,7 +26,6 @@ const Header = () => {
   };
 
   document.addEventListener('click', (e) => {
-    console.log(modalSearch);
     if (!(e.target as HTMLElement).closest('.search-block')) {
       setModalSearch(false);
     }

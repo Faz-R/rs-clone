@@ -1,12 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { selectViewed } from '@store/viewedSlice';
 import getStatistics from '@utils/getStatistics';
+import './index.scss';
+import Diagram from '@components/UI/Diagram/Diagram';
+import { useEffect, useState } from 'react';
+import Bars from '@components/UI/Bars/Bars';
+import { Bar } from 'react-chartjs-2';
 
 const StatisticsPage = () => {
   const dispatch = useDispatch();
 
   const viewed = useSelector(selectViewed);
-
+  const [sizeChartFont, setSizeChartFont] = useState(16);
   //! добавить проверку, если в сторе нет фильмов
 
   const {
@@ -19,9 +24,98 @@ const StatisticsPage = () => {
     viewerMovieLevel,
   } = getStatistics(viewed);
 
-  console.log(genresDiagram);
-  console.log(viewerMovieLevel);
-  return <h2>StatisticPage</h2>;
+  const getTimes = (time: number) => {
+    const minutes = time % 60;
+    const hours = Math.floor((time / 60) % 24);
+    const days = Math.floor(time / 60 / 24);
+    return `${days && `${days}д.`}${hours && ` ${hours}ч.`}${minutes && ` ${minutes}м.`}`;
+  };
+
+  const dataGenres = Object.entries(genresDiagram).sort(
+    ([value1, key1], [value2, key2]) => Number(key1) - Number(key2)
+  );
+
+  const namesGenres = dataGenres.map(([key, value]) => key);
+  const percentsGenres: number[] = dataGenres.map(([key, value]) => Number(value));
+
+  useEffect(() => {
+    if (window.innerWidth <= 450) {
+      setSizeChartFont(12);
+    }
+  }, []);
+
+  return (
+    <section className="statistic-page">
+      {!viewed ? (
+        <div>Данных нет</div>
+      ) : (
+        <>
+          <div className="statistic__title">
+            <i className="fa-solid fa-angles-right statistic__design__row" /> Статистика
+          </div>
+          <div className="statistic__top">
+            <div className="statistic__numbers-block statistics__block">
+              <div className="statistic__number">{amountMovies}</div>
+              <div className="statistic__number-subtitle">просмотренных фильмов</div>
+            </div>
+            <div className="statistic__numbers-block statistics__block">
+              <div className="statistic__number">{getTimes(amountTimes)}</div>
+              <div className="statistic__number-subtitle">проведено за просмотром</div>
+            </div>
+            <div className="statistic__numbers-block statistics__block">
+              <div className="statistic__number">{viewerMovieLevel}</div>
+            </div>
+          </div>
+          <div className="statistic__middle">
+            <div className="statistic__diagram statistics__block">
+              <span className="statistic__subtitle">Предпочтения в жанрах</span>
+              <div className="statistic__middle__diagram">
+                <Diagram labels={namesGenres} data={percentsGenres} />
+              </div>
+            </div>
+            <div className="statistic__genres-bar statistics__block">
+              <span className="statistic__subtitle">Топ-5 жанров</span>
+              <div className="statistic__middle__bar">
+                <Bars
+                  labels={Object.keys(favoriteGenres)}
+                  data={Object.values(favoriteGenres) as number[]}
+                  size={sizeChartFont}
+                  color="#ffffff"
+                  direction="x"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="statistic__footer">
+            <div className="statistic__actor-bar statistics__block">
+              <span className="statistic__subtitle">Топ-5 актёров</span>
+              <div className="statistic__footer__bar">
+                <Bars
+                  labels={Object.keys(favoriteActors)}
+                  data={Object.values(favoriteActors) as number[]}
+                  size={sizeChartFont}
+                  color="#ffffff"
+                  direction="y"
+                />
+              </div>
+            </div>
+            <div className="statistic__director-bar statistics__block">
+              <span className="statistic__subtitle">Топ-5 режиссёров</span>
+              <div className="statistic__footer__bar">
+                <Bars
+                  labels={Object.keys(favoriteDirectors)}
+                  data={Object.values(favoriteDirectors) as number[]}
+                  size={sizeChartFont}
+                  color="#ffffff"
+                  direction="y"
+                />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </section>
+  );
 };
 
 export default StatisticsPage;
