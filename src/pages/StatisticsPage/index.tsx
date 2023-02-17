@@ -5,12 +5,20 @@ import './index.scss';
 import Diagram from '@components/UI/Diagram/Diagram';
 import { useEffect, useState } from 'react';
 import Bars from '@components/UI/Bars/Bars';
+import { useSearchParams } from 'react-router-dom';
 
 const StatisticsPage = () => {
   const dispatch = useDispatch();
 
+  const lightFont = '#ffffff';
+  const darkFont = '#181818';
+
   const viewed = useSelector(selectViewed);
   const [sizeChartFont, setSizeChartFont] = useState(16);
+  const [chartFontColor, setChartFontColor] = useState(darkFont);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const themeExist = searchParams.get('theme');
 
   const {
     amountMovies,
@@ -26,7 +34,7 @@ const StatisticsPage = () => {
     const minutes = time % 60;
     const hours = Math.floor((time / 60) % 24);
     const days = Math.floor(time / 60 / 24);
-    return `${days && `${days}д.`}${hours && ` ${hours}ч.`}${minutes && ` ${minutes}м.`}`;
+    return `${days ? `${days}д.` : ''}${hours ? ` ${hours}ч.` : ''}${minutes && ` ${minutes}м.`}`;
   };
 
   const dataGenres = Object.entries(genresDiagram).sort(
@@ -40,7 +48,14 @@ const StatisticsPage = () => {
     if (window.innerWidth <= 450) {
       setSizeChartFont(12);
     }
-  }, []);
+
+    if (themeExist === 'light') {
+      setChartFontColor(darkFont);
+    }
+    if (themeExist === 'dark') {
+      setChartFontColor(lightFont);
+    }
+  }, [chartFontColor, themeExist]);
 
   return (
     <section className="statistic-page">
@@ -68,7 +83,7 @@ const StatisticsPage = () => {
             <div className="statistic__diagram statistics__block">
               <span className="statistic__subtitle">Предпочтения в жанрах</span>
               <div className="statistic__middle__diagram">
-                <Diagram labels={namesGenres} data={percentsGenres} />
+                <Diagram labels={namesGenres.reverse()} data={percentsGenres.reverse()} />
               </div>
             </div>
             <div className="statistic__genres-bar statistics__block">
@@ -78,7 +93,7 @@ const StatisticsPage = () => {
                   labels={Object.keys(favoriteGenres)}
                   data={Object.values(favoriteGenres) as number[]}
                   size={sizeChartFont}
-                  color="#ffffff"
+                  color={chartFontColor}
                   direction="x"
                 />
               </div>
@@ -92,7 +107,7 @@ const StatisticsPage = () => {
                   labels={Object.keys(favoriteActors)}
                   data={Object.values(favoriteActors) as number[]}
                   size={sizeChartFont}
-                  color="#ffffff"
+                  color={chartFontColor}
                   direction="y"
                 />
               </div>
@@ -104,7 +119,7 @@ const StatisticsPage = () => {
                   labels={Object.keys(favoriteDirectors)}
                   data={Object.values(favoriteDirectors) as number[]}
                   size={sizeChartFont}
-                  color="#ffffff"
+                  color={chartFontColor}
                   direction="y"
                 />
               </div>
