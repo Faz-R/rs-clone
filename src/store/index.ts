@@ -13,11 +13,13 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './userSlice';
 import viewedSliceReducer from './viewedSlice';
 import willViewSliceReducer from './willViewSlice';
+import themeReducer from './themeSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   viewed: viewedSliceReducer,
   willview: willViewSliceReducer,
+  theme: themeReducer,
 });
 
 const persistConfig = {

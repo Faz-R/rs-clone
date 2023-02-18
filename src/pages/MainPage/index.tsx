@@ -40,7 +40,7 @@ const MainPage = () => {
               <div className="card__back">
                 <h5 className="card__back__title-text">Случайный фильм</h5>
                 <span className="card__back__text">
-                  Положиться на удачу и пусть она подскажет, какой фильм будем смотреть
+                  Положиться на удачу, и пусть она подскажет, какой фильм будем смотреть
                 </span>
                 <Link to="random" className="card__link">
                   <Button>посмотреть</Button>
