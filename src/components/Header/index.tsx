@@ -37,7 +37,6 @@ const Header = () => {
   };
 
   document.addEventListener('click', (e) => {
-    console.log(modalSearch);
     if (!(e.target as HTMLElement).closest('.search-block')) {
       setModalSearch(false);
     }

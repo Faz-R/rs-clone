@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { useEffect, useState } from 'react';
-import getAnyMovie from '../../api/getAnyMovie';
-import Button from '../../components/UI/button/Button';
-import { AnyMovieInterface } from '../../types';
+import getAnyMovie from '@api/getAnyMovie';
+import Button from '@components/UI/button/Button';
+import type { AnyMovieInterface } from '@/types';
 import './index.scss';
 
 const Humor = () => {
@@ -59,13 +59,15 @@ const Humor = () => {
     const genres = (formData.get('emoji') as string).split(',');
     const year = `${minYear}-${maxYear}`;
 
-    await getAnyMovie({
-      genres,
-      year,
-      rating,
-      exceptions: showViewed ? exceptions : undefined,
-    }).then((response) => {
-      console.log(response);
+    await getAnyMovie(
+      {
+        genres,
+        year,
+        rating,
+        exceptions: showViewed ? exceptions : undefined,
+      },
+      0
+    ).then((response) => {
       if (response) {
         setRandomMovie(response as AnyMovieInterface);
       } else if (!response) {

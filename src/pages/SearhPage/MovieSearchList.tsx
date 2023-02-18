@@ -1,5 +1,5 @@
 import MovieCardColumn from '@components/MovieCardColumn';
-import type { AnyMovieInterface } from '../../types';
+import type { AnyMovieInterface } from '@/types';
 
 const MovieSearchList = (props: { movies: AnyMovieInterface[] }) => {
   const { movies } = props;

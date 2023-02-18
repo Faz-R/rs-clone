@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import Loader from '@components/UI/loader/Loader';
 import SearchForm from '@components/SearchForm/';
 import getNoun from '@utils/getWorldEnding';
-import getMoviesBySearchName from '../../api/getMoviesBySearchName';
+import getMoviesBySearchName from '@api/getMoviesBySearchName';
+import MovieSearchPagination from '@components/Pagination';
 import MovieSearchList from './MovieSearchList';
-import MovieSearchPagination from '../../components/Pagination';
-import type { AnyMovieInterface } from '../../types';
+import type { AnyMovieInterface } from '@/types';
 import './index.scss';
 
 const SearchPage = () => {
@@ -40,7 +40,7 @@ const SearchPage = () => {
       setMoviesPerPage(1);
     }
     setLoading(true);
-    getMoviesBySearchName(location.state, moviesPerPage).then((data) => {
+    getMoviesBySearchName(location.state, 0, moviesPerPage).then((data) => {
       setState(data);
       setLoading(false);
     });
@@ -51,7 +51,7 @@ const SearchPage = () => {
   const handleBtnClick = (step: 1 | -1) => {
     const newPage = page + step;
     setLoading(true);
-    getMoviesBySearchName(location.state, moviesPerPage, newPage).then((data) => {
+    getMoviesBySearchName(location.state, 0, moviesPerPage, newPage).then((data) => {
       setState(data);
       setLoading(false);
     });

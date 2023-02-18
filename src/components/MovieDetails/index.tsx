@@ -9,11 +9,7 @@ import classes from './index.module.scss';
 
 const MovieDetails = () => {
   const movieData = useAsyncValue() as MovieDataInterface;
-  console.log(movieData);
   const [movie] = parseMoviesData([movieData], 10);
-
-  console.log(movie);
-
   const dispatch = useAppDispatch();
   const viewedArr = useAppSelector((state) => state.viewed.viewed);
 
