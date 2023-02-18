@@ -10,6 +10,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 30px;
+  row-gap: 1em;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .movie__wrapper {
@@ -30,6 +35,10 @@
   &:hover .poster__info {
     visibility: visible;
     opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    align-self: center;
   }
 }
 
@@ -146,6 +155,10 @@
   height: 100%;
   padding-left: 30px;
   row-gap: 10px;
+
+  @media (max-width: 600px) {
+    padding-left: 0;
+  }
 }
 
 .movie__title {
@@ -171,6 +184,10 @@
   line-height: 1.5em;
   font-size: 1em;
   transition: var(--transition);
+}
+
+.movie__description {
+  margin-bottom: 40px;
 }
 
 .animation__active {
