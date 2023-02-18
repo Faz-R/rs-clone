@@ -1,12 +1,15 @@
 import getRandomNumber from '@utils/getRandomNumber';
 import getRandomGenres from '@utils/getRandomGenres';
 import parseMoviesData from '@utils/parseMovieData';
-import type { MovieDataInterface, SearchMovieFormData } from '@/types';
+import type { AnyMovieInterface, MovieDataInterface, SearchMovieFormData } from '@/types';
 import { DOMAIN, FIELDS } from '../constants';
 
-const TOKEN = import.meta.env.VITE_TOKEN;
+const TOKENS = import.meta.env.VITE_TOKENS.split(',');
 
-const getAnyMovie = async (formData: SearchMovieFormData) => {
+const getAnyMovie = async (
+  formData: SearchMovieFormData,
+  counter: number
+): Promise<AnyMovieInterface | null> => {
   let queryParams = FIELDS;
 
   const matrixData = Object.entries(formData);
@@ -33,7 +36,11 @@ const getAnyMovie = async (formData: SearchMovieFormData) => {
   });
 
   try {
-    const response = await fetch(`${DOMAIN}/?token=${TOKEN}${queryParams}&limit=100`);
+    const response = await fetch(`${DOMAIN}/?token=${TOKENS[counter]}${queryParams}&limit=100`);
+    if (!response.ok && response.status === 401 && counter < TOKENS.length) {
+      const result = await getAnyMovie(formData, counter + 1);
+      return result;
+    }
 
     const { docs } = (await response.json()) as { docs: MovieDataInterface[] };
 
@@ -44,8 +51,6 @@ const getAnyMovie = async (formData: SearchMovieFormData) => {
     const result = exceptions ? movies.filter((movie) => !exceptions.includes(movie.id)) : movies;
 
     const index = getRandomNumber(result.length);
-
-    console.log(result[index]);
 
     return result[index];
   } catch (err) {
