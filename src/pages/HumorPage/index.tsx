@@ -65,7 +65,6 @@ const Humor = () => {
       rating,
       exceptions: showViewed ? exceptions : undefined,
     }).then((response) => {
-      console.log(response);
       if (response) {
         setRandomMovie(response as AnyMovieInterface);
       } else if (!response) {
