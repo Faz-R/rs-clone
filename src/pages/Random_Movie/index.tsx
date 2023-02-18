@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Checkbox from '@components/UI/Checkbox/Checkbox';
-import getMoviesData from '@api/getAnyMovie';
+import getAnyMovie from '@api/getAnyMovie';
 import DoubleRange from '@components/UI/DoubleRange/DoubleRange';
 import Button from '@components/UI/button/Button';
 import CheckboxSwitch from '@components/UI/checkboxSwitch/CheckboxSwitch';
@@ -95,12 +95,15 @@ const RandomMovie = () => {
   const getMovie = async () => {
     setShowMovie(false);
     setLoading(true);
-    await getMoviesData({
-      genres: filter,
-      year: `${minYearRange}-${maxYearRange}`,
-      rating: `${minRateRange}-${maxRateRange}`,
-      exceptions: addExceptions ? exceptions : undefined,
-    }).then((response) => {
+    await getAnyMovie(
+      {
+        genres: filter,
+        year: `${minYearRange}-${maxYearRange}`,
+        rating: `${minRateRange}-${maxRateRange}`,
+        exceptions: addExceptions ? exceptions : undefined,
+      },
+      0
+    ).then((response) => {
       if (response) {
         setRandomMovie(response as AnyMovieInterface);
       } else if (!response) {
