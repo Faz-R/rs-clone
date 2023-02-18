@@ -94,6 +94,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   row-gap: 1em;
 
   @media (max-width: 800px) {
