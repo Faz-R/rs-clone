@@ -60,7 +60,7 @@ const StatisticsPage = () => {
         <i className="fa-solid fa-angles-right statistic__design__row" /> Статистика
       </div>
       {viewed.length === 0 ? (
-        <div className="statistic__empty">Фильмов пока нет</div>
+        <div className="statistic__empty">Фильмов для статистики пока нет</div>
       ) : (
         <>
           <div className="statistic__top">
