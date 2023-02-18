@@ -24,11 +24,7 @@ const Header = () => {
     if (theme === 'dark') {
       document.documentElement.setAttribute('theme', 'dark-theme');
     }
-
-    if (showMenu) {
-      setModalSearch(false);
-    }
-  }, [theme, showMenu, modalSearch]);
+  }, [theme, showMenu]);
 
   const closeNav = () => {
     setShowMenu(!showMenu);
