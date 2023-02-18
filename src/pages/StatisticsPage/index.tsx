@@ -1,14 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectViewed } from '@store/viewedSlice';
 import getStatistics from '@utils/getStatistics';
 import './index.scss';
 import Diagram from '@components/UI/Diagram/Diagram';
 import { useEffect, useState } from 'react';
 import Bars from '@components/UI/Bars/Bars';
-import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '@store/hooks';
 
 const StatisticsPage = () => {
-  const dispatch = useDispatch();
+  const themeColor = useAppSelector((state) => state.theme.value);
 
   const lightFont = '#ffffff';
   const darkFont = '#181818';
@@ -16,9 +16,6 @@ const StatisticsPage = () => {
   const viewed = useSelector(selectViewed);
   const [sizeChartFont, setSizeChartFont] = useState(16);
   const [chartFontColor, setChartFontColor] = useState(darkFont);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const themeExist = searchParams.get('theme');
 
   const {
     amountMovies,
@@ -49,13 +46,13 @@ const StatisticsPage = () => {
       setSizeChartFont(12);
     }
 
-    if (themeExist === 'light') {
+    if (themeColor === 'light') {
       setChartFontColor(darkFont);
     }
-    if (themeExist === 'dark') {
+    if (themeColor === 'dark') {
       setChartFontColor(lightFont);
     }
-  }, [chartFontColor, themeExist]);
+  }, [chartFontColor, themeColor]);
 
   return (
     <section className="statistic-page">

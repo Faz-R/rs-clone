@@ -1,23 +1,22 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
-import SearchForm from '../SearchForm/index';
 import './index.scss';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { addTheme } from '@store/themeSlice';
+import SearchForm from '../SearchForm/index';
 
 type Theme = 'dark' | 'light';
 
 const Header = () => {
   const [modalSearch, setModalSearch] = useState(false);
+  const dispatch = useAppDispatch();
+  const themeColor = useAppSelector((state) => state.theme.value);
   const [showMenu, setShowMenu] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const themeExist = searchParams.get('theme');
 
-  const [theme, setTheme] = useState<Theme>((themeExist as Theme) || 'light');
+  const [theme, setTheme] = useState<Theme>((themeColor as Theme) || 'light');
 
   useEffect(() => {
-    if (themeExist) {
-      setTheme(themeExist as Theme);
-    }
     if (theme === 'light') {
       document.documentElement.setAttribute('theme', 'light-theme');
     }
@@ -29,7 +28,7 @@ const Header = () => {
     if (showMenu) {
       setModalSearch(false);
     }
-  }, [theme, showMenu, modalSearch, themeExist]);
+  }, [theme, showMenu, modalSearch]);
 
   const closeNav = () => {
     setShowMenu(!showMenu);
@@ -153,11 +152,9 @@ const Header = () => {
               <div
                 className="change-theme_button header__icon"
                 onClick={() => {
-                  setTheme(theme === 'light' ? 'dark' : 'light');
-                  const key = 'theme';
                   const saveTheme = theme === 'light' ? 'dark' : 'light';
-                  searchParams.set(key, saveTheme);
-                  setSearchParams(searchParams);
+                  dispatch(addTheme(saveTheme));
+                  setTheme(theme === 'light' ? 'dark' : 'light');
                 }}
                 aria-hidden="true">
                 <i
