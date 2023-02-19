@@ -1,36 +1,30 @@
 import { Link } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
-import SearchForm from '../SearchForm/index';
 import './index.scss';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { addTheme } from '@store/themeSlice';
+import SearchForm from '../SearchForm/index';
+
+type Theme = 'dark' | 'light';
 
 const Header = () => {
   const [modalSearch, setModalSearch] = useState(false);
+  const dispatch = useAppDispatch();
+  const themeColor = useAppSelector((state) => state.theme.value);
   const [showMenu, setShowMenu] = useState(false);
-  const [theme, setTheme] = useState(true);
+
+  const [theme, setTheme] = useState<Theme>((themeColor as Theme) || 'light');
 
   useEffect(() => {
-    if (theme) {
+    if (theme === 'light') {
       document.documentElement.setAttribute('theme', 'light-theme');
-    } else {
+    }
+
+    if (theme === 'dark') {
       document.documentElement.setAttribute('theme', 'dark-theme');
     }
-
-    // document.addEventListener('click', (e) => {
-    //   console.log(modalSearch);
-    //   if (
-    //     !(e.target as HTMLElement).closest('.search-wrapper') ||
-    //     !(e.target as HTMLElement).closest('.header__icon__search')
-    //   ) {
-    //     console.log(modalSearch);
-    //     setModalSearch(false);
-    //   }
-    // });
-
-    if (showMenu) {
-      setModalSearch(false);
-    }
-  }, [theme, showMenu, modalSearch]);
+  }, [theme, showMenu]);
 
   const closeNav = () => {
     setShowMenu(!showMenu);
@@ -154,7 +148,9 @@ const Header = () => {
               <div
                 className="change-theme_button header__icon"
                 onClick={() => {
-                  setTheme(!theme);
+                  const saveTheme = theme === 'light' ? 'dark' : 'light';
+                  dispatch(addTheme(saveTheme));
+                  setTheme(theme === 'light' ? 'dark' : 'light');
                 }}
                 aria-hidden="true">
                 <i
