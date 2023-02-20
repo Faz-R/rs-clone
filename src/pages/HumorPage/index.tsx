@@ -59,7 +59,6 @@ const Humor = () => {
     const genres = (formData.get('emoji') as string).split(',');
     const year = `${minYear}-${maxYear}`;
 
-
     await getAnyMovie(
       {
         genres,
