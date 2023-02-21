@@ -47,12 +47,6 @@
             ],
             "@/*": [
                 "src/*"
-            ],
-            "@StatisticPage/*": [
-                "src/pages/StatisticsPage/*"
-            ],
-            "@StatisticsPage/*": [
-                "src/pages/StatisticsPage/*"
             ]
         }
     },

@@ -169,6 +169,7 @@
   font-weight: var(--h4-font-weight);
   color: var(--primary-color);
   transition: var(--transition);
+  padding-right: 110px;
 }
 
 .movie__title__eng {
@@ -187,7 +188,7 @@
 }
 
 .movie__description {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .animation__active {
@@ -262,4 +263,34 @@
 .poster__error__icon {
   font-size: 50px;
   padding-bottom: 20px;
+}
+
+.trailer__title {
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  margin-bottom: 20px;
+}
+
+.trailer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.trailer__video {
+  min-width: 640px;
+  min-height: 360px;
+  position: relative;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    min-width: 100%;
+    min-height: 50vw;
+  }
 }
