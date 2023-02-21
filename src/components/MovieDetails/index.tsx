@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { useEffect, useState } from 'react';
 import { addMovieToWillView, removeMovieFromWillView } from '@store/willViewSlice';
 import { addMovieToViewed, removeMovieFromViewed } from '@store/viewedSlice';
+import VideoPlayer from '@components/VideoPlayer';
 import type { MovieDataInterface } from '@/types';
 import classes from './index.module.scss';
 
@@ -56,7 +57,7 @@ const MovieDetails = () => {
   };
 
   const FilmDescription = () => {
-    if (!movie.description) {
+    if (!movie) {
       return `Описание фильма`;
     }
     return movie.description ? movie.description : `Описание фильма отсутствует`;
@@ -186,8 +187,17 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-
       <p className={`${classes.movie__description} ${classes.movie__text}`}>{FilmDescription()}</p>
+      <div className={classes.trailer}>
+        {movie.trailer && (
+          <>
+            <span className={classes.trailer__title}>Трейлер</span>
+            <div className={classes.trailer__video}>
+              <VideoPlayer video={movie.trailer || 'Трейлера нет'} />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
