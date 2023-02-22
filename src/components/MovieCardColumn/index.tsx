@@ -132,7 +132,7 @@ const MovieCardColumn = ({ movie }: IMovieCardColumn) => {
                 {movie.movieLength ? `${movie.movieLength} мин.` : ''}
               </span>
               <span className={classes.description__info}>
-                {movie.year} <span className={classes.point}>●</span> {movie.countries![0]}
+                {movie.year} <span className={classes.point}>●</span> {movie.countries?.[0]}
               </span>
               <span className={`${classes.description__info} ${classes.genres}`}>
                 {movie.genres?.join(', ')}

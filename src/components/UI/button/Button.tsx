@@ -3,10 +3,15 @@ import classes from './Button.module.scss';
 
 const Button = ({
   children,
-  ...props
+  type,
+  onClick,
 }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>): JSX.Element => {
   return (
-    <button {...props} className={`button ${classes.button}`} aria-hidden="true">
+    <button
+      type={type ? 'submit' : 'button'}
+      onClick={onClick}
+      className={`button ${classes.button}`}
+      aria-hidden="true">
       {children}
     </button>
   );

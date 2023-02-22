@@ -24,7 +24,7 @@ const MainPage = () => {
                   С помощью анкеты поможем выбрать фильм, который вам обязательно подойдёт
                 </span>
                 <Link to="humor" className="card__link">
-                  <Button>посмотреть</Button>
+                  посмотреть
                 </Link>
               </div>
             </div>
@@ -43,7 +43,7 @@ const MainPage = () => {
                   Положиться на удачу, и пусть она подскажет, какой фильм будем смотреть
                 </span>
                 <Link to="random" className="card__link">
-                  <Button>посмотреть</Button>
+                  посмотреть
                 </Link>
               </div>
             </div>
@@ -62,7 +62,7 @@ const MainPage = () => {
                   Список фильмов, ранее запланированных для просмотра
                 </span>
                 <Link to="expect" className="card__link">
-                  <Button>посмотреть</Button>
+                  посмотреть
                 </Link>
               </div>
             </div>
