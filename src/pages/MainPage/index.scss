@@ -195,8 +195,37 @@
 }
 
 .card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   left: 0;
   width: 100%;
   position: absolute;
   bottom: 0;
+  color: #ffffff;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+  font-weight: 500;
+  line-height: 125%;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  font-size: 1em;
+  font-style: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  padding: 0.8em 1.5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card__link:hover {
+  color: var(--primary-color);
+  background-image: none;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.card__link:disabled {
+  background-color: var(--color-lightest);
 }

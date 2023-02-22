@@ -26,7 +26,6 @@ export const getAllGenres = {
   novosti: 'новости',
   priklyucheniya: 'приключения',
   korotkometrazhka: 'короткометражка',
-  // 'realnoe-tv': 'реальное ТВ',
   semejnyj: 'семейный',
   sport: 'спорт',
   'tok-shou': 'ток-шоу',

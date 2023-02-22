@@ -11,7 +11,6 @@ import { AnyMovieInterface } from '@/types';
 import './index.scss';
 
 let sorted: AnyMovieInterface[] = [];
-// let moviesPerPage = 10;
 
 const Viewed = () => {
   const [loading, setLoading] = useState(false);

@@ -12,8 +12,6 @@ const getRandomGenres = () => {
     }
   }
 
-  console.log(randomGenres);
-
   const queryParams = randomGenres.map((genre) => `&field=genres.name&search=${genre}`);
 
   return queryParams.join('');

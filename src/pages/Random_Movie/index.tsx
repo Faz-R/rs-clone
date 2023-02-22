@@ -258,7 +258,9 @@ const RandomMovie = () => {
             />
           </div>
           <div className="button_random_movie">
-            <Button onClick={getMovie}>Случайный фильм</Button>
+            <Button type="submit" onClick={getMovie}>
+              Случайный фильм
+            </Button>
           </div>
         </div>
         <div className="movie-card__random">

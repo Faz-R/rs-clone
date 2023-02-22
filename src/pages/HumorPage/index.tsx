@@ -226,6 +226,7 @@ const Humor = () => {
           </div>
           <div className="button_random_movie">
             <Button
+              type="submit"
               onClick={() => {
                 if (!formValid) {
                   setError(true);

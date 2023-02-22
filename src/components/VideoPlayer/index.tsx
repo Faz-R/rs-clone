@@ -5,12 +5,9 @@ const VideoPlayer = ({ video }: { video: string }) => {
     <ReactPlayer
       url={video}
       controls
-      width='100%'
-      height='100%'
+      width="100%"
+      height="100%"
       style={{ position: 'absolute', width: '100%' }}
-      onError={() => {
-        console.log('swith other video');
-      }}
     />
   );
 };
