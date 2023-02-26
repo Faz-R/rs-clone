@@ -47,6 +47,9 @@
             ],
             "@/*": [
                 "src/*"
+            ],
+            "@VideoPlayer/*": [
+                "src/components/VideoPlayer/*"
             ]
         }
     },
