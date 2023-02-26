@@ -7,10 +7,10 @@ import Select from '@components/UI/select/Select';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
+import { changePageToWillView } from '@store/willViewSlice';
 import getNoun from '@utils/getWorldEnding';
 import { AnyMovieInterface } from '@/types';
 import '../Viewed/index.scss';
-import { changePageToWillView } from '@store/willViewSlice';
 
 let sorted: AnyMovieInterface[] = [];
 
@@ -18,10 +18,9 @@ const WillView = () => {
   const [loading, setLoading] = useState(false);
   const willView = useAppSelector((state) => state.willview.value);
   const pageForReboot = useAppSelector((state) => state.willview.page) || 1;
-  
-  const [movies, setMovies] = useState(willView);
-  const [moviesPerPage, setMoviesPerPage] = useState(10);
   const dispatch = useAppDispatch();
+  const [movies, setMovies] = useState(willView);
+  const [moviesPerPage, setMoviesPerPage] = useState(1);
 
   const [selectSort, setSelectSort] = useState<string | number>('');
 
@@ -70,15 +69,6 @@ const WillView = () => {
     pages: Math.ceil(movies.length / moviesPerPage),
   });
 
-  console.log('pageForReboot', pageForReboot, 'pages', state.pages);
-
-  if (state.page > state.pages) {
-    setState({ ...state, page: state.pages });
-    dispatch(changePageToWillView(state.pages));
-  } 
-
-  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
-
   useEffect(() => {
     if (window.innerWidth > 1000) {
       setMoviesPerPage(10);
@@ -103,15 +93,19 @@ const WillView = () => {
     sortMovies(selectSort);
   }, [willView, moviesPerPage, window]);
 
+  if (state.page > state.pages) {
+    setState({ ...state, page: state.pages });
+    dispatch(changePageToWillView(state.pages));
+  }
+
+  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
     setState({ ...state, page: state.page + step });
     dispatch(changePageToWillView(pageForReboot + step));
-    //pageForReboot += step;
     setLoading(false);
   };
-
-  
 
   return (
     <section className="viewed-page">
