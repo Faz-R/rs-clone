@@ -7,7 +7,7 @@ import Select from '@components/UI/select/Select';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
-import { changePageToWillView } from '@store/willViewSlice';
+import { changePageToWillView, changeSortToWillView } from '@store/willViewSlice';
 import getNoun from '@utils/getWorldEnding';
 import { AnyMovieInterface } from '@/types';
 import '../Viewed/index.scss';
@@ -18,11 +18,12 @@ const WillView = () => {
   const [loading, setLoading] = useState(false);
   const willView = useAppSelector((state) => state.willview.value);
   const pageForReboot = useAppSelector((state) => state.willview.page) || 1;
+  const sortFromState = useAppSelector((state) => state.willview.sort) || '';
   const dispatch = useAppDispatch();
   const [movies, setMovies] = useState(willView);
   const [moviesPerPage, setMoviesPerPage] = useState(1);
 
-  const [selectSort, setSelectSort] = useState<string | number>('');
+  const [selectSort, setSelectSort] = useState<string | number>(sortFromState);
 
   const rating = ({ imdb: a, kp: b }: { imdb: number | null; kp: number | null }) => {
     return ((a || 0) + (b || 0)) / 2;
@@ -30,6 +31,7 @@ const WillView = () => {
 
   const sortMovies = (sort: string | number) => {
     setSelectSort(sort);
+    dispatch(changeSortToWillView(sort));
     switch (sort) {
       case 'rating-hight':
         setMovies([...willView].sort((a, b) => rating(b.rating) - rating(a.rating)));
