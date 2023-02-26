@@ -2,11 +2,12 @@
 /* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@store/hooks';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
 import Select from '@components/UI/select/Select';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
+import { changePageToWillView, changeSortToWillView } from '@store/willViewSlice';
 import getNoun from '@utils/getWorldEnding';
 import { AnyMovieInterface } from '@/types';
 import '../Viewed/index.scss';
@@ -16,10 +17,13 @@ let sorted: AnyMovieInterface[] = [];
 const WillView = () => {
   const [loading, setLoading] = useState(false);
   const willView = useAppSelector((state) => state.willview.value);
+  const pageForReboot = useAppSelector((state) => state.willview.page) || 1;
+  const sortFromState = useAppSelector((state) => state.willview.sort) || '';
+  const dispatch = useAppDispatch();
   const [movies, setMovies] = useState(willView);
-  const [moviesPerPage, setMoviesPerPage] = useState(10);
+  const [moviesPerPage, setMoviesPerPage] = useState(1);
 
-  const [selectSort, setSelectSort] = useState<string | number>('');
+  const [selectSort, setSelectSort] = useState<string | number>(sortFromState);
 
   const rating = ({ imdb: a, kp: b }: { imdb: number | null; kp: number | null }) => {
     return ((a || 0) + (b || 0)) / 2;
@@ -27,6 +31,7 @@ const WillView = () => {
 
   const sortMovies = (sort: string | number) => {
     setSelectSort(sort);
+    dispatch(changeSortToWillView(sort));
     switch (sort) {
       case 'rating-hight':
         setMovies([...willView].sort((a, b) => rating(b.rating) - rating(a.rating)));
@@ -62,13 +67,9 @@ const WillView = () => {
   };
 
   const [state, setState] = useState({
-    page: movies.length !== 0 ? 1 : 0,
+    page: movies.length !== 0 ? pageForReboot || 1 : 0,
     pages: Math.ceil(movies.length / moviesPerPage),
   });
-
-  if (state.page > state.pages) setState({ ...state, page: state.pages });
-
-  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
   useEffect(() => {
     if (window.innerWidth > 1000) {
@@ -94,9 +95,17 @@ const WillView = () => {
     sortMovies(selectSort);
   }, [willView, moviesPerPage, window]);
 
+  if (state.page > state.pages) {
+    setState({ ...state, page: state.pages });
+    dispatch(changePageToWillView(state.pages));
+  }
+
+  sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
+
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
     setState({ ...state, page: state.page + step });
+    dispatch(changePageToWillView(pageForReboot + step));
     setLoading(false);
   };
 

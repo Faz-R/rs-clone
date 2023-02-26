@@ -5,10 +5,14 @@ import { AnyMovieInterface } from '@/types';
 
 export interface IIdWillViewObject {
   value: AnyMovieInterface[];
+  page: number;
+  sort: string | number;
 }
 
 const initialState: IIdWillViewObject = {
   value: [],
+  page: 0,
+  sort: '',
 };
 
 export const willViewSlice = createSlice({
@@ -25,8 +29,19 @@ export const willViewSlice = createSlice({
         return item.id !== action.payload.id;
       });
     },
+    changePageToWillView: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
+    changeSortToWillView: (state, action: PayloadAction<string | number>) => {
+      state.sort = action.payload;
+    },
   },
 });
 
-export const { addMovieToWillView, removeMovieFromWillView } = willViewSlice.actions;
+export const {
+  addMovieToWillView,
+  removeMovieFromWillView,
+  changePageToWillView,
+  changeSortToWillView,
+} = willViewSlice.actions;
 export default willViewSlice.reducer;

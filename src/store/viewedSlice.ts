@@ -7,10 +7,14 @@ import { RootState } from './index';
 
 export interface IIdViewedObject {
   viewed: AnyMovieInterface[];
+  page: number;
+  sort: string | number;
 }
 
 const initialState: IIdViewedObject = {
   viewed: [],
+  page: 0,
+  sort: '',
 };
 
 export const viewedSlice = createSlice({
@@ -27,9 +31,16 @@ export const viewedSlice = createSlice({
         return item.id !== action.payload.id;
       });
     },
+    changePageToViewed: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
+    changeSortToViewed: (state, action: PayloadAction<string | number>) => {
+      state.sort = action.payload;
+    },
   },
 });
 
-export const { addMovieToViewed, removeMovieFromViewed } = viewedSlice.actions;
+export const { addMovieToViewed, removeMovieFromViewed, changePageToViewed, changeSortToViewed } =
+  viewedSlice.actions;
 export const selectViewed = (state: RootState) => state.viewed.viewed;
 export default viewedSlice.reducer;

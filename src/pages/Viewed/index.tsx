@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/extensions */
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@store/hooks';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
 import MovieSearchPagination from '@components/Pagination';
 import MovieCardColumn from '@components/MovieCardColumn';
 import Loader from '@components/UI/loader/Loader';
 import getNoun from '@utils/getWorldEnding';
 import Select from '@components/UI/select/Select';
+import { changePageToViewed, changeSortToViewed } from '@store/viewedSlice';
 import { AnyMovieInterface } from '@/types';
 import './index.scss';
 
@@ -16,16 +17,20 @@ const Viewed = () => {
   const [loading, setLoading] = useState(false);
   const viewed = useAppSelector((state) => state.viewed.viewed);
   const [movies, setMovies] = useState(useAppSelector((state) => state.viewed.viewed));
+  const pageForReboot = useAppSelector((state) => state.viewed.page) || 1;
+  const sortFromState = useAppSelector((state) => state.viewed.sort) || '';
+  const dispatch = useAppDispatch();
 
-  const [selectSort, setSelectSort] = useState<string | number>('');
+  const [selectSort, setSelectSort] = useState<string | number>(sortFromState);
 
   const rating = ({ imdb: a, kp: b }: { imdb: number | null; kp: number | null }) => {
     return ((a || 0) + (b || 0)) / 2;
   };
 
-  const [moviesPerPage, setMoviesPerPage] = useState(10);
+  const [moviesPerPage, setMoviesPerPage] = useState(1);
   const sortMovies = (sort: string | number) => {
     setSelectSort(sort);
+    dispatch(changeSortToViewed(sort));
     switch (sort) {
       case 'rating-hight':
         setMovies([...viewed].sort((a, b) => rating(b.rating) - rating(a.rating)));
@@ -53,11 +58,14 @@ const Viewed = () => {
   };
 
   const [state, setState] = useState({
-    page: movies.length !== 0 ? 1 : 0,
+    page: movies.length !== 0 ? pageForReboot || 1 : 0,
     pages: Math.ceil(movies.length / moviesPerPage),
   });
 
-  if (state.page > state.pages) setState({ ...state, page: state.pages });
+  if (state.page > state.pages) {
+    setState({ ...state, page: state.pages });
+    dispatch(changePageToViewed(state.pages));
+  }
 
   sorted = movies.slice((state.page - 1) * moviesPerPage, state.page * moviesPerPage);
 
@@ -90,6 +98,7 @@ const Viewed = () => {
   const handleBtnClick = (step: 1 | -1) => {
     setLoading(true);
     setState({ ...state, page: state.page + step });
+    dispatch(changePageToViewed(pageForReboot + step));
     setLoading(false);
   };
 
