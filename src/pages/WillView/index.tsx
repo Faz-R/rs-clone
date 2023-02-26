@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/extensions */
-/* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import Select from '@components/UI/select/Select';
