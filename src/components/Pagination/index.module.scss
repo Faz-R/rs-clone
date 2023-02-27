@@ -1,0 +1,49 @@
+.pagination {
+  font-size: var(--h6-font-size);
+  line-height: var(--h6-line-height);
+  letter-spacing: var(--h6-letter-spacing);
+  text-transform: var(--h6-text-transform);
+  font-weight: var(--h6-font-weight);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.number {
+  min-width: 90px;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  min-width: 50px;
+  padding: 0 5px;
+  font-size: 20px;
+  line-height: 58px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  transition: var(--transition);
+  border-radius: 50%;
+  background: var(--card-color);
+  color: var(--tertiary-color);
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+  border: 1px solid var(--card-color);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    border-color: var(--primary-color);
+    background: transparent;
+  }
+
+  &:disabled {
+    color: var(--tertiary-color-half);
+    border-color: var(--card-color);
+    background: transparent;
+  }
+}

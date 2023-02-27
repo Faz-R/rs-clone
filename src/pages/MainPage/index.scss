@@ -1,0 +1,231 @@
+@mixin flex($direction, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+.main-page__question {
+  margin-bottom: 30px;
+  background: var(--bg-caret);
+}
+
+.page__title {
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-line-height);
+  letter-spacing: var(--h3-letter-spacing);
+  text-transform: var(--h3-text-transform);
+  font-weight: var(--h3-font-weight);
+  padding-top: 50px;
+  margin-bottom: 30px;
+  z-index: 2;
+  position: relative;
+  cursor: default;
+
+  @media (max-width: 600px) {
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--h4-letter-spacing);
+    text-transform: var(--h4-text-transform);
+    font-weight: var(--h4-font-weight);
+  }
+
+  @media (max-width: 500px) {
+    padding-top: 30px;
+  }
+}
+
+.question__cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+.question-card__wrapper {
+  height: 280px;
+  min-width: 280px;
+  position: relative;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+.question__cards__card {
+  perspective: 1000px;
+  height: 280px;
+}
+
+.card__front {
+  @include flex(column, flex-end, flex-start);
+}
+.card__front,
+.card__back {
+  position: absolute;
+  max-width: 280px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: 1s;
+  backface-visibility: hidden;
+  background-color: var(--card-color);
+  padding: 30px;
+  transform: rotateY(0);
+  box-shadow: 0 0 transparent, 0 0 transparent, 0 0 5px 1px rgb(0 0 0 / 10%);
+}
+
+@media (max-width: 600px) {
+  .card__front,
+  .card__back {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.card__back {
+  @include flex(column);
+  transform: rotateY(180deg);
+}
+
+.card__back .button {
+  position: absolute;
+  bottom: 0;
+  border-radius: inherit;
+  width: 100%;
+}
+
+.question-card__wrapper:hover .card__front {
+  transform: rotateY(180deg);
+}
+
+.question-card__wrapper:hover .card__back {
+  transform: rotateY(360deg);
+}
+
+.card__front__text {
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-line-height);
+  letter-spacing: var(--h5-letter-spacing);
+  text-transform: var(--h5-text-transform);
+  font-weight: var(--h5-font-weight);
+}
+
+.card__back__title-text {
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-line-height);
+  letter-spacing: var(--h5-letter-spacing);
+  text-transform: var(--h5-text-transform);
+  font-weight: var(--h5-font-weight);
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.card__back__text {
+  padding-top: 10px;
+  margin-bottom: auto;
+  line-height: 150%;
+}
+
+.card__circle {
+  font-size: 28px;
+  font-weight: 500;
+  padding: 23px;
+  width: 1em;
+  height: 1em;
+  color: #ffffff;
+  background-color: #ff7425;
+  box-sizing: content-box;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.main-page__user {
+  margin-bottom: 40px;
+}
+
+.user__info {
+  @include flex(row, flex-start);
+}
+
+.user__logo {
+  font-size: 90px;
+  padding: 10px;
+  color: var(--tertiary-color);
+}
+
+.user__description {
+  padding: 10px;
+  padding-left: 20px;
+  @include flex(column, center, flex-start);
+  gap: 1em;
+}
+
+.user__text {
+  color: inherit;
+  text-decoration: none;
+  @include flex(row);
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-line-height);
+  letter-spacing: var(--h5-letter-spacing);
+  text-transform: var(--h5-text-transform);
+  font-weight: var(--h5-font-weight);
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.text__plus {
+  color: var(--primary-color);
+  font-size: 1em;
+  padding-right: 10px;
+}
+
+.design__row {
+  color: var(--primary-color);
+  font-size: 0.9em;
+}
+
+.card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  color: #ffffff;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+  font-weight: 500;
+  line-height: 125%;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  font-size: 1em;
+  font-style: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  padding: 0.8em 1.5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card__link:hover {
+  color: var(--primary-color);
+  background-image: none;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.card__link:disabled {
+  background-color: var(--color-lightest);
+}

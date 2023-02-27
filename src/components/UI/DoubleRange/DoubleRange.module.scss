@@ -1,0 +1,144 @@
+.range {
+  width: 100%;
+}
+
+.range {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.rangebar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  pointer-events: none;
+}
+.ranger__track {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  background-color: var(--primary-color);
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+}
+.rangebar::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 5px;
+}
+.rangebar::-moz-range-track {
+  -moz-appearance: none;
+  height: 5px;
+}
+.rangebar::-ms-track {
+  appearance: none;
+  height: 5px;
+}
+.rangebar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.2em;
+  width: 1.2em;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  margin-top: -7px;
+  pointer-events: auto;
+  border-radius: 50%;
+}
+.rangebar::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 1em;
+  width: 1em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  pointer-events: auto;
+}
+.rangebar::-ms-thumb {
+  appearance: none;
+  height: 1em;
+  width: 1em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  pointer-events: auto;
+}
+.rangebar:active::-webkit-slider-thumb {
+  background-color: var(--secondary-color);
+  border: 3px solid var(--primary-color);
+}
+
+.range__values {
+  width: 100%;
+}
+
+.range__lines {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 65px;
+}
+
+.values {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  bottom: 22px;
+  background-color: var(--primary-color);
+  position: relative;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.8em;
+  cursor: default;
+  font-weight: 500;
+  color: #ffffff;
+  transform: scale(0.9);
+  transition: transform var(--transition) ease-in-out;
+  user-select: none;
+}
+
+.values:before {
+  content: '';
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  border-top: 14px solid var(--primary-color);
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  margin: auto;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.show {
+  transform: scale(1);
+
+  &::before {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.range__first {
+  position: absolute;
+  left: 0;
+}
+
+.range__second {
+  position: absolute;
+  left: 100%;
+}

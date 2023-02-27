@@ -1,0 +1,28 @@
+.button{
+  color: #ffffff;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  background-color: var(--primary-color);
+  font-weight: 500;
+  line-height: 125%;
+  transition: all .2s ease-in-out;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  padding: 0.8em 1.5em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button:hover{
+  color: var(--primary-color);
+  background-image: none;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.button:disabled{
+  background-color: var(--color-lightest);
+}
